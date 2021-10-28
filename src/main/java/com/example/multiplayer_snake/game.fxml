@@ -4,16 +4,17 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.multiplayer_snake.SnakeController">
    <children>
-      <MenuBar layoutY="2.0" prefWidth="600.0">
+      <MenuBar prefWidth="600.0">
         <menus>
           <Menu mnemonicParsing="false" text="Game">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Exit" />
-            </items>
+               <items>
+                  <MenuItem fx:id="exitBTNMenu" mnemonicParsing="false" onAction="#onExitMenuClick" text="Exit Game" />
+               </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
@@ -22,5 +23,14 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Text layoutX="10.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="60.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="null">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
