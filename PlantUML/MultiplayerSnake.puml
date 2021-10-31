@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package Client {
+    package Model {
+        class Snake {}
+    }
+
+    package View {
+        class game {}
+        class loginFrame {}
+    }
+
+    package Controller {
+        class SnakeController {}
+    }
+    'connections
+    Snake --> game
+    Snake --> loginFrame
+    game --> SnakeController
+    loginFrame --> SnakeController
+    SnakeController --> Snake
+    }
+
+package Server {
+    class SnakeServer
+    class Database {}
+    'connections
+    SnakeServer <--> Database
+}
+
+'connections
+Snake <--> SnakeServer :network
+@enduml
