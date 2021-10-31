@@ -4,22 +4,48 @@
 package Client {
     package Model {
         class Snake {}
+        class Player{
+        -playerID
+        -name
+        -passwort
+        }
+        class Highscore{
+        -playerID
+        -highscore
+        -datetime
+        }
     }
 
     package View {
-        class game {}
-        class loginFrame {}
+        class scoreView{}
+        class registryView{}
+        class loginView{}
+        class arenaView{}
+        class mainView{}
     }
 
     package Controller {
-        class SnakeController {}
+        class scoreController {}
+        class databaseController {
+        -checkPlayer
+        -addPlayer
+        }
+        class arenaController {}
+        class mainController {}
+        class serverController{}
     }
     'connections
-    Snake --> game
-    Snake --> loginFrame
-    game --> SnakeController
-    loginFrame --> SnakeController
-    SnakeController --> Snake
+    registryView --> Player
+    loginView --> Player
+    Highscore <-- scoreView
+    Snake <-- arenaView
+    scoreView <-- scoreController
+    registryView <-- databaseController
+    loginView <-- databaseController
+    arenaView <-- arenaController
+    mainView <-- mainController
+    arenaController --> Snake
+    scoreController --> Highscore
     }
 
 package Server {
@@ -30,5 +56,6 @@ package Server {
 }
 
 'connections
-Snake <--> SnakeServer :network
+serverController <--> SnakeServer :network
+databaseController <--> SnakeServer :network
 @enduml
