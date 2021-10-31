@@ -4,10 +4,9 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.multiplayer_snake.SnakeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.multiplayer_snake.SnakeController">
    <children>
       <MenuBar prefWidth="600.0">
         <menus>
@@ -18,19 +17,16 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="gameInfoBTNMenu" mnemonicParsing="false" onAction="#onGameInfoMenuClick" text="Game Info" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <Text layoutX="10.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:">
-         <font>
-            <Font size="15.0" />
-         </font></Text>
-      <Text layoutX="60.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="null">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
+      <Text layoutX="10.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 1&gt;" />
+      <Text layoutX="10.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" />
+      <Text layoutX="60.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;" />
+      <Text layoutX="532.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 2&gt;" />
+      <Text layoutX="495.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" />
+      <Text layoutX="545.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;" />
    </children>
 </Pane>
