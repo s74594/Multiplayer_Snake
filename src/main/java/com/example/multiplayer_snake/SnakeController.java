@@ -14,6 +14,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -29,14 +30,17 @@ public class SnakeController {
 	private MenuItem exitBTNMenu;
 	
 	@FXML
+    private MenuItem gameInfoBTNMenu;
+	
+	@FXML
     private Text scoreLabel;
 
     @FXML
     private Label scoreLabelNumber;
 
 	private static final int WIDTH = 600;
-	private static final int HEIGHT = 400;
-	private static final int ROWS = 20;
+	private static final int HEIGHT = 408;
+	private static final int ROWS = 25;
 	private static final int COLUMNS = ROWS;
 	private static final int SQUARE_SIZE = WIDTH / ROWS;
 	private GraphicsContext graphicsContext;
@@ -58,10 +62,7 @@ public class SnakeController {
 			stage.setScene(scene);
 			stage.show();
 			
-			/** Center Snake Window on Screen **/
-			Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-	        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-	        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+			centerWindowOnScreen(stage);	// call methode center screen
 
 			graphicsContext = canvas.getGraphicsContext2D();
 			run();
@@ -110,5 +111,33 @@ public class SnakeController {
 			// TODO: handle exception
 			System.err.println(e.getMessage());
 		}
+	}
+	
+	@FXML
+    void onGameInfoMenuClick(ActionEvent event) {
+		try {
+			// <Play Button>: Open a new game window
+			Parent rootParent = FXMLLoader.load(getClass().getResource("frameGameInfo.fxml"));
+			
+			Scene scene = new Scene(rootParent);
+			Stage stage = new Stage();
+			stage.setTitle("Snake - Gameplay Info");
+			stage.initModality(Modality.APPLICATION_MODAL);	// disable minimize, maximize button
+			stage.setResizable(false);
+			stage.setScene(scene);
+			stage.show();
+			
+			centerWindowOnScreen(stage);	// call methode center screen
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(e.getMessage());
+		}
+    }
+	
+	void centerWindowOnScreen(Stage stage) {
+		/** Center Snake Window on Screen **/
+		Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
 	}
 }
