@@ -1,4 +1,4 @@
-package com.example.multiplayer_snake;
+package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
