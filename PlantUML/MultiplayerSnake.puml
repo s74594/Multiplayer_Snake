@@ -7,7 +7,7 @@ package Client {
         class Player{
         -playerID
         -name
-        -passwort
+        -password
         }
         class Highscore{
         -playerID

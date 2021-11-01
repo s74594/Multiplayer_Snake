@@ -51,8 +51,8 @@ public class SnakeController {
 	protected void onPlayButtonClick(ActionEvent event) {
 		try {
 			// <Play Button>: Open a new game window
-//			Parent rootParent = FXMLLoader.load(getClass().getResource("game.fxml"));
-			URL url = new File("src/main/resources/com/example/multiplayer_snake/game.fxml").toURI().toURL();
+//			Parent rootParent = FXMLLoader.load(getClass().getResource("arenaView.fxml"));
+			URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 
 			// Create a new Window

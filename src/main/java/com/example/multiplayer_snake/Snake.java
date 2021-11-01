@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-fsd
+
 public class Snake extends Application {
 	
 	@SuppressWarnings("exports")
@@ -18,8 +18,8 @@ public class Snake extends Application {
 	public void start(Stage stage) throws IOException {
 		try {
 			// Open: Login Window
-//			Parent rootParent = FXMLLoader.load(getClass().getResource("loginFrame.fxml"));
-			URL url = new File("src/main/resources/com/example/multiplayer_snake/loginFrame.fxml").toURI().toURL();
+//			Parent rootParent = FXMLLoader.load(getClass().getResource("loginView.fxml"));
+			URL url = new File("src/main/resources/com/example/multiplayer_snake/loginView.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 			Scene scene = new Scene(rootParent);
 			stage.setTitle("Snake");
@@ -32,7 +32,7 @@ public class Snake extends Application {
 	        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
 	        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
 		} catch (Exception e) {
-			// TODO: handle exception
+			// handle exception
 			System.err.println(e.getMessage());
 		}
 	}
