@@ -7,7 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class Snake extends Application {
 	
@@ -16,7 +18,9 @@ public class Snake extends Application {
 	public void start(Stage stage) throws IOException {
 		try {
 			// Open: Login Window
-			Parent rootParent = FXMLLoader.load(getClass().getResource("loginFrame.fxml"));
+//			Parent rootParent = FXMLLoader.load(getClass().getResource("loginFrame.fxml"));
+			URL url = new File("src/main/resources/com/example/multiplayer_snake/loginFrame.fxml").toURI().toURL();
+			Parent rootParent = FXMLLoader.load(url);
 			Scene scene = new Scene(rootParent);
 			stage.setTitle("Snake");
 			stage.setResizable(false);

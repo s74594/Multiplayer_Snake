@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.File;
+import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,7 +51,9 @@ public class SnakeController {
 	protected void onPlayButtonClick(ActionEvent event) {
 		try {
 			// <Play Button>: Open a new game window
-			Parent rootParent = FXMLLoader.load(getClass().getResource("game.fxml"));
+//			Parent rootParent = FXMLLoader.load(getClass().getResource("game.fxml"));
+			URL url = new File("src/main/resources/com/example/multiplayer_snake/game.fxml").toURI().toURL();
+			Parent rootParent = FXMLLoader.load(url);
 
 			// Create a new Window
 			Pane rootPane = new Pane();
@@ -117,7 +121,9 @@ public class SnakeController {
     void onGameInfoMenuClick(ActionEvent event) {
 		try {
 			// <Play Button>: Open a new game window
-			Parent rootParent = FXMLLoader.load(getClass().getResource("frameGameInfo.fxml"));
+//			Parent rootParent = FXMLLoader.load(getClass().getResource("frameGameInfo.fxml"));
+			URL url = new File("src/main/resources/com/example/multiplayer_snake/frameGameInfo.fxml").toURI().toURL();
+			Parent rootParent = FXMLLoader.load(url);
 			
 			Scene scene = new Scene(rootParent);
 			Stage stage = new Stage();
