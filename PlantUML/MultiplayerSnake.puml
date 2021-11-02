@@ -2,6 +2,9 @@
 'https://plantuml.com/class-diagram
 
 package Client {
+    package Main {
+        class Snake {}
+    }
     package Model {
         class Snake {}
         class Player{
@@ -14,6 +17,7 @@ package Client {
         -highscore
         -datetime
         }
+        class Game{}
     }
 
     package View {
@@ -25,27 +29,27 @@ package Client {
     }
 
     package Controller {
-        class scoreController {}
-        class databaseController {
+        class ScoreController {}
+        class DatabaseController {
         -checkPlayer
         -addPlayer
         }
-        class arenaController {}
-        class mainController {}
-        class serverController{}
+        class ArenaController {}
+        class MainController {}
+        class ServerController{}
     }
     'connections
     registryView --> Player
     loginView --> Player
     Highscore <-- scoreView
-    Snake <-- arenaView
+    Snake <-- loginView
     scoreView <-- scoreController
     registryView <-- databaseController
     loginView <-- databaseController
     arenaView <-- arenaController
     mainView <-- mainController
-    arenaController --> Snake
-    scoreController --> Highscore
+    ArenaController --> Snake
+    ScoreController --> Highscore
     }
 
 package Server {
@@ -56,6 +60,6 @@ package Server {
 }
 
 'connections
-serverController <--> SnakeServer :network
-databaseController <--> SnakeServer :network
+ServerController <--> SnakeServer :network
+DatabaseController <--> SnakeServer :network
 @enduml

@@ -20,7 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class SnakeController {
+public class LoginController {
 
 	@FXML
 	private Button playButton;
