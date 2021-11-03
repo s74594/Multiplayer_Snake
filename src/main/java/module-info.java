@@ -8,6 +8,8 @@ module com.example.multiplayer_snake {
 	opens com.example.multiplayer_snake to javafx.fxml;
 
 	exports com.example.multiplayer_snake;
+	exports com.example.multiplayer_snake.model;
+	
 	exports controller;
 	
 	opens controller to javafx.fxml;

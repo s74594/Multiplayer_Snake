@@ -23,7 +23,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.LoginViewModel;
 
-public class LoginViewController implements Initializable {
+public class LoginController implements Initializable {
 	@FXML
 	private Button playButton;
 	@FXML
@@ -112,40 +112,6 @@ public class LoginViewController implements Initializable {
 			// <Exit Button>: Close login window
 			Stage stage = (Stage) exitButton.getScene().getWindow();
 			stage.close();
-		} catch (Exception e) {
-			// handle error exception
-			System.err.println(e.getMessage());
-		}
-	}
-
-	@FXML
-	void onExitMenuClick(ActionEvent event) {
-		try {
-			// <Menubar: Game -> Exit Game>: Close game window
-			System.exit(0);
-		} catch (Exception e) {
-			// handle error exception
-			System.err.println(e.getMessage());
-		}
-	}
-
-	@FXML
-	void onGameInfoMenuClick(ActionEvent event) {
-		try {
-			// <Menubar: Help -> Game Info>: Open a new game window
-//			Parent rootParent = FXMLLoader.load(getClass().getResource("frameGameInfo.fxml"));
-			URL url = new File("src/main/resources/com/example/multiplayer_snake/frameGameInfo.fxml").toURI().toURL();
-			Parent rootParent = FXMLLoader.load(url);
-
-			Scene scene = new Scene(rootParent);
-			Stage stage = new Stage();
-			stage.setTitle("Snake - Gameplay Info");
-			stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
-			stage.setResizable(false);
-			stage.setScene(scene);
-			stage.show();
-
-			centerWindowOnScreen(stage); // call method: center frame on screen
 		} catch (Exception e) {
 			// handle error exception
 			System.err.println(e.getMessage());
