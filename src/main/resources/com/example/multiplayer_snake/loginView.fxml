@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #7c9e01;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SnakeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #7c9e01;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginViewController">
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="358.0" BorderPane.alignment="CENTER">
          <children>
@@ -36,7 +36,7 @@
                         <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="playButton" layoutX="70.0" layoutY="110.0" mnemonicParsing="false" onAction="#onPlayButtonClick" style="-fx-background-color: #e89f02;" text="Play" textFill="WHITE">
+                  <Button fx:id="button_play" layoutX="70.0" layoutY="110.0" mnemonicParsing="false" onAction="#onPlayButtonClick" style="-fx-background-color: #e89f02;" text="Play" textFill="WHITE">
                      <font>
                         <Font name="Matura MT Script Capitals" size="14.0" />
                      </font>
@@ -57,7 +57,7 @@
                         <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Button layoutX="161.0" layoutY="164.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign up!" textFill="#110eed" underline="true">
+                  <Button fx:id="button_signup" layoutX="161.0" layoutY="164.0" mnemonicParsing="false" onAction="#onSignupButtonClick" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign up!" textFill="#110eed" underline="true">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
