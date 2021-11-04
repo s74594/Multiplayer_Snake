@@ -1,7 +1,7 @@
 package model;
 
 import java.sql.*;
-import controller.databaseController;
+import controller.DatabaseController;
 
 public class LoginViewModel {
 	
@@ -9,7 +9,7 @@ public class LoginViewModel {
 	
 	public LoginViewModel() {
 		
-		connection = databaseController.Connector();
+		connection = DatabaseController.Connector();
 		
 		if (connection==null) System.exit(1); // DB connection fails
 	}

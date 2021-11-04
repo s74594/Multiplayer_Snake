@@ -52,8 +52,14 @@
                   <Tooltip text="Repeat your password" />
                </tooltip>
             </TextField>
-            <Button layoutX="62.0" layoutY="161.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" style="-fx-background-color: #e89f02; -fx-cursor: hand;" text="Sign-up" />
-            <Button layoutX="152.0" layoutY="161.0" mnemonicParsing="false" style="-fx-background-color: #e89f02; -fx-cursor: hand;" text="Clear" />
+            <Button layoutX="30.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02; -fx-cursor: hand;" text="Sign-up">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font></Button>
+            <Button layoutX="120.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02; -fx-cursor: hand;" text="Clear">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font></Button>
          </children>
       </AnchorPane>
       <Text layoutX="87.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Registration">

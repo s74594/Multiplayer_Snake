@@ -36,17 +36,17 @@
                         <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="button_play" layoutX="70.0" layoutY="110.0" mnemonicParsing="false" onAction="#onPlayButtonClick" style="-fx-background-color: #e89f02;" text="Play" textFill="WHITE">
+                  <Button fx:id="button_play" layoutX="50.0" layoutY="120.0" mnemonicParsing="false" onAction="#onPlayButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02;" text="Play">
                      <font>
-                        <Font name="Matura MT Script Capitals" size="14.0" />
+                        <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="exitButton" layoutX="170.0" layoutY="110.0" mnemonicParsing="false" onAction="#onExitButtonClick" style="-fx-background-color: #e89f02;" text="Exit" textFill="WHITE">
+                  <Button fx:id="exitButton" layoutX="142.0" layoutY="120.0" mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02;" text="Exit">
                      <font>
-                        <Font name="Matura MT Script Capitals" size="14.0" />
+                        <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />

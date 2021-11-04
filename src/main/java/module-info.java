@@ -6,11 +6,9 @@ module com.example.multiplayer_snake {
 	requires java.sql;
 
 	opens com.example.multiplayer_snake to javafx.fxml;
+	opens controller to javafx.fxml;
 
 	exports com.example.multiplayer_snake;
 	exports com.example.multiplayer_snake.model;
-	
 	exports controller;
-	
-	opens controller to javafx.fxml;
 }
