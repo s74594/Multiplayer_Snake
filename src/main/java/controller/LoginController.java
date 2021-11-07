@@ -21,9 +21,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import model.LoginViewModel;
+//import model.LoginViewModel;
 
-public class LoginController implements Initializable {
+public class LoginController /*implements Initializable*/ {
 	@FXML
 	private Button playButton;
 	@FXML
@@ -47,18 +47,18 @@ public class LoginController implements Initializable {
 	private static final int SQUARE_SIZE = WIDTH / ROWS;
 	private GraphicsContext graphicsContext;
 
-	@SuppressWarnings("exports")
-	public LoginViewModel loginViewModel = new LoginViewModel();
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// Check Database SQL-Lite Connection
-		if (loginViewModel.isDBConnected()) {
-			System.out.println("Database connection successful.");
-		} else {
-			System.out.println("Database connection not succeeded.");
-		}
-	}
+//	@SuppressWarnings("exports")
+//	public LoginViewModel loginViewModel = new LoginViewModel();
+//
+//	@Override
+//	public void initialize(URL location, ResourceBundle resources) {
+//		// Check Database SQL-Lite Connection
+//		if (loginViewModel.isDBConnected()) {
+//			System.out.println("Database connection successful.");
+//		} else {
+//			System.out.println("Database connection not succeeded.");
+//		}
+//	}
 
 	@FXML
 	protected void onPlayButtonClick(ActionEvent event) {
