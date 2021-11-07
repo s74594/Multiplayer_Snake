@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.net.URL;
 
+import com.example.multiplayer_snake.model.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,13 +11,20 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class ArenaController {
 
-    @FXML
+	private Player model; // Controller <-> Model connection
+
+	@FXML
+	public Circle snake;
+
+	@FXML
     private MenuItem exitBTNMenu;
 
     @FXML
@@ -36,8 +44,6 @@ public class ArenaController {
     @FXML
 	void onGameInfoMenuClick(ActionEvent event) {
 		try {
-			// <Menubar: Help -> Game Info>: Open a new game window
-//			Parent rootParent = FXMLLoader.load(getClass().getResource("frameGameInfo.fxml"));
 			URL url = new File("src/main/resources/com/example/multiplayer_snake/frameGameInfo.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 
@@ -51,7 +57,6 @@ public class ArenaController {
 
 			centerWindowOnScreen(stage); // call method: center frame on screen
 		} catch (Exception e) {
-			// handle error exception
 			System.err.println(e.getMessage());
 		}
 	}
@@ -61,5 +66,11 @@ public class ArenaController {
 		Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
 		stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
 		stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+	}
+
+	@FXML
+	public void snakeSteering(KeyEvent keyEvent) {
+		snake.setRadius(200);
+
 	}
 }
