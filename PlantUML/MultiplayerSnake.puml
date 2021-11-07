@@ -1,5 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
+'- Indicates private
+'+ Indicates public
+'# Indicates protected
 
 package Client {
     package Main {
@@ -37,9 +40,22 @@ package Client {
         -addPlayer
         +Connection connector()
         }
-        class ArenaController {}
+        class ArenaController {
+        +void onExitMenuClick(ActionEvent event)
+        +void onGameInfoMenuClick(ActionEvent event)
+        +void centerWindowOnScreen(Stage stage)
+        }
         class MainController {}
         class ServerController{}
+        class LoginController {
+        +void initialize(URL location, ResourceBundle resources)
+        #void onPlayButtonClick(ActionEvent event)
+        -void run()
+        -void drawBackground(GraphicsContext graphicsContext)
+        -void onExitButtonClick(ActionEvent event)
+        +void centerWindowOnScreen(Stage stage)
+        #void onSignupButtonClick(ActionEvent event)
+        }
     }
     'connections
     registryView --> Player
