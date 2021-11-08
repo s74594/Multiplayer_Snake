@@ -7,6 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
    <children>
+      <Pane id="game" fx:id="playGround" focusTraversable="true" onKeyPressed="#snakeSteering" onMouseClicked="#snakeDemo" prefHeight="408.0" prefWidth="600.0" style="-fx-background-color: #7c9e01;" />
       <MenuBar prefWidth="600.0">
         <menus>
           <Menu mnemonicParsing="false" text="Game">
@@ -45,6 +46,6 @@
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Circle fx:id="snake" fill="DODGERBLUE" layoutX="210.0" layoutY="114.0" onKeyPressed="#snakeSteering" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="snake" fill="DODGERBLUE" layoutX="210.0" layoutY="114.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </Pane>

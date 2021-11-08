@@ -1,10 +1,14 @@
 package com.example.multiplayer_snake;
 
+import controller.ArenaController;
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -26,7 +30,7 @@ public class Snake extends Application {
                 stage.setScene(scene);
                 stage.show();
 
-                centerWindowOnScreen(stage);
+                //centerWindowOnScreen(stage);
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
