@@ -2,17 +2,17 @@ package com.example.multiplayer_snake;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import controller.CenterWindowScreen;
 
 public class Snake extends Application {
+	
+	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 
     @SuppressWarnings("exports")
     @Override
@@ -26,18 +26,11 @@ public class Snake extends Application {
             stage.setScene(scene);
             stage.show();
 
-            centerWindowOnScreen(stage);
+            centerWindowScreen.CenterScreen(stage);
         } catch (Exception e) {
             // handle exception
             System.err.println(e.getMessage());
         }
-    }
-
-    void centerWindowOnScreen(Stage stage) {
-        /* Center Snake Window on Screen */
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
 
     public static void main(String[] args) {

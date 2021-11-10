@@ -1,27 +1,18 @@
 package controller;
 
 import com.example.multiplayer_snake.model.Player;
-import javafx.animation.PathTransition;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
 import java.io.File;
 import java.net.URL;
 
@@ -52,6 +43,8 @@ public class ArenaController {
 
     @FXML
     private MenuItem gameInfoBTNMenu;
+    
+    CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 
     @FXML
     void initialize() {
@@ -86,18 +79,10 @@ public class ArenaController {
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
-            centerWindowOnScreen(stage); // call method: center frame on screen
+            centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-    }
-
-    @FXML
-    void centerWindowOnScreen(Stage stage) {
-        /* Center Snake Window on Screen */
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
 
     @FXML

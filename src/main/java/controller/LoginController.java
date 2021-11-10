@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,6 +46,8 @@ public class LoginController {
     private static final int COLUMNS = ROWS;
     private static final int SQUARE_SIZE = WIDTH / ROWS;
     private GraphicsContext graphicsContext;
+    
+    CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 
 /*    @SuppressWarnings("exports")
     public LoginViewModel loginViewModel = new LoginViewModel();
@@ -80,7 +81,7 @@ public class LoginController {
             stage.setScene(scene);
             stage.show();
 
-            centerWindowOnScreen(stage); // call method: center frame on screen
+            centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
             graphicsContext = canvas.getGraphicsContext2D();
             run();
         } catch (Exception e) {
@@ -119,13 +120,6 @@ public class LoginController {
         }
     }
 
-    void centerWindowOnScreen(Stage stage) {
-        /* Center Snake Window on Screen */
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
-    }
-
     @FXML
     protected void onSignupButtonClick(ActionEvent event) {
         try {
@@ -142,7 +136,7 @@ public class LoginController {
             stage.setScene(scene);
             stage.show();
 
-            centerWindowOnScreen(stage); // call method: center frame on screen
+            centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
         } catch (Exception e) {
             // handle error exception
             System.err.println(e.getMessage());
