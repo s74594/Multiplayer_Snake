@@ -24,7 +24,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.LoginViewModel;
 
-public class LoginController implements Initializable {
+public class LoginController {
     @FXML
     private Button playButton;
     @FXML
@@ -48,7 +48,7 @@ public class LoginController implements Initializable {
     private static final int SQUARE_SIZE = WIDTH / ROWS;
     private GraphicsContext graphicsContext;
 
-    @SuppressWarnings("exports")
+/*    @SuppressWarnings("exports")
     public LoginViewModel loginViewModel = new LoginViewModel();
 
     @Override
@@ -59,7 +59,7 @@ public class LoginController implements Initializable {
         } else {
             System.out.println("Database connection not succeeded.");
         }
-    }
+    }*/
 
     @FXML
     protected void onPlayButtonClick(ActionEvent event) {

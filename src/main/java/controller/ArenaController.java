@@ -10,9 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -22,7 +22,19 @@ import java.net.URL;
 
 public class ArenaController {
 
-    private Player model; // Controller <-> Model connection
+    private Player player; // Controller <-> Model connection
+
+    @FXML
+    public Text namePlayer1;
+
+    @FXML
+    public Text scorePlayer1;
+
+    @FXML
+    public Text namePlayer2;
+
+    @FXML
+    public Text scorePlayer2;
 
     @FXML
     public Pane playGround;
@@ -38,7 +50,12 @@ public class ArenaController {
 
     @FXML
     void initialize() {
-        System.out.println("init");
+        player = new Player();
+
+        namePlayer1.setText("Max");
+        namePlayer2.setText("Maxi");
+        scorePlayer1.setText("9014");
+        scorePlayer2.setText("9541");
     }
 
     @FXML
@@ -64,15 +81,15 @@ public class ArenaController {
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
-
             centerWindowOnScreen(stage); // call method: center frame on screen
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
 
+    @FXML
     void centerWindowOnScreen(Stage stage) {
-        /* Center Snake Window on Screen **/
+        /* Center Snake Window on Screen */
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
@@ -86,23 +103,11 @@ public class ArenaController {
 
         System.out.println("Key: " + keyEvent.getCode() + "  SnakeX: " + snakeX + "  SnakeY: " + snakeY);  // Debug
 
-        if(keyEvent.getCode() == KeyCode.UP) {
-            snake.setLayoutY(snakeY - snakeSpeed);
+        switch (keyEvent.getCode()) {
+            case UP -> snake.setLayoutY(snakeY - snakeSpeed);
+            case DOWN -> snake.setLayoutY(snakeY + snakeSpeed);
+            case LEFT -> snake.setLayoutX(snakeX - snakeSpeed);
+            case RIGHT -> snake.setLayoutX(snakeX + snakeSpeed);
         }
-        if(keyEvent.getCode() == KeyCode.DOWN) {
-            snake.setLayoutY(snakeY + snakeSpeed);
-        }
-        if(keyEvent.getCode() == KeyCode.LEFT) {
-            snake.setLayoutX(snakeX - snakeSpeed);
-        }
-        if(keyEvent.getCode() == KeyCode.RIGHT) {
-            snake.setLayoutX(snakeX + snakeSpeed);
-        }
-
-    }
-
-    @FXML
-    public void snakeDemo(MouseEvent mouseEvent) {
-        snake.setRadius(20);
     }
 }
