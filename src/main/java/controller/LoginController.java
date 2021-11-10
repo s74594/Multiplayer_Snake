@@ -22,7 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import model.LoginViewModel;
+//import model.LoginViewModel;
 
 public class LoginController {
     @FXML
