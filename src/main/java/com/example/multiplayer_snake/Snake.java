@@ -1,12 +1,10 @@
 package com.example.multiplayer_snake;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -20,7 +18,8 @@ public class Snake extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
-            Parent rootParent = FXMLLoader.load(getClass().getResource("loginView.fxml"));
+            URL url = new File("src/main/resources/com/example/multiplayer_snake/loginView.fxml").toURI().toURL();
+            Parent rootParent = FXMLLoader.load(url);
             Scene scene = new Scene(rootParent);
             stage.setTitle("Snake");
             stage.setResizable(false);
