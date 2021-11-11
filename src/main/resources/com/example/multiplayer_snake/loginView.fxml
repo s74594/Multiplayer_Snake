@@ -1,36 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #7c9e01;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #7c9e01;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="358.0" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane layoutX="51.0" layoutY="55.0" prefHeight="204.0" prefWidth="238.0" style="-fx-background-color: #607a00; -fx-background-radius: 10px;">
                <children>
-                  <TextField layoutX="72.0" layoutY="25.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;" text="Enter your name">
+                  <TextField id="player_name" fx:id="player_name" layoutX="72.0" layoutY="25.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;" text="Enter your name">
                      <tooltip>
                         <Tooltip text="Set your user name" />
-                     </tooltip>
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </TextField>
-                  <TextField layoutX="72.0" layoutY="62.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;" text="Password">
-                     <tooltip>
-                        <Tooltip text="Set your password" />
                      </tooltip>
                      <font>
                         <Font name="Arial Rounded MT Bold" size="12.0" />
@@ -72,6 +57,12 @@
                         <Image url="@../../../../../../glyphicons/png/glyphicons-205-unlock.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="pw_incorrect" layoutX="47.0" layoutY="94.0" prefHeight="17.0" prefWidth="181.0" text="Password or name incorrect !" textFill="RED" visible="false">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="player_password" layoutX="72.0" layoutY="65.0" />
                </children>
             </AnchorPane>
          </children>

@@ -2,6 +2,8 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -38,6 +38,12 @@ public class LoginController {
     private Text scoreLabel;
     @FXML
     private Label scoreLabelNumber;
+    @FXML
+    private TextField player_name;
+    @FXML
+    private PasswordField player_password;
+    @FXML
+    private Label pw_incorrect;
 
     /* Global variables */
     private static final int WIDTH = 600;
@@ -48,6 +54,7 @@ public class LoginController {
     private GraphicsContext graphicsContext;
     
     CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
+    private ActionEvent event;
 
 /*    @SuppressWarnings("exports")
     public LoginViewModel loginViewModel = new LoginViewModel();
@@ -62,11 +69,39 @@ public class LoginController {
         }
     }*/
 
+    private Connection connect() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:D:/0_Intellij/Multiplayer_Snake/SQL Lite Database/Snake_System.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+
     @FXML
-    protected void onPlayButtonClick(ActionEvent event) {
+    protected void onPlayButtonClick(ActionEvent event) throws SQLException {
+        this.event = event;
         try {
             // <Play Button>: opens arena view
             // Parent rootParent = FXMLLoader.load(getClass().getResource("arenaView.fxml"));
+
+            String playerName = player_name.getText();
+            String playerPassword= player_password.getText();
+
+            // Verbindung zur DB
+            String sql = "SELECT players.password FROM players WHERE players.name='" + playerName+ "'";
+                Connection conn = this.connect();
+                Statement stmt  = conn.createStatement();
+                ResultSet rs    = stmt.executeQuery(sql);
+                String expectedPW= rs.getString("password");
+
+          //  System.out.println("Eingegebener Name: " +playerName + " erwartetes password: " +expectedPW + " und das eingegebene password: " + playerPassword);
+
+
+            if (Objects.equals(playerPassword, expectedPW)) {
             URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
             Parent rootParent = FXMLLoader.load(url);
 
@@ -83,7 +118,13 @@ public class LoginController {
 
             centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
             graphicsContext = canvas.getGraphicsContext2D();
-            run();
+            run();}
+            else{
+                pw_incorrect.setVisible(true);
+               // System.out.println("Password incorrect");
+            }
+
+
         } catch (Exception e) {
             // handle error exception
             System.err.println(e.getMessage());
