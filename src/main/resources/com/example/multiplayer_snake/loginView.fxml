@@ -21,14 +21,6 @@
                         <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="player_password" layoutX="72.0" layoutY="62.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;" text="Password">
-                     <tooltip>
-                        <Tooltip text="Set your password" />
-                     </tooltip>
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </TextField>
                   <Button fx:id="button_play" layoutX="50.0" layoutY="120.0" mnemonicParsing="false" onAction="#onPlayButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02;" text="Play">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="12.0" />
@@ -70,6 +62,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
+                  <PasswordField fx:id="player_password" layoutX="72.0" layoutY="65.0" />
                </children>
             </AnchorPane>
          </children>
