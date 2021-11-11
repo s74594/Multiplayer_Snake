@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/class-diagram
+'- Indicates private
+'+ Indicates public
+'# Indicates protected
+
+package Client {
+    package Main {
+        class Snake {}
+    }
+
+    package Model {
+        class Player{
+        }
+
+        class Highscore{
+
+        }
+    }
+
+    package View {
+        class scoreView{}
+
+        class registryView{}
+
+        class loginView{}
+
+        class arenaView{}
+    }
+
+    package Controller {
+        class ScoreController {}
+
+        class DatabaseServerController {
+
+        }
+
+        class ArenaController {
+
+        }
+
+        class LoginController {
+
+        }
+    }
+    'connections
+
+
+package Server {
+    class SnakeServer
+    class Database {}
+    'connections
+
+}
+
+'connections
+
+@enduml

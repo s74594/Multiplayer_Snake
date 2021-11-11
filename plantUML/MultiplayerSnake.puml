@@ -8,45 +8,48 @@ package Client {
     package Main {
         class Snake {}
     }
+
     package Model {
-        class Snake {}
         class Player{
         -playerID
         -name
         -password
         +void addPlayer()
         }
+
         class Highscore{
         -playerID
         -highscore
         -datetime
         +void updateHighscore()
         }
-        class Game{}
     }
 
     package View {
         class scoreView{}
+
         class registryView{}
+
         class loginView{}
+
         class arenaView{}
-        class mainView{}
     }
 
     package Controller {
         class ScoreController {}
-        class DatabaseController {
+
+        class DatabaseServerController {
         -checkPlayer
         -addPlayer
         +Connection connector()
         }
+
         class ArenaController {
         +void onExitMenuClick(ActionEvent event)
         +void onGameInfoMenuClick(ActionEvent event)
         +void centerWindowOnScreen(Stage stage)
         }
-        class MainController {}
-        class ServerController{}
+
         class LoginController {
         +void initialize(URL location, ResourceBundle resources)
         #void onPlayButtonClick(ActionEvent event)
@@ -62,13 +65,15 @@ package Client {
     loginView --> Player
     Highscore <-- scoreView
     Snake <-- loginView
-    scoreView <-- scoreController
-    registryView <-- databaseController
-    loginView <-- databaseController
-    arenaView <-- arenaController
-    mainView <-- mainController
+    scoreView <-- ScoreController
+    registryView <-- DatabaseServerController
+    loginView <-- DatabaseServerController
+    arenaView <-- ArenaController
     ArenaController --> Snake
     ScoreController --> Highscore
+    LoginController --> loginView
+    arenaView --> Player
+    arenaView --> Highscore
     }
 
 package Server {
@@ -79,6 +84,5 @@ package Server {
 }
 
 'connections
-ServerController <--> SnakeServer :network
-DatabaseController <--> SnakeServer :network
+DatabaseServerController <--> SnakeServer :network
 @enduml
