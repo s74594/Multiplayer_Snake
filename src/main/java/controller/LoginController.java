@@ -71,7 +71,7 @@ public class LoginController {
 
     private Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:D:/0_Intellij/Multiplayer_Snake/SQL Lite Database/Snake_System.db";
+        String url = "jdbc:sqlite:src/SQL Lite Database/Snake_System.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
