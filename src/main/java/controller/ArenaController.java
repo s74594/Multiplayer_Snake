@@ -67,7 +67,7 @@ public class ArenaController {
 	/* Method to generate food at a random position(x,y) */
 	public void generateFood() {
 
-		/* size of window */
+		/* place food within defined borders */
 		int minWidth = 0;
 		int maxWidth = 580;
 		int minHeight = 25;
@@ -84,7 +84,7 @@ public class ArenaController {
 
 		System.out.println("X: " + posX + " Y: " + posY); // Debug
 	}
-	
+
 	/* snake eats food and generate new food at position(x,y) */
 	public void eatFood() {
 		foodImage.setVisible(false); // set food invisible the snake hits its boundaries
@@ -134,43 +134,43 @@ public class ArenaController {
 		System.out.println("Key: " + keyEvent.getCode() + "  SnakeX: " + snakeX + "  SnakeY: " + snakeY); // Debug
 
 		switch (keyEvent.getCode()) {
-			case UP -> {
-				// Detect collition
-				if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
-					System.out.println("Food collition detected"); // Debug
-					eatFood();
-				}
-				
-				snake.setLayoutY(snakeY - snakeSpeed);
+		case UP -> {
+			// Detect collision
+			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
+				System.out.println("Food collition detected"); // Debug
+				eatFood();
 			}
-			case DOWN -> {
-				// Detect collition
-				if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
-					System.out.println("Food collition detected"); // Debug
-					eatFood();
-				}
-				
-				snake.setLayoutY(snakeY + snakeSpeed);
+
+			snake.setLayoutY(snakeY - snakeSpeed);
+		}
+		case DOWN -> {
+			// Detect collision
+			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
+				System.out.println("Food collition detected"); // Debug
+				eatFood();
 			}
-			case LEFT -> {
-				// Detect collition
-				if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
-					System.out.println("Food collition detected"); // Debug
-					eatFood();
-				}
-				
-				snake.setLayoutX(snakeX - snakeSpeed);
+
+			snake.setLayoutY(snakeY + snakeSpeed);
+		}
+		case LEFT -> {
+			// Detect collision
+			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
+				System.out.println("Food collition detected"); // Debug
+				eatFood();
 			}
-			case RIGHT -> {
-				// Detect collition
-				if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
-					System.out.println("Food collition detected"); // Debug
-					eatFood();
-				}
-				
-				snake.setLayoutX(snakeX + snakeSpeed);
+
+			snake.setLayoutX(snakeX - snakeSpeed);
+		}
+		case RIGHT -> {
+			// Detect collision
+			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
+				System.out.println("Food collition detected"); // Debug
+				eatFood();
 			}
-			default -> throw new IllegalArgumentException("Unexpected value: " + keyEvent.getCode());
+
+			snake.setLayoutX(snakeX + snakeSpeed);
+		}
+		default -> throw new IllegalArgumentException("Unexpected value: " + keyEvent.getCode());
 		}
 		/*
 		 * PathTransition pathTransition = new PathTransition();

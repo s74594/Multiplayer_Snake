@@ -54,7 +54,7 @@
       <Circle fx:id="snake" fill="DODGERBLUE" layoutX="210.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="foodImage" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../../../../image/pear.png" />
+            <Image url="@../../../../../../image/raspberry.png" />
          </image>
       </ImageView>
    </children>
