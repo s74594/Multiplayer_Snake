@@ -22,7 +22,7 @@
          <children>
             <AnchorPane layoutX="51.0" layoutY="55.0" prefHeight="204.0" prefWidth="238.0" style="-fx-background-color: #607a00; -fx-background-radius: 10px;">
                <children>
-                  <TextField id="player_name" fx:id="player_name" layoutX="72.0" layoutY="25.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;" text="Enter your name">
+                  <TextField id="player_name" fx:id="player_name" layoutX="72.0" layoutY="25.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;">
                      <tooltip>
                         <Tooltip text="Set your user name" />
                      </tooltip>
@@ -66,12 +66,15 @@
                         <Image url="@../../../../../../glyphicons/png/glyphicons-205-unlock.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="pw_incorrect" layoutX="47.0" layoutY="94.0" prefHeight="17.0" prefWidth="181.0" text="Password or name incorrect !" textFill="RED" visible="false">
+                  <PasswordField fx:id="player_password" layoutX="72.0" layoutY="65.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;">
+                     <tooltip>
+                        <Tooltip text="Set your password" />
+                     </tooltip></PasswordField>
+                  <Label fx:id="pw_incorrect" layoutX="45.0" layoutY="95.0" prefHeight="19.0" prefWidth="180.0" text="Password or name incorrect !" textFill="RED" visible="false">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="player_password" layoutX="72.0" layoutY="65.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;" />
                </children>
             </AnchorPane>
          </children>

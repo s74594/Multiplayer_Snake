@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 
 public class CenterWindowScreen {
 	
+	@SuppressWarnings("exports")
 	public void CenterScreen(Stage stage) {
 	/* Center Snake Window on Screen */
     Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
