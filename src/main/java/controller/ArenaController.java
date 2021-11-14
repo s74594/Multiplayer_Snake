@@ -135,7 +135,7 @@ public class ArenaController {
 
 		switch (keyEvent.getCode()) {
 		case UP -> {
-			// Detect collision
+			// Detect food collision
 			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
 				System.out.println("Food collition detected"); // Debug
 				eatFood();
@@ -144,7 +144,7 @@ public class ArenaController {
 			snake.setLayoutY(snakeY - snakeSpeed);
 		}
 		case DOWN -> {
-			// Detect collision
+			// Detect food collision
 			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
 				System.out.println("Food collition detected"); // Debug
 				eatFood();
@@ -153,7 +153,7 @@ public class ArenaController {
 			snake.setLayoutY(snakeY + snakeSpeed);
 		}
 		case LEFT -> {
-			// Detect collision
+			// Detect food collision
 			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
 				System.out.println("Food collition detected"); // Debug
 				eatFood();
@@ -162,7 +162,7 @@ public class ArenaController {
 			snake.setLayoutX(snakeX - snakeSpeed);
 		}
 		case RIGHT -> {
-			// Detect collision
+			// Detect food collision
 			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
 				System.out.println("Food collition detected"); // Debug
 				eatFood();
@@ -172,6 +172,7 @@ public class ArenaController {
 		}
 		default -> throw new IllegalArgumentException("Unexpected value: " + keyEvent.getCode());
 		}
+
 		/*
 		 * PathTransition pathTransition = new PathTransition();
 		 * pathTransition.setDuration(Duration.millis(6000));

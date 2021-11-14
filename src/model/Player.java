@@ -1,4 +1,4 @@
-package com.example.multiplayer_snake.model;
+package model;
 
 import javafx.scene.text.Text;
 
