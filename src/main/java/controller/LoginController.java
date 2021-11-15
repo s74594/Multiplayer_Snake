@@ -44,6 +44,13 @@ public class LoginController {
     private PasswordField player_password;
     @FXML
     private Label pw_incorrect;
+    @FXML
+    private TextField r_name;
+    @FXML
+    private TextField r_pw;
+    @FXML
+    private TextField r_pw_check;
+
 
     /* Global variables */
     private static final int WIDTH = 600;
@@ -69,18 +76,6 @@ public class LoginController {
         }
     }*/
 
-    private Connection connect() {
-        // SQLite connection string
-        String url = "jdbc:sqlite:src/SQL Lite Database/Snake_System.db";
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
-
     @FXML
     protected void onPlayButtonClick(ActionEvent event) throws SQLException {
         this.event = event;
@@ -88,20 +83,9 @@ public class LoginController {
             // <Play Button>: opens arena view
             // Parent rootParent = FXMLLoader.load(getClass().getResource("arenaView.fxml"));
 
-            String playerName = player_name.getText();
-            String playerPassword= player_password.getText();
+            String expectedPW =DatabaseController.Select_Player_PW(player_name.getText());
 
-            // Verbindung zur DB
-            String sql = "SELECT players.password FROM players WHERE players.name='" + playerName+ "'";
-                Connection conn = this.connect();
-                Statement stmt  = conn.createStatement();
-                ResultSet rs    = stmt.executeQuery(sql);
-                String expectedPW= rs.getString("password");
-
-          //  System.out.println("Eingegebener Name: " +playerName + " erwartetes password: " +expectedPW + " und das eingegebene password: " + playerPassword);
-
-
-            if (Objects.equals(playerPassword, expectedPW)) {
+            if (Objects.equals(player_password.getText(), expectedPW)) {
             URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
             Parent rootParent = FXMLLoader.load(url);
 
@@ -171,7 +155,7 @@ public class LoginController {
 
             Scene scene = new Scene(rootParent);
             Stage stage = new Stage();
-            stage.setTitle("??????");
+            stage.setTitle("Create a new player");
             stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
             stage.setResizable(false);
             stage.setScene(scene);
@@ -182,5 +166,11 @@ public class LoginController {
             // handle error exception
             System.err.println(e.getMessage());
         }
+
+    }
+
+
+    public void onRegisterButtonClick(ActionEvent actionEvent) {
+        DatabaseController.Insert_Player(r_name.getText(), r_pw.getText(), r_pw_check.getText());
     }
 }
