@@ -1,18 +1,23 @@
 package controller;
 
 import com.example.multiplayer_snake.model.Player;
+import com.example.multiplayer_snake.SnakeController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
@@ -48,6 +53,9 @@ public class ArenaController {
 
 	@FXML
 	public ImageView foodImage;
+	
+	@FXML
+    private Label gameOver;
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	Random random = new Random();
@@ -56,6 +64,7 @@ public class ArenaController {
 	void initialize() {
 		player = new Player();
 
+		gameOver.setText(null);
 		namePlayer1.setText("Max");
 		namePlayer2.setText("Maxi");
 		scorePlayer1.setText("9014");
@@ -110,14 +119,25 @@ public class ArenaController {
 		}
 
 		// Head touches any border
-		if (snake.getLayoutX() <= 9)
+		if (snake.getLayoutX() <= 9) {
 			System.out.println("Left border touched: Game Over!"); // Collision with left border
-		if (snake.getLayoutX() >= 590)
+			gameOver();
+		} else if (snake.getLayoutX() >= 590) {
 			System.out.println("Right border touched: Game Over!"); // Collision with right border
-		if (snake.getLayoutY() <= 35)
+			gameOver();
+		} else if (snake.getLayoutY() <= 35) {
 			System.out.println("Top border touched: Game Over!"); // Collision with top border
-		if (snake.getLayoutY() > 395)
+			gameOver();
+		} else if (snake.getLayoutY() > 395) {
 			System.out.println("Bottom border touched: Game Over!");// Collision with bottom border
+			gameOver();
+		}
+	}
+
+	@FXML
+	private void gameOver() {
+		gameOver.setText("Game Over!");
+		gameOver.setTextFill(Color.RED);
 	}
 
 	@FXML

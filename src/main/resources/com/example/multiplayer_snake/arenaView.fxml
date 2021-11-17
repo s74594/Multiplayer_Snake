@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -27,6 +28,11 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Label fx:id="gameOver" layoutX="227.0" layoutY="189.0" text="Game Over!">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="25.0" />
+         </font>
+      </Label>
       <Text fx:id="namePlayer1" layoutX="10.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 1&gt;">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
