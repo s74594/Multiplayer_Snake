@@ -6,10 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -17,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
 import java.util.Random;
+import java.util.Timer;
 
 public class ArenaController {
 
@@ -51,6 +54,20 @@ public class ArenaController {
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	Random random = new Random();
+
+	/*************************************************/
+//	public static final int SCREEN_WIDTH = 100;
+//	public static final int SCREEN_HEIGHT = 100;
+//	public static final int UNIT_SIZE = 25;
+//	public static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
+//	static final int DELAY = 75;
+//	public final int x[] = new int[GAME_UNITS];
+//	public final int y[] = new int[GAME_UNITS];
+//	public int bodyParts = 3; // initial start with 3 body parts
+//	char direction = 'R';
+//	Timer timer;
+
+	/*************************************************/
 
 	@FXML
 	void initialize() {
@@ -102,6 +119,24 @@ public class ArenaController {
 		}
 	}
 
+	public void checkCollision() {
+		// Head touches a fruit
+		if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
+			System.out.println("Food collition detected"); // Debug
+			eatFood();
+		}
+
+		// Head touches any border
+		if (snake.getLayoutX() <= 9)
+			System.out.println("Left border touched: Game Over!"); // Collision with left border
+		if (snake.getLayoutX() >= 590)
+			System.out.println("Right border touched: Game Over!"); // Collision with right border
+		if (snake.getLayoutY() <= 35)
+			System.out.println("Top border touched: Game Over!"); // Collision with top border
+		if (snake.getLayoutY() > 395)
+			System.out.println("Bottom border touched: Game Over!");// Collision with bottom border
+	}
+
 	@FXML
 	void onGameInfoMenuClick(ActionEvent event) {
 		try {
@@ -126,6 +161,16 @@ public class ArenaController {
 		double snakeX = snake.getLayoutX();
 		double snakeY = snake.getLayoutY();
 
+		/**************************************/
+//		for (int i = 0; i < bodyParts; i++) {
+//			if (i == 0) {
+//				snake.setFill(Color.GREEN);
+//			} else {
+//				snake.setFill(Color.RED);
+//			}
+//		}
+		/**************************************/
+
 		/*
 		 * Path path = new Path(); path.getElements().add(new MoveTo(snake.getLayoutX(),
 		 * snake.getLayoutY())); path.getElements().add(new LineTo(0, 200));
@@ -136,38 +181,22 @@ public class ArenaController {
 		switch (keyEvent.getCode()) {
 		case UP -> {
 			// Detect food collision
-			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
-				System.out.println("Food collition detected"); // Debug
-				eatFood();
-			}
-
+			checkCollision();
 			snake.setLayoutY(snakeY - snakeSpeed);
 		}
 		case DOWN -> {
 			// Detect food collision
-			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
-				System.out.println("Food collition detected"); // Debug
-				eatFood();
-			}
-
+			checkCollision();
 			snake.setLayoutY(snakeY + snakeSpeed);
 		}
 		case LEFT -> {
 			// Detect food collision
-			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
-				System.out.println("Food collition detected"); // Debug
-				eatFood();
-			}
-
+			checkCollision();
 			snake.setLayoutX(snakeX - snakeSpeed);
 		}
 		case RIGHT -> {
 			// Detect food collision
-			if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
-				System.out.println("Food collition detected"); // Debug
-				eatFood();
-			}
-
+			checkCollision();
 			snake.setLayoutX(snakeX + snakeSpeed);
 		}
 		default -> throw new IllegalArgumentException("Unexpected value: " + keyEvent.getCode());
