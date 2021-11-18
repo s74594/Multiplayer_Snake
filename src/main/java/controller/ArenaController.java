@@ -72,25 +72,12 @@ public class ArenaController {
         generateFood(); // initialize food
     }
 
-    /* Method to generate food at a random position(x,y) */
+
     public void generateFood() {
-
-        /* place food within defined borders */
-        int minWidth = 0;
-        int maxWidth = 580;
-        int minHeight = 25;
-        int maxHeight = 380;
-
-        /* generates a random value */
-        int posX = (int) (Math.random() * (maxWidth - minWidth)) + minWidth;
-        int posY = (int) (Math.random() * (maxHeight - minHeight) + minHeight);
-
-        /* set fruit */
-        foodImage.setLayoutX(posX);
-        foodImage.setLayoutY(posY);
+        model.generateFood();
+        foodImage.setLayoutX(model.fruitX);
+        foodImage.setLayoutY(model.fruitY);
         foodImage.setVisible(true);
-
-        System.out.println("X: " + posX + " Y: " + posY); // Debug
     }
 
     /* snake eats food and generate new food at position(x,y) */
