@@ -129,6 +129,7 @@ public class ArenaController {
             model.generateFood();
         }
         if(model.gameOver == 1) {
+            gameOver.setVisible(true);
             gameOver.setText("Game Over!");
             gameOver.setTextFill(Color.RED);
         }
