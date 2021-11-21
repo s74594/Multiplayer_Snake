@@ -53,26 +53,23 @@ public class DatabaseController {
         }
     }
 
-    public static void Insert_Player(String name, String pw, String pw_check) {
+    public static String Insert_Player(String name, String pw, String pw_check) {
         Connection conn = DatabaseController.connect();
         try {
             if (Objects.equals(pw, pw_check)) {
-            String sql = "INSERT INTO players (" + "name, password) " +  "VALUES ( '" + name + "', '" + pw + "' );";
-            Statement stmt  = conn.createStatement();
-            ResultSet rs    = stmt.executeQuery(sql);
-            System.out.println(rs);
+                String sql = "INSERT INTO players (" + "name, password) " + "VALUES ( '" + name + "', '" + pw + "' );";
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                System.out.println(rs);
                 conn.close();
-            }
-            if (!Objects.equals(pw, pw_check)){
-                System.out.println("Passwörter stimmen nicht überein");
+                return "Neuer Spieler angelegt";
+            } else if (!Objects.equals(pw, pw_check)) {
                 conn.close();
+                return "Passwörter stimmen nicht überein";
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            String x = e.getMessage();
+            return x;
         }
-
-    }
-
-
-
-}
+        return "Notwendige Returnmeldung";
+    }}
