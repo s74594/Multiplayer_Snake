@@ -127,6 +127,10 @@ public class ArenaController {
         if (model.eatFruit == 1) {
             foodImage.setVisible(false); // set food invisible the snake hits its boundaries
             model.generateFood();
+            foodImage.setLayoutX(model.fruitX);
+            foodImage.setLayoutY(model.fruitY);
+            foodImage.setVisible(true);
+            model.eatFruit = 0;
         }
         if(model.gameOver == 1) {
             gameOver.setVisible(true);
