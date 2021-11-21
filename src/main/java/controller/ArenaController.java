@@ -63,27 +63,20 @@ public class ArenaController {
     void initialize() {
         model = new Player();
 
-        gameOver.setText(null);
         namePlayer1.setText("Max");
         namePlayer2.setText("Maxi");
         scorePlayer1.setText("9014");
         scorePlayer2.setText("9541");
 
+        gameOver.setVisible(false);
         generateFood(); // initialize food
     }
-
 
     public void generateFood() {
         model.generateFood();
         foodImage.setLayoutX(model.fruitX);
         foodImage.setLayoutY(model.fruitY);
         foodImage.setVisible(true);
-    }
-
-    /* snake eats food and generate new food at position(x,y) */
-    public void eatFood() {
-        foodImage.setVisible(false); // set food invisible the snake hits its boundaries
-        generateFood();
     }
 
     @FXML
@@ -95,35 +88,6 @@ public class ArenaController {
             // handle error exception
             System.err.println(e.getMessage());
         }
-    }
-
-    public void checkCollision() {
-        // Head touches a fruit
-        if (foodImage.getBoundsInParent().intersects(snake.getBoundsInParent())) {
-            System.out.println("Food collition detected"); // Debug
-            eatFood();
-        }
-
-        // Head touches any border
-        if (snake.getLayoutX() <= 9) {
-            System.out.println("Left border touched: Game Over!"); // Collision with left border
-            gameOver();
-        } else if (snake.getLayoutX() >= 590) {
-            System.out.println("Right border touched: Game Over!"); // Collision with right border
-            gameOver();
-        } else if (snake.getLayoutY() <= 35) {
-            System.out.println("Top border touched: Game Over!"); // Collision with top border
-            gameOver();
-        } else if (snake.getLayoutY() > 395) {
-            System.out.println("Bottom border touched: Game Over!");// Collision with bottom border
-            gameOver();
-        }
-    }
-
-    @FXML
-    private void gameOver() {
-        gameOver.setText("Game Over!");
-        gameOver.setTextFill(Color.RED);
     }
 
     @FXML
@@ -151,9 +115,22 @@ public class ArenaController {
         double snakeY = snake.getLayoutY();
         KeyCode direction = keyEvent.getCode();
 
+        // bounds
+        model.snakeBounds = snake.getBoundsInParent();
+        model.fruitBounds = foodImage.getBoundsInParent();
+
+        // move
         model.movePlayer(snakeX, snakeY, direction);
         System.out.println(model.snakeX + "   " + model.snakeY);
         snake.setLayoutY(model.snakeY);
         snake.setLayoutX(model.snakeX);
+        if (model.eatFruit == 1) {
+            foodImage.setVisible(false); // set food invisible the snake hits its boundaries
+            model.generateFood();
+        }
+        if(model.gameOver == 1) {
+            gameOver.setText("Game Over!");
+            gameOver.setTextFill(Color.RED);
+        }
     }
 }
