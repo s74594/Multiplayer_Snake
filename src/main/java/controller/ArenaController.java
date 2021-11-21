@@ -57,7 +57,6 @@ public class ArenaController {
     private Label gameOver;
 
     CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
-    Random random = new Random();
 
     @FXML
     void initialize() {
