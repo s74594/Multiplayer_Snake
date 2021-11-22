@@ -1,9 +1,9 @@
 package com.example.multiplayer_snake;
 
+import controller.CenterWindowScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,55 +15,49 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class SnakeController {
 
 	@FXML
 	private Button playButton;
-
 	@FXML
 	private Button exitButton;
-
 	@FXML
 	private MenuItem exitBTNMenu;
-	
 	@FXML
-    private MenuItem gameInfoBTNMenu;
-	
+	private MenuItem gameInfoBTNMenu;
 	@FXML
-    private Text scoreLabel;
-
-    @FXML
-    private Label scoreLabelNumber;
-
+	private Text scoreLabel;
+	@FXML
+	private Label scoreLabelNumber;
 	private static final int WIDTH = 600;
 	private static final int HEIGHT = 408;
 	private static final int ROWS = 25;
 	private static final int COLUMNS = ROWS;
 	private static final int SQUARE_SIZE = WIDTH / ROWS;
 	private GraphicsContext graphicsContext;
+	
+	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 
 	@FXML
 	protected void onPlayButtonClick(ActionEvent event) {
 		try {
 			// <Play Button>: Open a new game window
 			Parent rootParent = FXMLLoader.load(getClass().getResource("game.fxml"));
-
+		      
 			// Create a new Window
 			Pane rootPane = new Pane();
 			Canvas canvas = new Canvas(WIDTH, HEIGHT);
-			rootPane.getChildren().addAll(canvas,rootParent);
+			rootPane.getChildren().addAll(canvas, rootParent);
 			Scene scene = new Scene(rootPane);
 			Stage stage = new Stage();
 			stage.setTitle("Snake");
 			stage.setResizable(false);
 			stage.setScene(scene);
 			stage.show();
-			
-			centerWindowOnScreen(stage);	// call methode center screen
 
+			centerWindowScreen.CenterScreen(stage);
 			graphicsContext = canvas.getGraphicsContext2D();
 			run();
 		} catch (Exception e) {
@@ -112,32 +106,25 @@ public class SnakeController {
 			System.err.println(e.getMessage());
 		}
 	}
-	
+
 	@FXML
-    void onGameInfoMenuClick(ActionEvent event) {
+	void onGameInfoMenuClick(ActionEvent event) {
 		try {
 			// <Play Button>: Open a new game window
 			Parent rootParent = FXMLLoader.load(getClass().getResource("frameGameInfo.fxml"));
-			
+
 			Scene scene = new Scene(rootParent);
 			Stage stage = new Stage();
 			stage.setTitle("Snake - Gameplay Info");
-			stage.initModality(Modality.APPLICATION_MODAL);	// disable minimize, maximize button
+			stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
 			stage.setResizable(false);
 			stage.setScene(scene);
 			stage.show();
-			
-			centerWindowOnScreen(stage);	// call methode center screen
+
+			centerWindowScreen.CenterScreen(stage);
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println(e.getMessage());
 		}
-    }
-	
-	void centerWindowOnScreen(Stage stage) {
-		/** Center Snake Window on Screen **/
-		Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
 	}
 }

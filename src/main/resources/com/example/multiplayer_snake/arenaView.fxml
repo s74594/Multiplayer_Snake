@@ -45,7 +45,7 @@
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text fx:id="namePlayer2" layoutX="535.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 2&gt;" textAlignment="RIGHT">
+      <Text fx:id="namePlayer2" layoutX="535.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 2&gt;">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
@@ -57,7 +57,9 @@
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Circle fx:id="snake" fill="DODGERBLUE" layoutX="210.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="snakeHead" fill="DODGERBLUE" layoutX="211.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="snakeBody" fill="#9bcfff" layoutX="190.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="snakeTail" fill="#9bcfff" layoutX="169.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="foodImage" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../../../../image/raspberry.png" />

@@ -1,6 +1,8 @@
 package controller;
 
 import com.example.multiplayer_snake.model.Player;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,124 +19,151 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import javafx.util.Duration;
 import java.io.File;
 import java.net.URL;
-import java.util.Random;
 
 public class ArenaController {
 
-    private Player model; // Controller -> Model connection
+	private Player model; // Controller -> Model connection
+	@SuppressWarnings("exports")
+	@FXML
+	public Text namePlayer1;
+	@SuppressWarnings("exports")
+	@FXML
+	public Text scorePlayer1;
+	@SuppressWarnings("exports")
+	@FXML
+	public Text namePlayer2;
+	@SuppressWarnings("exports")
+	@FXML
+	public Text scorePlayer2;
+	@SuppressWarnings("exports")
+	@FXML
+	public Pane playGround;
+	@SuppressWarnings("exports")
+	@FXML
+	public Circle snakeHead; // snake head
+	@FXML
+	public Circle snakeBody; // snake body
+	@FXML
+	public Circle snakeTailCircle; // snake tail
+	@FXML
+	private MenuItem exitBTNMenu;
+	@FXML
+	private MenuItem gameInfoBTNMenu;
+	@SuppressWarnings("exports")
+	@FXML
+	public ImageView foodImage;
+	@FXML
+	private Label gameOver;
+	private boolean isApplicationRunning = false;
+	private Timeline animation = new Timeline();
+	public static double millis = 0.3;
 
-    @FXML
-    public Text namePlayer1;
+	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 
-    @FXML
-    public Text scorePlayer1;
+	@FXML
+	void initialize() {
+		model = new Player();
 
-    @FXML
-    public Text namePlayer2;
+		namePlayer1.setText("Max");
+		namePlayer2.setText("Maxi");
+		scorePlayer1.setText("9014");
+		scorePlayer2.setText("9541");
 
-    @FXML
-    public Text scorePlayer2;
+		gameOver.setVisible(false);
+		generateFood(); // initialize food
+	}
 
-    @FXML
-    public Pane playGround;
+	public void generateFood() {
+		model.generateFood();
+		foodImage.setLayoutX(model.fruitX);
+		foodImage.setLayoutY(model.fruitY);
+		foodImage.setVisible(true);
+	}
 
-    @FXML
-    public Circle snake; // snake head
+	@FXML
+	void onExitMenuClick(ActionEvent event) {
+		try {
+			// <Menubar: Game -> Exit Game>: Close game window
+			System.exit(0);
+		} catch (Exception e) {
+			// handle error exception
+			System.err.println(e.getMessage());
+		}
+	}
 
-    @FXML
-    private MenuItem exitBTNMenu;
+	@FXML
+	void onGameInfoMenuClick(ActionEvent event) {
+		try {
+			URL url = new File("src/main/resources/com/example/multiplayer_snake/frameGameInfo.fxml").toURI().toURL();
+			Parent rootParent = FXMLLoader.load(url);
+			Scene scene = new Scene(rootParent);
+			Stage stage = new Stage();
+			stage.setTitle("Snake - Gameplay Info");
+			stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
+			stage.setResizable(false);
+			stage.setScene(scene);
+			stage.show();
+			centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+	}
 
-    @FXML
-    private MenuItem gameInfoBTNMenu;
+	private void startGame() {
+		animation.play();
+		isApplicationRunning = true;
+	}
 
-    @FXML
-    public ImageView foodImage;
+	private void stopGame() {
+		animation.stop();
+		isApplicationRunning = false;
+	}
 
-    @FXML
-    private Label gameOver;
+	@FXML
+	void snakeSteering(KeyEvent keyEvent) {
+		@SuppressWarnings("unused")
+		Player move;
 
-    CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
+		KeyFrame frame = new KeyFrame(Duration.seconds(millis), event -> {
+			if (!isApplicationRunning) {
+				return;
+			}
 
-    @FXML
-    void initialize() {
-        model = new Player();
+			double snakeHeadX = snakeHead.getLayoutX();
+			double snakeHeadY = snakeHead.getLayoutY();
+			KeyCode direction = keyEvent.getCode();
 
-        namePlayer1.setText("Max");
-        namePlayer2.setText("Maxi");
-        scorePlayer1.setText("9014");
-        scorePlayer2.setText("9541");
+			// bounds
+			model.snakeBounds = snakeHead.getBoundsInParent();
+			model.fruitBounds = foodImage.getBoundsInParent();
 
-        gameOver.setVisible(false);
-        generateFood(); // initialize food
-    }
+			// move
+			model.movePlayer(snakeHeadX, snakeHeadY, direction);
+			snakeHead.setLayoutX(model.snakeX);
+			snakeHead.setLayoutY(model.snakeY);
 
-    public void generateFood() {
-        model.generateFood();
-        foodImage.setLayoutX(model.fruitX);
-        foodImage.setLayoutY(model.fruitY);
-        foodImage.setVisible(true);
-    }
+			if (model.eatFruit == true) {
+				foodImage.setVisible(false); // set food invisible the snake hits its boundaries
+				model.generateFood();
+				foodImage.setLayoutX(model.fruitX);
+				foodImage.setLayoutY(model.fruitY);
+				foodImage.setVisible(true);
+				model.eatFruit = false;
+			}
 
-    @FXML
-    void onExitMenuClick(ActionEvent event) {
-        try {
-            // <Menubar: Game -> Exit Game>: Close game window
-            System.exit(0);
-        } catch (Exception e) {
-            // handle error exception
-            System.err.println(e.getMessage());
-        }
-    }
+			if (model.gameOver == true) {
+				gameOver.setVisible(true);
+				gameOver.setText("Game Over!");
+				gameOver.setTextFill(Color.RED);
+				stopGame();
+			}
+		});
 
-    @FXML
-    void onGameInfoMenuClick(ActionEvent event) {
-        try {
-            URL url = new File("src/main/resources/com/example/multiplayer_snake/frameGameInfo.fxml").toURI().toURL();
-            Parent rootParent = FXMLLoader.load(url);
-            Scene scene = new Scene(rootParent);
-            Stage stage = new Stage();
-            stage.setTitle("Snake - Gameplay Info");
-            stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.show();
-            centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    @FXML
-    void snakeSteering(KeyEvent keyEvent) {
-        Player move;
-        double snakeX = snake.getLayoutX();
-        double snakeY = snake.getLayoutY();
-        KeyCode direction = keyEvent.getCode();
-
-        // bounds
-        model.snakeBounds = snake.getBoundsInParent();
-        model.fruitBounds = foodImage.getBoundsInParent();
-
-        // move
-        model.movePlayer(snakeX, snakeY, direction);
-        System.out.println(model.snakeX + "   " + model.snakeY);
-        snake.setLayoutY(model.snakeY);
-        snake.setLayoutX(model.snakeX);
-        if (model.eatFruit == 1) {
-            foodImage.setVisible(false); // set food invisible the snake hits its boundaries
-            model.generateFood();
-            foodImage.setLayoutX(model.fruitX);
-            foodImage.setLayoutY(model.fruitY);
-            foodImage.setVisible(true);
-            model.eatFruit = 0;
-        }
-        if(model.gameOver == 1) {
-            gameOver.setVisible(true);
-            gameOver.setText("Game Over!");
-            gameOver.setTextFill(Color.RED);
-        }
-    }
+		animation.getKeyFrames().add(frame);
+		animation.setCycleCount(Timeline.INDEFINITE);
+		startGame();
+	}
 }
