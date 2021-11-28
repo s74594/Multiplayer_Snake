@@ -1,9 +1,18 @@
 package controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
+
+
 public class DatabaseController {
+
 
 	@SuppressWarnings("exports")
 	public static Connection Connector() {
@@ -70,4 +79,32 @@ public class DatabaseController {
 		}
 		return "Notwendige Returnmeldung";
 	}
+
+	public static List<String[]>  GetHighscore() {
+		List<String[]> lottoList = new LinkedList<String[]>();
+		try {
+			String sql = "SELECT Players.name, Highscore.points, Highscore.date_of_score from Highscore,Players WHERE Highscore.player_id = Players.player_id ORDER BY points desc";
+			Connection conn = DatabaseController.connect();
+			Statement stmt = conn.createStatement();
+			ResultSet set = stmt.executeQuery(sql);
+
+		//	ResultSet set = state.executeQuery("SELECT * FROM numberLotto");
+
+			while(set.next())
+			{
+				String[] currentRow = new String[] {set.getString(1),
+						set.getString(2),
+						set.getString(3)
+				};
+				lottoList.add(currentRow);
+			}
+
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return lottoList;
+	}
+
 }
