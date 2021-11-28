@@ -4,6 +4,9 @@ import java.io.File;
 import java.net.URL;
 import java.sql.*;
 import java.util.Objects;
+
+import com.example.multiplayer_snake.main.SnakeObserver;
+import com.example.multiplayer_snake.model.SocketClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +22,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-//import model.LoginViewModel;
 
 public class LoginController {
 	@FXML
@@ -64,15 +66,10 @@ public class LoginController {
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	private ActionEvent event;
 
-	/*
-	 * @SuppressWarnings("exports") public LoginViewModel loginViewModel = new
-	 * LoginViewModel();
-	 * 
-	 * @Override public void initialize(URL location, ResourceBundle resources) { //
-	 * Check Database SQL-Lite Connection if (loginViewModel.isDBConnected()) {
-	 * System.out.println("Database connection successful."); } else {
-	 * System.out.println("Database connection not succeeded."); } }
-	 */
+	@FXML
+	void initialize() {
+		SocketClient.connect();
+	}
 
 	@FXML
 	protected void onPlayButtonClick(ActionEvent event) throws SQLException {

@@ -1,6 +1,7 @@
 package controller;
 
 import com.example.multiplayer_snake.model.Player;
+import com.example.multiplayer_snake.model.SocketClient;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -20,8 +21,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.net.URL;
+import java.util.concurrent.SubmissionPublisher;
 
 public class ArenaController {
 
@@ -62,10 +66,14 @@ public class ArenaController {
 	public static double millis = 0.3;
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
+	SubmissionPublisher source = new SubmissionPublisher<String>(); // Observer Pattern
 
 	@FXML
 	void initialize() {
 		model = new Player();
+
+		// Observer Pattern
+		source.subscribe(new SocketClient());
 
 		namePlayer1.setText("Max");
 		namePlayer2.setText("Maxi");
@@ -122,6 +130,18 @@ public class ArenaController {
 		isApplicationRunning = false;
 	}
 
+	private void multiplayerSnakeStatus() {
+		// Observer Pattern
+		JSONObject snakeStatus = new JSONObject();
+		snakeStatus.put("Player", String.valueOf(model.name));
+		snakeStatus.put("Points", String.valueOf(model.points));
+		snakeStatus.put("Eatfruit", String.valueOf(model.eatFruit));
+		snakeStatus.put("Gameover", String.valueOf(model.gameOver));
+		snakeStatus.put("SnakeX", String.valueOf(model.snakeX));
+		snakeStatus.put("SnakeY", String.valueOf(model.snakeY));
+		source.submit(String.valueOf(snakeStatus));
+	}
+
 	@FXML
 	void snakeSteering(KeyEvent keyEvent) {
 		@SuppressWarnings("unused")
@@ -144,6 +164,9 @@ public class ArenaController {
 			model.movePlayer(snakeHeadX, snakeHeadY, direction);
 			snakeHead.setLayoutX(model.snakeX);
 			snakeHead.setLayoutY(model.snakeY);
+
+			// data to server
+			multiplayerSnakeStatus();
 
 			if (model.eatFruit == true) {
 				foodImage.setVisible(false); // set food invisible the snake hits its boundaries
