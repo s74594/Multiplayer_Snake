@@ -130,6 +130,18 @@ public class ArenaController {
 		isApplicationRunning = false;
 	}
 
+	private void multiplayerSnakeStatus() {
+		// Observer Pattern
+		JSONObject snakeStatus = new JSONObject();
+		snakeStatus.put("Player", String.valueOf(model.name));
+		snakeStatus.put("Points", String.valueOf(model.points));
+		snakeStatus.put("Eatfruit", String.valueOf(model.eatFruit));
+		snakeStatus.put("Gameover", String.valueOf(model.gameOver));
+		snakeStatus.put("SnakeX", String.valueOf(model.snakeX));
+		snakeStatus.put("SnakeY", String.valueOf(model.snakeY));
+		source.submit(String.valueOf(snakeStatus));
+	}
+
 	@FXML
 	void snakeSteering(KeyEvent keyEvent) {
 		@SuppressWarnings("unused")
@@ -153,11 +165,8 @@ public class ArenaController {
 			snakeHead.setLayoutX(model.snakeX);
 			snakeHead.setLayoutY(model.snakeY);
 
-			// Observer Pattern
-			JSONObject snakeStatus = new JSONObject();
-			snakeStatus.put("SnakeX", String.valueOf(model.snakeX));
-			snakeStatus.put("SnakeY", String.valueOf(model.snakeY));
-			source.submit(String.valueOf(snakeStatus));
+			// data to server
+			multiplayerSnakeStatus();
 
 			if (model.eatFruit == true) {
 				foodImage.setVisible(false); // set food invisible the snake hits its boundaries

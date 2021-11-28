@@ -13,8 +13,8 @@ import java.util.List;
 
 public class Player {
 
-    Text points;
-    Text name;
+    public Text points;
+    public Text name;
     public double snakeX;
     public double snakeY;
     public double fruitX;
