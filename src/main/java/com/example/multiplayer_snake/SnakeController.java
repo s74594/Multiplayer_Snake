@@ -31,8 +31,8 @@ public class SnakeController {
 	private Text scoreLabel;
 	@FXML
 	private Label scoreLabelNumber;
-	private static final int WIDTH = 600;
-	private static final int HEIGHT = 408;
+	private static final int WIDTH = 800;
+	private static final int HEIGHT = 600;
 	private static final int ROWS = 25;
 	private static final int COLUMNS = ROWS;
 	private static final int SQUARE_SIZE = WIDTH / ROWS;
@@ -48,7 +48,7 @@ public class SnakeController {
 		      
 			// Create a new Window
 			Pane rootPane = new Pane();
-			Canvas canvas = new Canvas(WIDTH, HEIGHT);
+			Canvas canvas = new Canvas(WIDTH,HEIGHT);
 			rootPane.getChildren().addAll(canvas, rootParent);
 			Scene scene = new Scene(rootPane);
 			Stage stage = new Stage();

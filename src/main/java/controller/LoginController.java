@@ -55,10 +55,9 @@ public class LoginController {
 	@FXML
 	private Button backButton;
 
-	/* Global variables */
-	private static final int WIDTH = 600;
-	private static final int HEIGHT = 408;
-	private static final int ROWS = 25;
+	private static final int WIDTH = 1024;
+	private static final int HEIGHT = 732;
+	private static final int ROWS = 32;
 	private static final int COLUMNS = ROWS;
 	private static final int SQUARE_SIZE = WIDTH / ROWS;
 	private GraphicsContext graphicsContext;

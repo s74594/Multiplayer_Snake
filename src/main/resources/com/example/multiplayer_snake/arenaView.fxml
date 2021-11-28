@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
    <children>
-      <Pane id="game" fx:id="playGround" focusTraversable="true" onKeyPressed="#snakeSteering" opacity="0.0" prefHeight="408.0" prefWidth="600.0" style="-fx-background-color: #7c9e01;" />
-      <MenuBar prefHeight="28.0" prefWidth="600.0">
+      <Pane id="game" fx:id="playGround" focusTraversable="true" onKeyPressed="#snakeSteering" opacity="0.0" prefHeight="703.0" prefWidth="1024.0" style="-fx-background-color: #7c9e01;">
+         <children>
+            <Label fx:id="gameOver" layoutX="327.0" layoutY="285.0" text="Game Over!">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="25.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <MenuBar prefHeight="32.0" prefWidth="1024.0">
         <menus>
           <Menu mnemonicParsing="false" text="Game">
                <items>
@@ -29,38 +41,31 @@
 
         </menus>
       </MenuBar>
-      <Label fx:id="gameOver" layoutX="227.0" layoutY="189.0" text="Game Over!">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="25.0" />
-         </font>
-      </Label>
-      <Text fx:id="namePlayer1" layoutX="10.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 1&gt;">
+      <Text fx:id="namePlayer1" layoutX="10.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 1&gt;">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text layoutX="10.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:">
+      <Text layoutX="10.0" layoutY="688.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text fx:id="scorePlayer1" layoutX="55.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;">
+      <Text fx:id="scorePlayer1" layoutX="54.0" layoutY="688.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text fx:id="namePlayer2" layoutX="535.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 2&gt;">
+      <Text fx:id="namePlayer2" layoutX="957.0" layoutY="667.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 2&gt;">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text layoutX="502.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="RIGHT">
+      <Text layoutX="925.0" layoutY="688.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="RIGHT">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text fx:id="scorePlayer2" layoutX="548.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;" textAlignment="RIGHT">
+      <Text fx:id="scorePlayer2" layoutX="970.0" layoutY="688.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;" textAlignment="RIGHT">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
       <Circle fx:id="snakeHead" fill="DODGERBLUE" layoutX="211.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="snakeBody" fill="#9bcfff" layoutX="190.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="snakeTail" fill="#9bcfff" layoutX="169.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="foodImage" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../../../../image/raspberry.png" />
