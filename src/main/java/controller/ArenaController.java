@@ -51,6 +51,8 @@ public class ArenaController {
 	@FXML
 	private MenuItem exitBTNMenu;
 	@FXML
+	private MenuItem HighscoreBTN;
+	@FXML
 	private MenuItem gameInfoBTNMenu;
 	@SuppressWarnings("exports")
 	@FXML
@@ -102,6 +104,25 @@ public class ArenaController {
 			Scene scene = new Scene(rootParent);
 			Stage stage = new Stage();
 			stage.setTitle("Snake - Gameplay Info");
+			stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
+			stage.setResizable(false);
+			stage.setScene(scene);
+			stage.show();
+			centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+	}
+
+	@FXML
+	void onHighscoreBTNClick(ActionEvent event) {
+		try {
+			System.out.println("Aloha");
+			URL url = new File("src/main/resources/com/example/multiplayer_snake/highscoreView.fxml").toURI().toURL();
+			Parent rootParent = FXMLLoader.load(url);
+			Scene scene = new Scene(rootParent);
+			Stage stage = new Stage();
+			stage.setTitle("Highscore");
 			stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
 			stage.setResizable(false);
 			stage.setScene(scene);
