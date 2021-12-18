@@ -31,14 +31,6 @@ public class SocketClient implements Flow.Subscriber<String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Wait for messages to send to the server
-/*        while (true) {
-            writer.println("test");
-            writer.flush();
-        }*/
-
-
     }
 
     @Override

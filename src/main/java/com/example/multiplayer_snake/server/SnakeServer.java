@@ -1,11 +1,11 @@
 package com.example.multiplayer_snake.server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
 import java.net.SocketException;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,12 +27,14 @@ public class SnakeServer {
                 // create output writer
                 PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
                 clientWriters.add(writer);
+                System.out.println(">>> Clientwriter:" + clientWriters);
 
                 // create input reader
                 BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
                 // start concurrent message handler
-                new Thread(new BroadcastMessageHandler(reader)).start();
+                //new Thread(new BroadcastMessageHandler(reader)).start();
+                new Thread(new MessageHandler(reader)).start();
             }
         } catch (SocketException e) {
             System.out.println("Connection lost");

@@ -22,6 +22,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginController {
 	@FXML
@@ -74,11 +76,18 @@ public class LoginController {
 	protected void onPlayButtonClick(ActionEvent event) throws SQLException {
 		this.event = event;
 		try {
-			// <Play Button>: opens arena view
-			// Parent rootParent =
-			// FXMLLoader.load(getClass().getResource("arenaView.fxml"));
-
 			String expectedPW = DatabaseController.Select_Player_PW(player_name.getText());
+
+			// database connection password retrieve
+			JSONObject databaseRequest = new JSONObject();
+			try {
+				databaseRequest.put("PlayerLogin", String.valueOf(player_name.getText()));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			SocketClient.writer.println(databaseRequest);
+
+
 
 			if (Objects.equals(player_password.getText(), expectedPW)) {
 				URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
@@ -169,9 +178,6 @@ public class LoginController {
 	@FXML
 	protected void onSignupButtonClick(ActionEvent event) {
 		try {
-			// <Play Button>: Open a new game window
-			// Parent rootParent =
-			// FXMLLoader.load(getClass().getResource("registryView.fxml"));
 			URL url = new File("src/main/resources/com/example/multiplayer_snake/registryView.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 			Stage stage = (Stage) exitButton.getScene().getWindow();
