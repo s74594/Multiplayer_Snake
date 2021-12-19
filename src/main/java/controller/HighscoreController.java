@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -53,7 +54,6 @@ public class HighscoreController {
     {
         arr = new Label[]{Player_Pos1, Player_Pos2, Player_Pos3, Player_Pos4, Player_Pos5};
     }
-    //  ArrayList<Label> arr = new ArrayList<>();
 
     CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 
@@ -65,9 +65,7 @@ public class HighscoreController {
         for (int i = 0; i < highscore_list.size(); ++i) {
             for(int j = 0; j < highscore_list.get(i).length; ++j) {
                 System.out.println(highscore_list.get(i)[j]);
-                //arr[2].setText(highscore_list.get(i)[j]);
                 Player_Pos1.setText(highscore_list.get(i)[j]);
-               // Player_Pos1_Date.setText(highscore_list.get(i)[j]);
             }
         }
 
