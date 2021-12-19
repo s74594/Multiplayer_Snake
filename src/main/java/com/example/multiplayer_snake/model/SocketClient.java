@@ -11,7 +11,7 @@ public class SocketClient implements Flow.Subscriber<String> {
 
     public static Socket socket;
     public static PrintWriter writer;
-    Flow.Subscription subscription;
+    Flow.Subscription subscription; // Observer pattern
 
     public static void connect() {
         try {
@@ -33,9 +33,10 @@ public class SocketClient implements Flow.Subscriber<String> {
         }
     }
 
+    // Observer pattern
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
-        System.out.println("Subscription started");
+        System.out.println("Subscription SocketClient started");
         this.subscription = subscription;
         subscription.request(1);
     }

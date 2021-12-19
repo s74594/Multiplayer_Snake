@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.sql.*;
 import java.util.Objects;
+import java.util.concurrent.Flow;
 
 import com.example.multiplayer_snake.main.SnakeObserver;
 import com.example.multiplayer_snake.model.SocketClient;
@@ -25,7 +26,9 @@ import javafx.stage.Stage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginController {
+import static java.lang.Thread.sleep;
+
+public class LoginController implements Flow.Subscriber<String> {
 	@FXML
 	private Button playButton;
 	@FXML
@@ -63,6 +66,8 @@ public class LoginController {
 	private static final int COLUMNS = ROWS;
 	private static final int SQUARE_SIZE = WIDTH / ROWS;
 	private GraphicsContext graphicsContext;
+	String expectedPW;
+	Flow.Subscription subscription; // Observer pattern
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	private ActionEvent event;
@@ -86,8 +91,7 @@ public class LoginController {
 				e.printStackTrace();
 			}
 			SocketClient.writer.println(databaseRequest);
-
-
+			System.out.println("ExpectedPW:" + expectedPW);
 
 			if (Objects.equals(player_password.getText(), expectedPW)) {
 				URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
@@ -225,5 +229,32 @@ public class LoginController {
 		r_name.clear();
 		r_pw.clear();
 		r_pw_check.clear();
+	}
+
+	@Override
+	public void onSubscribe(Flow.Subscription subscription) {
+		System.out.println("Subscription LoginController started");
+		this.subscription = subscription;
+		subscription.request(1);
+	}
+
+	@Override
+	public void onNext(String item) {
+		System.out.printf("LoginController - Received new state = %s\n", item);
+		JSONObject itemJSON = new JSONObject(item);
+		if(itemJSON.get("PlayerLogin") != null) {
+			expectedPW = (String) itemJSON.get("Password");
+		}
+		this.subscription.request(1);
+	}
+
+	@Override
+	public void onError(Throwable throwable) {
+
+	}
+
+	@Override
+	public void onComplete() {
+		System.out.println("Subscription ended");
 	}
 }

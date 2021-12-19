@@ -167,7 +167,6 @@ public class ArenaController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		source.submit(String.valueOf(snakeStatus));
 	}
 

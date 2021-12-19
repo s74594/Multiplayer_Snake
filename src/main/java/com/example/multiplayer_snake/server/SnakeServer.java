@@ -27,7 +27,6 @@ public class SnakeServer {
                 // create output writer
                 PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
                 clientWriters.add(writer);
-                System.out.println(">>> Clientwriter:" + clientWriters);
 
                 // create input reader
                 BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
