@@ -4,15 +4,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 
 public class DatabaseController {
-
 
 	@SuppressWarnings("exports")
 	public static Connection Connector() {
@@ -80,31 +85,46 @@ public class DatabaseController {
 		return "Notwendige Returnmeldung";
 	}
 
-	public static List<String[]>  GetHighscore() {
-		List<String[]> lottoList = new LinkedList<String[]>();
+	public static List<String[]> GetHighscore() {
+		List<String[]> highscoreList = new LinkedList<String[]>();
 		try {
 			String sql = "SELECT Players.name, Highscore.points, Highscore.date_of_score from Highscore,Players WHERE Highscore.player_id = Players.player_id ORDER BY points desc";
 			Connection conn = DatabaseController.connect();
 			Statement stmt = conn.createStatement();
 			ResultSet set = stmt.executeQuery(sql);
 
-		//	ResultSet set = state.executeQuery("SELECT * FROM numberLotto");
-
-			while(set.next())
-			{
-				String[] currentRow = new String[] {set.getString(1),
+			while (set.next()) {
+				//String datum = set.getString(3);
+				//Date date = new Date(Long.parseLong(datum));
+				String[] currentRow = new String[]{set.getString(1),
 						set.getString(2),
 						set.getString(3)
 				};
-				lottoList.add(currentRow);
+				highscoreList.add(currentRow);
 			}
-
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 
-		return lottoList;
+		return highscoreList;
 	}
 
+	public static void Insert_Highscore(String player_id, LocalDateTime datenow, int points) {
+		Connection conn = DatabaseController.connect();
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		String formatDateTime = datenow.format(formatter);
+		try {
+			String sql = "INSERT INTO highscore (" + "player_id, date_of_score, points) " + "VALUES ( '" + player_id + "', '" + formatDateTime + "', '" + points + "' );";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.println(rs);
+			conn.close();
+		} catch (SQLException e) {
+			String x = e.getMessage();
+		}
+
+	}
 }

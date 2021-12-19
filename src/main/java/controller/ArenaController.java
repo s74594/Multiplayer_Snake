@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.concurrent.SubmissionPublisher;
 
 public class ArenaController {
@@ -68,6 +69,7 @@ public class ArenaController {
 	private boolean isApplicationRunning = false;
 	private Timeline animation = new Timeline();
 	public static double millis = 0.3;
+	public int point_counter_player1= 0;
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	SubmissionPublisher source = new SubmissionPublisher<String>(); // Observer Pattern
@@ -82,7 +84,7 @@ public class ArenaController {
 		namePlayer1.setText("Max");
 		namePlayer2.setText("Maxi");
 		scorePlayer1.setText("9014");
-		scorePlayer2.setText("9541");
+		scorePlayer2.setText(String.valueOf(point_counter_player1));
 
 		gameOver.setVisible(false);
 		generateFood(); // initialize food
@@ -204,12 +206,15 @@ public class ArenaController {
 				foodImage.setLayoutY(model.fruitY);
 				foodImage.setVisible(true);
 				model.eatFruit = false;
+				point_counter_player1++;
+				scorePlayer2.setText(String.valueOf(point_counter_player1));
 			}
 
 			if (model.gameOver == true) {
 				gameOver.setVisible(true);
 				gameOver.setText("Game Over!");
 				gameOver.setTextFill(Color.RED);
+				DatabaseController.Insert_Highscore("7", LocalDateTime.now(), point_counter_player1);
 				stopGame();
 			}
 		});
