@@ -2,7 +2,6 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,8 +13,6 @@ import java.util.List;
 import java.util.Objects;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-
 
 public class DatabaseController {
 
@@ -88,18 +85,15 @@ public class DatabaseController {
 	public static List<String[]> GetHighscore() {
 		List<String[]> highscoreList = new LinkedList<String[]>();
 		try {
-			String sql = "SELECT Players.name, Highscore.points, Highscore.date_of_score from Highscore,Players WHERE Highscore.player_id = Players.player_id ORDER BY points desc";
+			String sql = "SELECT Players.name, Highscore.points, Highscore.date_of_score from Highscore, Players WHERE Highscore.player_id = Players.player_id ORDER BY points desc";
 			Connection conn = DatabaseController.connect();
 			Statement stmt = conn.createStatement();
 			ResultSet set = stmt.executeQuery(sql);
 
 			while (set.next()) {
-				//String datum = set.getString(3);
-				//Date date = new Date(Long.parseLong(datum));
-				String[] currentRow = new String[]{set.getString(1),
-						set.getString(2),
-						set.getString(3)
-				};
+				// String datum = set.getString(3);
+				// Date date = new Date(Long.parseLong(datum));
+				String[] currentRow = new String[] { set.getString(1), set.getString(2), set.getString(3) };
 				highscoreList.add(currentRow);
 			}
 
@@ -117,7 +111,8 @@ public class DatabaseController {
 
 		String formatDateTime = datenow.format(formatter);
 		try {
-			String sql = "INSERT INTO highscore (" + "player_id, date_of_score, points) " + "VALUES ( '" + player_id + "', '" + formatDateTime + "', '" + points + "' );";
+			String sql = "INSERT INTO highscore (" + "player_id, date_of_score, points) " + "VALUES ( '" + player_id
+					+ "', '" + formatDateTime + "', '" + points + "' );";
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println(rs);
@@ -125,6 +120,5 @@ public class DatabaseController {
 		} catch (SQLException e) {
 			String x = e.getMessage();
 		}
-
 	}
 }

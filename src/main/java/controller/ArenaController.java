@@ -21,13 +21,15 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 import java.util.concurrent.SubmissionPublisher;
 
 public class ArenaController {
@@ -51,8 +53,10 @@ public class ArenaController {
 	@SuppressWarnings("exports")
 	@FXML
 	public Circle snakeHead; // snake head
+	@SuppressWarnings("exports")
 	@FXML
 	public Circle snakeBody; // snake body
+	@SuppressWarnings("exports")
 	@FXML
 	public Circle snakeTailCircle; // snake tail
 	@FXML
@@ -69,11 +73,13 @@ public class ArenaController {
 	private boolean isApplicationRunning = false;
 	private Timeline animation = new Timeline();
 	public static double millis = 0.3;
-	public int point_counter_player1= 0;
+	public int point_counter_player1 = 0;
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
+	@SuppressWarnings("rawtypes")
 	SubmissionPublisher source = new SubmissionPublisher<String>(); // Observer Pattern
 
+	@SuppressWarnings("unchecked")
 	@FXML
 	void initialize() {
 		model = new Player();
@@ -88,6 +94,56 @@ public class ArenaController {
 
 		gameOver.setVisible(false);
 		generateFood(); // initialize food
+
+		// Read file and set the color of the snake
+		try {
+			File myObj = new File("color.txt");
+			Scanner reader = new Scanner(myObj);
+			while (reader.hasNextLine()) {
+				String data = reader.nextLine();
+				System.out.println(data);
+				snakeHead.setFill(Color.web(data));
+			}
+			reader.close();
+			delete();
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+	
+	/* Löschen des Files, wenn die Farbe der Snake gesetzt wurde */
+	public void delete() {
+		File myObj = new File("color.txt"); 
+	    if (myObj.delete()) { 
+	      System.out.println("Deleted the file: " + myObj.getName());
+	    } else {
+	      System.out.println("Failed to delete the file.");
+	    }
+	}
+
+	// Customize the color of a snake
+	@SuppressWarnings("exports")
+	public void custom_Snake_Color(Color value) {
+
+		// Format a color in a web-friendly hex format
+		String webFormat = String.format("#%02x%02x%02x",
+				(int) (255 * value.getRed()),
+				(int) (255 * value.getGreen()),
+				(int) (255 * value.getBlue()));
+
+		// Wert muss an initialize übergeben werden..
+		// Zurzeit Auslagerung in einem File
+		// Hexadezimalwert der Variable webFormat schreiben
+		try {
+			FileWriter writer = new FileWriter("color.txt");
+			writer.write(webFormat);
+			writer.close();
+			System.out.println("Successfully wrote \"" + webFormat + "\" to the file.");
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
 	}
 
 	public void generateFood() {
@@ -155,6 +211,7 @@ public class ArenaController {
 		isApplicationRunning = false;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void multiplayerSnakeStatus() {
 		// Observer Pattern
 		JSONObject snakeStatus = new JSONObject();
@@ -169,7 +226,7 @@ public class ArenaController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		source.submit(String.valueOf(snakeStatus));
 	}
 

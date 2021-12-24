@@ -4,8 +4,6 @@ import java.io.File;
 import java.net.URL;
 import java.sql.*;
 import java.util.Objects;
-
-import com.example.multiplayer_snake.main.SnakeObserver;
 import com.example.multiplayer_snake.model.SocketClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,6 +52,8 @@ public class LoginController {
 	private TextField r_pw_check;
 	@FXML
 	private Button backButton;
+	@FXML
+	private ColorPicker snakeColorPicker; // color picker to customize a snake
 
 	private static final int WIDTH = 1024;
 	private static final int HEIGHT = 732;
@@ -99,9 +99,7 @@ public class LoginController {
 				centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
 				graphicsContext = canvas.getGraphicsContext2D();
 				run();
-			}
-
-			else {
+			} else {
 				pw_incorrect.setVisible(true);
 			}
 
@@ -109,6 +107,15 @@ public class LoginController {
 			// handle error exception
 			System.err.println(e.getMessage());
 		}
+	}
+
+	// Customize the color of a snake
+	@FXML
+	void customizeSnakeColor(ActionEvent event) {
+		/* Instance herstellen */
+		ArenaController customSnakeColor = new ArenaController();
+		/* Übergabe des Color-Picker-Wertes an ArenaController.java */
+		customSnakeColor.custom_Snake_Color(snakeColorPicker.getValue());
 	}
 
 	@FXML
@@ -189,7 +196,6 @@ public class LoginController {
 			// handle error exception
 			System.err.println(e.getMessage());
 		}
-
 	}
 
 	@SuppressWarnings("exports")
@@ -199,6 +205,7 @@ public class LoginController {
 				"[SQLITE_CONSTRAINT_UNIQUE]  A UNIQUE constraint failed (UNIQUE constraint failed: players.name)")) {
 			error_msg.setVisible(true);
 		}
+
 		if (Objects.equals(message, "Passwörter stimmen nicht überein")) {
 			error_msg.setText("Passwords aren´t matching");
 			error_msg.setVisible(true);

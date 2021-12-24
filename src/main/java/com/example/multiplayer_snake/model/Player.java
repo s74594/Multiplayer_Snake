@@ -7,7 +7,6 @@ import javafx.geometry.Bounds;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,6 @@ public class Player {
     public boolean eatFruit = false;
     public boolean gameOver = false;
     final double snakeSpeed = 3; // speed adjust
-
 
     @SuppressWarnings("exports")
     public void movePlayer(double x, double y, KeyCode direction) {
