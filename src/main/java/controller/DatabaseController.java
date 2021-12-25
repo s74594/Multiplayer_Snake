@@ -1,18 +1,11 @@
 package controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class DatabaseController {
 

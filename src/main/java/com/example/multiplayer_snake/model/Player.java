@@ -1,14 +1,9 @@
 package com.example.multiplayer_snake.model;
 
-import com.example.multiplayer_snake.main.SnakeObservable;
-import com.example.multiplayer_snake.main.SnakeObserver;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
-import org.json.JSONObject;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Player {
 
@@ -32,7 +27,7 @@ public class Player {
         this.snakeY = y;
 
         // System.out.println("Key: " + direction + "  SnakeX: " + snakeX + "  SnakeY: " + snakeY); // Debug
-
+        
         switch (direction) {
             case UP -> {
                 // Detect food collision

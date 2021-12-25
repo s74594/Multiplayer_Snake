@@ -1,14 +1,9 @@
 package controller;
 
-import com.example.multiplayer_snake.model.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import java.sql.*;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class HighscoreController {
 
