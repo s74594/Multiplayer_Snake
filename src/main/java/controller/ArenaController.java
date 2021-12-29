@@ -111,15 +111,15 @@ public class ArenaController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/* Löschen des Files, wenn die Farbe der Snake gesetzt wurde */
 	public void delete() {
-		File myObj = new File("color.txt"); 
-	    if (myObj.delete()) { 
-	      System.out.println("Deleted the file: " + myObj.getName());
-	    } else {
-	      System.out.println("Failed to delete the file.");
-	    }
+		File myObj = new File("color.txt");
+		if (myObj.delete()) {
+			System.out.println("Deleted the file: " + myObj.getName());
+		} else {
+			System.out.println("Failed to delete the file.");
+		}
 	}
 
 	// Customize the color of a snake
@@ -163,7 +163,7 @@ public class ArenaController {
 			System.err.println(e.getMessage());
 		}
 	}
-
+	
 	@FXML
 	void onGameInfoMenuClick(ActionEvent event) {
 		try {
@@ -185,7 +185,6 @@ public class ArenaController {
 	@FXML
 	void onHighscoreBTNClick(ActionEvent event) {
 		try {
-			System.out.println("Aloha");
 			URL url = new File("src/main/resources/com/example/multiplayer_snake/highscoreView.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 			Scene scene = new Scene(rootParent);
@@ -209,6 +208,25 @@ public class ArenaController {
 	private void stopGame() {
 		animation.stop();
 		isApplicationRunning = false;
+		gameSelection();
+	}
+
+	private void gameSelection() {
+		try {
+			URL url = new File("src/main/resources/com/example/multiplayer_snake/gameSelectionView.fxml").toURI()
+					.toURL();
+			Parent rootParent = FXMLLoader.load(url);
+			Scene scene = new Scene(rootParent);
+			Stage stage = new Stage();
+			stage.setTitle("Highscore");
+			stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
+			stage.setResizable(false);
+			stage.setScene(scene);
+			stage.show();
+			centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
