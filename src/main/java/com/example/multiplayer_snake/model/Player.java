@@ -27,33 +27,35 @@ public class Player {
         this.snakeY = y;
 
         // System.out.println("Key: " + direction + "  SnakeX: " + snakeX + "  SnakeY: " + snakeY); // Debug
-        
-        switch (direction) {
-            case UP -> {
-                // Detect food collision
-                checkCollision();
-                snakeY = (snakeY - snakeSpeed);
-                break;
+
+        if (direction != null) {
+            switch (direction) {
+                case UP -> {
+                    // Detect food collision
+                    checkCollision();
+                    snakeY = (snakeY - snakeSpeed);
+                    break;
+                }
+                case DOWN -> {
+                    // Detect food collision
+                    checkCollision();
+                    snakeY = (snakeY + snakeSpeed);
+                    break;
+                }
+                case LEFT -> {
+                    // Detect food collision
+                    checkCollision();
+                    snakeX = (snakeX - snakeSpeed);
+                    break;
+                }
+                case RIGHT -> {
+                    // Detect food collision
+                    checkCollision();
+                    snakeX = (snakeX + snakeSpeed);
+                    break;
+                }
+                default -> throw new IllegalArgumentException("Unexpected value: " + direction);
             }
-            case DOWN -> {
-                // Detect food collision
-                checkCollision();
-                snakeY = (snakeY + snakeSpeed);
-                break;
-            }
-            case LEFT -> {
-                // Detect food collision
-                checkCollision();
-                snakeX = (snakeX - snakeSpeed);
-                break;
-            }
-            case RIGHT -> {
-                // Detect food collision
-                checkCollision();
-                snakeX = (snakeX + snakeSpeed);
-                break;
-            }
-            default -> throw new IllegalArgumentException("Unexpected value: " + direction);
         }
     }
 
@@ -68,13 +70,13 @@ public class Player {
         if (snakeX <= 9) {
             System.out.println("Left border touched: Game Over!"); // Collision with left border
             gameOver();
-        } else if (snakeX >= 590) {
+        } else if (snakeX >= 1024) {
             System.out.println("Right border touched: Game Over!"); // Collision with right border
             gameOver();
         } else if (snakeY <= 35) {
             System.out.println("Top border touched: Game Over!"); // Collision with top border
             gameOver();
-        } else if (snakeY > 395) {
+        } else if (snakeY > 732) {
             System.out.println("Bottom border touched: Game Over!");// Collision with bottom border
             gameOver();
         }
