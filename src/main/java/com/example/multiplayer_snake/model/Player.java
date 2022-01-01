@@ -5,6 +5,8 @@ import javafx.geometry.Bounds;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 
+import java.util.LinkedList;
+
 public class Player {
 
     public Text points;
@@ -20,11 +22,15 @@ public class Player {
     public boolean eatFruit = false;
     public boolean gameOver = false;
     final double snakeSpeed = 3; // speed adjust
+    public int snakeBodySize = 1;
+    public LinkedList<Double> snakeBodyLocationsX = new LinkedList<>();
+    public LinkedList<Double> snakeBodyLocationsY = new LinkedList<>();
 
     @SuppressWarnings("exports")
     public void movePlayer(double x, double y, KeyCode direction) {
         this.snakeX = x;
         this.snakeY = y;
+        eatFruit = false;
 
         // System.out.println("Key: " + direction + "  SnakeX: " + snakeX + "  SnakeY: " + snakeY); // Debug
 
@@ -57,6 +63,21 @@ public class Player {
                 default -> throw new IllegalArgumentException("Unexpected value: " + direction);
             }
         }
+        snakeBodyLocations();
+    }
+
+    private void snakeBodyLocations() {
+        snakeBodyLocationsX.addFirst(snakeX);
+        snakeBodyLocationsY.addFirst(snakeY);
+        if(snakeBodyLocationsX.size() > 10) {
+            snakeBodyLocationsX.removeLast();
+        }
+        if(snakeBodyLocationsY.size() > 10) {
+            snakeBodyLocationsY.removeLast();
+        }
+        // System.out.println("snakeBodyLocationsX: " + snakeBodyLocationsX);
+        // System.out.println("snakeBodyLocationsY: " + snakeBodyLocationsY);
+        // System.out.println("snakeBodyLocations length X: " + snakeBodySize);
     }
 
     public void checkCollision() {
@@ -64,6 +85,9 @@ public class Player {
         if (fruitBounds.intersects(snakeBounds)) {
             System.out.println("Food collision detected"); // Debug
             eatFruit = true;
+            if(snakeBodySize < 10) {
+                snakeBodySize++;
+            }
         }
 
         // Head touches any border
@@ -104,6 +128,6 @@ public class Player {
         fruitX = posX;
         fruitY = posY;
 
-        System.out.println("Fruit location(x): " + fruitX + " Fruit location(y): " + fruitY); // Debug
+        // System.out.println("Fruit location(x): " + fruitX + " Fruit location(y): " + fruitY); // Debug
     }
 }

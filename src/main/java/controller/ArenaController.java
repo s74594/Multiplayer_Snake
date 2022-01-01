@@ -13,11 +13,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -75,6 +77,24 @@ public class ArenaController {
     private Timeline animation = new Timeline();
     public static double millis = 0.3;
     public int point_counter_player1 = 0;
+    @FXML
+    public Circle body1;
+    @FXML
+    public Circle body2;
+    @FXML
+    public Circle body3;
+    @FXML
+    public Circle body4;
+    @FXML
+    public Circle body5;
+    @FXML
+    public Circle body6;
+    @FXML
+    public Circle body7;
+    @FXML
+    public Circle body8;
+    @FXML
+    public Circle body9;
 
     CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
     @SuppressWarnings("rawtypes")
@@ -95,18 +115,25 @@ public class ArenaController {
     @FXML
     void initialize() {
         model = new Player();
-        timer.start();
-
-        // Observer Pattern
-        source.subscribe(new SocketClient());
-
+        model.snakeBodyLocationsX.addFirst(211.0);  // store initial position in bodyparts array
+        model.snakeBodyLocationsY.addFirst(110.0);  // store initial position in bodyparts array
+        timer.start();  // Animation Timer
+        source.subscribe(new SocketClient());  // Observer Pattern
         namePlayer1.setText("Max");
         namePlayer2.setText("Maxi");
         scorePlayer1.setText("9014");
         scorePlayer2.setText(String.valueOf(point_counter_player1));
-
         gameOver.setVisible(false);
-        generateFood(); // initialize food
+        generateFood();  // initialize food
+        body1.setVisible(false);
+        body2.setVisible(false);
+        body3.setVisible(false);
+        body4.setVisible(false);
+        body5.setVisible(false);
+        body6.setVisible(false);
+        body7.setVisible(false);
+        body8.setVisible(false);
+        body9.setVisible(false);
 
         // Read file and set the color of the snake
         try {
@@ -263,8 +290,10 @@ public class ArenaController {
     @FXML
     void snakeSteering(KeyEvent keyEvent) {
 
-        double snakeHeadX = snakeHead.getLayoutX();
-        double snakeHeadY = snakeHead.getLayoutY();
+        // double snakeHeadX = snakeHead.getLayoutX();
+        // double snakeHeadY = snakeHead.getLayoutY();
+        double snakeHeadX = model.snakeBodyLocationsX.getFirst();
+        double snakeHeadY = model.snakeBodyLocationsY.getFirst();
         KeyCode direction = keyEvent.getCode();
         animationDirection = keyEvent;
         //System.out.println(direction.toString());
@@ -275,8 +304,62 @@ public class ArenaController {
 
         // move
         model.movePlayer(snakeHeadX, snakeHeadY, direction);
-        snakeHead.setLayoutX(model.snakeX);
-        snakeHead.setLayoutY(model.snakeY);
+        //snakeHead.setLayoutX(model.snakeX);  // calculated Snakehead position
+        //snakeHead.setLayoutY(model.snakeY);  // calculated Snakehead position
+
+        // draw snake
+        snakeHead.setLayoutX(model.snakeBodyLocationsX.getFirst());
+        snakeHead.setLayoutY(model.snakeBodyLocationsY.getFirst());
+        //System.out.println(model.snakeBodySize);
+        for(int i = 1; i < model.snakeBodySize; i++) {
+            if (i == 2) {
+                body1.setLayoutX(model.snakeBodyLocationsX.get(i));
+                body1.setLayoutY(model.snakeBodyLocationsY.get(i));
+                body1.setVisible(true);
+                System.out.println("i");
+            }
+            if (i == 3) {
+                body2.setLayoutX(model.snakeBodyLocationsX.get(i));
+                body2.setLayoutY(model.snakeBodyLocationsY.get(i));
+                body2.setVisible(true);
+            }
+            if (i == 4) {
+                body3.setLayoutX(model.snakeBodyLocationsX.get(i));
+                body3.setLayoutY(model.snakeBodyLocationsY.get(i));
+                body3.setVisible(true);
+            }
+            if (i == 5) {
+                body4.setLayoutX(model.snakeBodyLocationsX.get(i));
+                body4.setLayoutY(model.snakeBodyLocationsY.get(i));
+                body4.setVisible(true);
+            }
+            if (i == 5) {
+                body4.setLayoutX(model.snakeBodyLocationsX.get(i));
+                body4.setLayoutY(model.snakeBodyLocationsY.get(i));
+                body4.setVisible(true);
+            }
+            if (i == 6) {
+                body5.setLayoutX(model.snakeBodyLocationsX.get(i));
+                body5.setLayoutY(model.snakeBodyLocationsY.get(i));
+                body5.setVisible(true);
+            }
+            if (i == 7) {
+                body6.setLayoutX(model.snakeBodyLocationsX.get(i));
+                body6.setLayoutY(model.snakeBodyLocationsY.get(i));
+                body6.setVisible(true);
+            }
+            if (i == 8) {
+                body7.setLayoutX(model.snakeBodyLocationsX.get(i));
+                body7.setLayoutY(model.snakeBodyLocationsY.get(i));
+                body7.setVisible(true);
+            }
+            if (i == 9) {
+                body8.setLayoutX(model.snakeBodyLocationsX.get(i));
+                body8.setLayoutY(model.snakeBodyLocationsY.get(i));
+                body8.setVisible(true);
+            }
+        }
+
 
         // data to server
         multiplayerSnakeStatus();

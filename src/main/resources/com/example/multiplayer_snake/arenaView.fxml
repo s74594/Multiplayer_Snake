@@ -66,6 +66,15 @@
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
       <Circle fx:id="snakeHead" layoutX="211.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="body1" layoutX="250.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="body2" layoutX="250.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="body3" layoutX="250.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="body4" layoutX="250.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="body5" layoutX="250.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="body6" layoutX="250.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="body7" layoutX="250.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="body8" layoutX="250.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="body9" layoutX="250.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="foodImage" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../../../../image/raspberry.png" />
