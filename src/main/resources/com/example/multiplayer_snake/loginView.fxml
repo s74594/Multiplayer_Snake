@@ -22,7 +22,7 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="358.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="51.0" layoutY="27.0" prefHeight="232.0" prefWidth="238.0" style="-fx-background-color: #607a00; -fx-background-radius: 10px;">
+            <AnchorPane layoutX="51.0" layoutY="6.0" prefHeight="254.0" prefWidth="238.0" style="-fx-background-color: #607a00; -fx-background-radius: 10px;">
                <children>
                   <TextField id="player_name" fx:id="player_name" layoutX="72.0" layoutY="25.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;" text="Testaccount">
                      <tooltip>
@@ -37,57 +37,79 @@
                         <Tooltip text="Set your password" />
                      </tooltip>
                   </PasswordField>
-                  <Button fx:id="button_play" layoutX="50.0" layoutY="168.0" mnemonicParsing="false" onAction="#onPlayButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02;" text="Play">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
+                  <Button fx:id="button_play" layoutX="50.0" layoutY="187.0" mnemonicParsing="false" onAction="#onPlayButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02;" text="Play">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="exitButton" layoutX="141.0" layoutY="168.0" mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02;" text="Exit">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
+                  <Button fx:id="exitButton" layoutX="141.0" layoutY="187.0" mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02;" text="Exit">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Text layoutX="58.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not a member?">
+                  <Text layoutX="50.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not a member?">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Button fx:id="button_signup" layoutX="161.0" layoutY="199.0" mnemonicParsing="false" onAction="#onSignupButtonClick" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign up!" textFill="#110eed" underline="true">
+                  <Button fx:id="button_signup" layoutX="161.0" layoutY="218.0" mnemonicParsing="false" onAction="#onSignupButtonClick" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign up!" textFill="#110eed" underline="true">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
                   </Button>
-                  <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="50.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="50.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../glyphicons/png/glyphicons-4-user.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="50.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="50.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../glyphicons/png/glyphicons-205-unlock.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="pw_incorrect" layoutX="45.0" layoutY="135.0" prefHeight="25.0" prefWidth="180.0" text="Password or name incorrect !" textFill="RED" visible="false">
+                  <Label fx:id="pw_incorrect" layoutX="50.0" layoutY="160.0" prefHeight="25.0" prefWidth="180.0" text="Password or name incorrect !" textFill="RED" visible="false">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <ColorPicker fx:id="snakeColorPicker" layoutX="141.0" layoutY="103.0" onAction="#customizeSnakeColor" prefWidth="80.0" style="-fx-background-color: #e89f02;">
+                  <ColorPicker fx:id="snakeColorPicker" layoutX="141.0" layoutY="95.0" onAction="#customizeSnakeColor" prefWidth="80.0" style="-fx-background-color: #e89f02;">
                      <value>
                         <Color />
                      </value>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ColorPicker>
-                  <Label layoutX="45.0" layoutY="107.0" text="Snake Color:">
+                  <Label layoutX="50.0" layoutY="101.0" text="Snake Color:">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
+                  <Label layoutX="50.0" layoutY="130.0" text="Select Avatar:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="avatarIMG" fitHeight="25.0" fitWidth="25.0" layoutX="169.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../image/avatar/img_1.png" />
+                     </image></ImageView>
+                  <Button fx:id="nextBTN" layoutX="188.0" layoutY="124.0" mnemonicParsing="false" onAction="#onNextClick" style="-fx-background-color: transparent;" text="&gt;" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="backBTN" layoutX="148.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBackClick" style="-fx-background-color: transparent;" text="&lt;" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
             </AnchorPane>
          </children>

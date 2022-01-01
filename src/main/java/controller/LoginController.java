@@ -1,8 +1,11 @@
 package controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Objects;
 import com.example.multiplayer_snake.model.SocketClient;
 import javafx.event.ActionEvent;
@@ -13,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -55,6 +60,16 @@ public class LoginController {
 	@FXML
 	private ColorPicker snakeColorPicker; // color picker to customize a snake
 
+	/* Image Slider */
+	@FXML
+	private ImageView avatarIMG;
+	@FXML
+	private Button backBTN;
+	@FXML
+	private Button nextBTN;
+	ArrayList<String> pictures = new ArrayList<String>();
+	public int indexIMGCounter = 1; // Index counter, iterating an arraylist
+
 	private static final int WIDTH = 1024;
 	private static final int HEIGHT = 732;
 	private static final int ROWS = 32;
@@ -68,6 +83,12 @@ public class LoginController {
 	@FXML
 	void initialize() {
 		SocketClient.connect();
+
+		/* add images to arraylist */
+		pictures.add("image/avatar/img_1.png");
+		pictures.add("image/avatar/img_2.png");
+		pictures.add("image/avatar/img_3.png");
+		pictures.add("image/avatar/img_4.png");
 	}
 
 	@FXML
@@ -75,8 +96,6 @@ public class LoginController {
 		this.event = event;
 		try {
 			// <Play Button>: opens arena view
-			// Parent rootParent =
-			// FXMLLoader.load(getClass().getResource("arenaView.fxml"));
 
 			String expectedPW = DatabaseController.Select_Player_PW(player_name.getText());
 
@@ -202,7 +221,7 @@ public class LoginController {
 	public void onRegisterButtonClick(ActionEvent actionEvent) {
 		String message = DatabaseController.Insert_Player(r_name.getText(), r_pw.getText(), r_pw_check.getText());
 		if (Objects.equals(message,
-				"[SQLITE_CONSTRAINT_UNIQUE]  A UNIQUE constraint failed (UNIQUE constraint failed: players.name)")) {
+				"[SQLITE_CONSTRAINT_UNIQUE] A UNIQUE constraint failed (UNIQUE constraint failed: players.name)")) {
 			error_msg.setVisible(true);
 		}
 
@@ -211,7 +230,7 @@ public class LoginController {
 			error_msg.setVisible(true);
 		}
 
-		if (Objects.equals(message, "query does not return ResultSet")) {
+		if (Objects.equals(message, "Query does not return ResultSet")) {
 			error_msg.setText("User " + "'" + r_name.getText() + "'" + " successfully added.");
 			error_msg.setTextFill(Color.BLUE);
 			error_msg.setVisible(true);
@@ -226,5 +245,47 @@ public class LoginController {
 		r_name.clear();
 		r_pw.clear();
 		r_pw_check.clear();
+	}
+
+	/* Image slider */
+	@FXML
+	void onNextClick(ActionEvent event) {
+		try {
+			Image image = new Image(new FileInputStream(pictures.get(indexIMGCounter)));
+			avatarIMG.setImage(image);
+			indexIMGCounter++;
+			System.out.println(">> " + indexIMGCounter); // debug counter
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// Prevent index out of bounds error
+		// and disable next button
+		if (indexIMGCounter == 4)
+			nextBTN.setDisable(true);
+		
+		// Enable back button
+		if (indexIMGCounter == 1)
+			backBTN.setDisable(false);
+	}
+
+	@FXML
+	void onBackClick(ActionEvent event) {
+		indexIMGCounter--;
+		nextBTN.setDisable(false);
+		System.out.println(">> " + indexIMGCounter); // debug counter
+		try {
+			Image image = new Image(new FileInputStream(pictures.get(indexIMGCounter)));
+			avatarIMG.setImage(image);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// Prevent index out of bounds error
+		// and disable back button
+		if (indexIMGCounter == 0)
+			backBTN.setDisable(true);
 	}
 }
