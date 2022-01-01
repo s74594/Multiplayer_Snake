@@ -24,12 +24,13 @@ import javafx.util.Duration;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 import java.util.concurrent.SubmissionPublisher;
 
 public class ArenaController {
@@ -79,6 +80,10 @@ public class ArenaController {
 	@SuppressWarnings("rawtypes")
 	SubmissionPublisher source = new SubmissionPublisher<String>(); // Observer Pattern
 
+	static final String DB_URL = "jdbc:sqlite:src/SQL Lite Database/Snake_System.db";
+	static String HEXCOLOR = "0x000000ff"; // Color = black
+	static final String QUERY = "SELECT snakecolor.id, snakecolor.hexcolor FROM snakecolor WHERE snakecolor.id = 1";
+
 	@SuppressWarnings("unchecked")
 	@FXML
 	void initialize() {
@@ -95,53 +100,24 @@ public class ArenaController {
 		gameOver.setVisible(false);
 		generateFood(); // initialize food
 
-		// Read file and set the color of the snake
-		try {
-			File myObj = new File("color.txt");
-			Scanner reader = new Scanner(myObj);
-			while (reader.hasNextLine()) {
-				String data = reader.nextLine();
-				System.out.println(data);
-				snakeHead.setFill(Color.web(data));
+		/**
+		 * Customize the color of a snake
+		 */
+		// Open a database connection
+		try (Connection conn = DriverManager.getConnection(DB_URL, HEXCOLOR, null);
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(QUERY);) {
+			while (rs.next()) {
+				// Display values
+				System.out.println("----");
+				System.out.println("Read from Database");
+				System.out.println(">> ID: " + rs.getInt("id"));
+				System.out.println(">> HEXCOLOR VALUE: " + rs.getString("hexcolor"));
+				
+				HEXCOLOR = rs.getString("hexcolor");
+				snakeHead.setFill(Color.valueOf(HEXCOLOR));
 			}
-			reader.close();
-			delete();
-		} catch (FileNotFoundException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}
-	}
-
-	/* Löschen des Files, wenn die Farbe der Snake gesetzt wurde */
-	public void delete() {
-		File myObj = new File("color.txt");
-		if (myObj.delete()) {
-			System.out.println("Deleted the file: " + myObj.getName());
-		} else {
-			System.out.println("Failed to delete the file.");
-		}
-	}
-
-	// Customize the color of a snake
-	@SuppressWarnings("exports")
-	public void custom_Snake_Color(Color value) {
-
-		// Format a color in a web-friendly hex format
-		String webFormat = String.format("#%02x%02x%02x",
-				(int) (255 * value.getRed()),
-				(int) (255 * value.getGreen()),
-				(int) (255 * value.getBlue()));
-
-		// Wert muss an initialize übergeben werden..
-		// Zurzeit Auslagerung in einem File
-		// Hexadezimalwert der Variable webFormat schreiben
-		try {
-			FileWriter writer = new FileWriter("color.txt");
-			writer.write(webFormat);
-			writer.close();
-			System.out.println("Successfully wrote \"" + webFormat + "\" to the file.");
-		} catch (IOException e) {
-			System.out.println("An error occurred.");
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -163,7 +139,7 @@ public class ArenaController {
 			System.err.println(e.getMessage());
 		}
 	}
-	
+
 	@FXML
 	void onGameInfoMenuClick(ActionEvent event) {
 		try {

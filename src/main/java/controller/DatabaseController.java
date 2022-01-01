@@ -6,25 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import javafx.scene.paint.Color;
 
 public class DatabaseController {
-
-	@SuppressWarnings("exports")
-	public static Connection Connector() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			/*
-			 * getConnection("jdbc:sqlite:________.sqlite"); ^ | |- insert database path
-			 * here, otherwise an empty playerDB is being created
-			 */
-			Connection connection = DriverManager.getConnection("jdbc:sqlite:SQL Lite Database/playerDB.sqlite");
-
-			return connection;
-		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
-		}
-	}
 
 	@SuppressWarnings("exports")
 	public static Connection connect() {
@@ -112,6 +96,27 @@ public class DatabaseController {
 			conn.close();
 		} catch (SQLException e) {
 			String x = e.getMessage();
+		}
+	}
+
+	/**
+	 * Insert a new row into the 'snakecolor' table
+	 * @param value
+	 */
+	@SuppressWarnings("exports")
+	public void Insert_Custom_Snake_Color(Color value) {
+		Connection conn = DatabaseController.connect();
+
+//		String sqlInsertString = "INSERT INTO snakecolor (id, hexcolor) VALUES (1, '" + value + "' )";
+		String sqlUpdateString = "UPDATE snakecolor SET hexcolor = '" + value + "' WHERE snakecolor.id = 1;";
+
+		try {
+			Statement st = conn.createStatement();
+			st.executeUpdate(sqlUpdateString);
+			System.out.println(">> " + sqlUpdateString);
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println(">> " + e.getMessage());
 		}
 	}
 }

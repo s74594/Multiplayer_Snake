@@ -7,8 +7,10 @@ import javafx.scene.text.Text;
 
 public class Player {
 
-    public Text points;
-    public Text name;
+    @SuppressWarnings("exports")
+	public Text points;
+    @SuppressWarnings("exports")
+	public Text name;
     public double snakeX;
     public double snakeY;
     public double fruitX;

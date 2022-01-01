@@ -113,9 +113,9 @@ public class LoginController {
 	@FXML
 	void customizeSnakeColor(ActionEvent event) {
 		/* Instance herstellen */
-		ArenaController customSnakeColor = new ArenaController();
-		/* Übergabe des Color-Picker-Wertes an ArenaController.java */
-		customSnakeColor.custom_Snake_Color(snakeColorPicker.getValue());
+		DatabaseController customSnakeColorDB = new DatabaseController();
+		/* Übergabe des Color-Picker-Wertes an DatabaseController */
+		customSnakeColorDB.Insert_Custom_Snake_Color(snakeColorPicker.getValue());
 	}
 
 	@FXML
