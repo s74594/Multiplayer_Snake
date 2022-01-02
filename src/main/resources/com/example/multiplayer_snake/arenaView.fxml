@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
+<Pane maxHeight="-Infinity" fx:id="playGround2" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
    <children>
       <Pane id="game" fx:id="playGround" focusTraversable="true" onKeyPressed="#snakeSteering" opacity="0.0" prefHeight="732.0" prefWidth="1024.0" style="-fx-background-color: #7c9e01;">
          <children>
