@@ -69,10 +69,10 @@ public class Player {
     private void snakeBodyLocations() {
         snakeBodyLocationsX.addFirst(snakeX);
         snakeBodyLocationsY.addFirst(snakeY);
-        if(snakeBodyLocationsX.size() > 10) {
+        if(snakeBodyLocationsX.size() > 98) {
             snakeBodyLocationsX.removeLast();
         }
-        if(snakeBodyLocationsY.size() > 10) {
+        if(snakeBodyLocationsY.size() > 98) {
             snakeBodyLocationsY.removeLast();
         }
         // System.out.println("snakeBodyLocationsX: " + snakeBodyLocationsX);
@@ -85,7 +85,7 @@ public class Player {
         if (fruitBounds.intersects(snakeBounds)) {
             System.out.println("Food collision detected"); // Debug
             eatFruit = true;
-            if(snakeBodySize < 10) {
+            if(snakeBodySize < 100) {
                 snakeBodySize++;
             }
         }

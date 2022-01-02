@@ -112,6 +112,14 @@ public class ArenaController {
         gameOver.setVisible(false);
         generateFood();  // initialize food
 
+        // Initialize Snakebody
+        for(int i = 0; i < body.length; i++) {
+            body[i] = new Circle(10);
+            body[i].setFill(Color.BLACK);
+            body[i].setVisible(false);
+            playGround2.getChildren().add(body[i]);
+        }
+
         // Read file and set the color of the snake
         try {
             File myObj = new File("color.txt");
@@ -289,12 +297,9 @@ public class ArenaController {
         snakeHead.setLayoutY(model.snakeBodyLocationsY.getFirst());
         //System.out.println(model.snakeBodySize);
         for(int i = 0; i <= model.snakeBodySize; i++) {
-                body[i] = new Circle(10);
-                body[i].setFill(Color.BLACK);
                 body[i].setLayoutX(model.snakeBodyLocationsX.get(i));
                 body[i].setLayoutY(model.snakeBodyLocationsY.get(i));
                 body[i].setVisible(true);
-                playGround2.getChildren().add(body[i]);
         }
 
         // data to server
