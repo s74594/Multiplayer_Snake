@@ -53,6 +53,8 @@ public class ArenaController {
     @SuppressWarnings("exports")
     @FXML
     public Pane playGround;
+    @FXML
+    public Pane playGround2;
     @SuppressWarnings("exports")
     @FXML
     public Circle snakeHead; // snake head
@@ -78,23 +80,7 @@ public class ArenaController {
     public static double millis = 0.3;
     public int point_counter_player1 = 0;
     @FXML
-    public Circle body1;
-    @FXML
-    public Circle body2;
-    @FXML
-    public Circle body3;
-    @FXML
-    public Circle body4;
-    @FXML
-    public Circle body5;
-    @FXML
-    public Circle body6;
-    @FXML
-    public Circle body7;
-    @FXML
-    public Circle body8;
-    @FXML
-    public Circle body9;
+    public Circle[] body = new Circle[100];
 
     CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
     @SuppressWarnings("rawtypes")
@@ -125,15 +111,6 @@ public class ArenaController {
         scorePlayer2.setText(String.valueOf(point_counter_player1));
         gameOver.setVisible(false);
         generateFood();  // initialize food
-        body1.setVisible(false);
-        body2.setVisible(false);
-        body3.setVisible(false);
-        body4.setVisible(false);
-        body5.setVisible(false);
-        body6.setVisible(false);
-        body7.setVisible(false);
-        body8.setVisible(false);
-        body9.setVisible(false);
 
         // Read file and set the color of the snake
         try {
@@ -311,54 +288,14 @@ public class ArenaController {
         snakeHead.setLayoutX(model.snakeBodyLocationsX.getFirst());
         snakeHead.setLayoutY(model.snakeBodyLocationsY.getFirst());
         //System.out.println(model.snakeBodySize);
-        for(int i = 2; i <= model.snakeBodySize; i++) {
-            if (i == 2) {
-                body1.setLayoutX(model.snakeBodyLocationsX.get(i));
-                body1.setLayoutY(model.snakeBodyLocationsY.get(i));
-                body1.setVisible(true);
-            }
-            if (i == 3) {
-                body2.setLayoutX(model.snakeBodyLocationsX.get(i));
-                body2.setLayoutY(model.snakeBodyLocationsY.get(i));
-                body2.setVisible(true);
-            }
-            if (i == 4) {
-                body3.setLayoutX(model.snakeBodyLocationsX.get(i));
-                body3.setLayoutY(model.snakeBodyLocationsY.get(i));
-                body3.setVisible(true);
-            }
-            if (i == 5) {
-                body4.setLayoutX(model.snakeBodyLocationsX.get(i));
-                body4.setLayoutY(model.snakeBodyLocationsY.get(i));
-                body4.setVisible(true);
-            }
-            if (i == 5) {
-                body4.setLayoutX(model.snakeBodyLocationsX.get(i));
-                body4.setLayoutY(model.snakeBodyLocationsY.get(i));
-                body4.setVisible(true);
-            }
-            if (i == 6) {
-                body5.setLayoutX(model.snakeBodyLocationsX.get(i));
-                body5.setLayoutY(model.snakeBodyLocationsY.get(i));
-                body5.setVisible(true);
-            }
-            if (i == 7) {
-                body6.setLayoutX(model.snakeBodyLocationsX.get(i));
-                body6.setLayoutY(model.snakeBodyLocationsY.get(i));
-                body6.setVisible(true);
-            }
-            if (i == 8) {
-                body7.setLayoutX(model.snakeBodyLocationsX.get(i));
-                body7.setLayoutY(model.snakeBodyLocationsY.get(i));
-                body7.setVisible(true);
-            }
-            if (i == 9) {
-                body8.setLayoutX(model.snakeBodyLocationsX.get(i));
-                body8.setLayoutY(model.snakeBodyLocationsY.get(i));
-                body8.setVisible(true);
-            }
+        for(int i = 0; i <= model.snakeBodySize; i++) {
+                body[i] = new Circle(10);
+                body[i].setFill(Color.BLACK);
+                body[i].setLayoutX(model.snakeBodyLocationsX.get(i));
+                body[i].setLayoutY(model.snakeBodyLocationsY.get(i));
+                body[i].setVisible(true);
+                playGround2.getChildren().add(body[i]);
         }
-
 
         // data to server
         multiplayerSnakeStatus();
