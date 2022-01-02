@@ -70,9 +70,10 @@ public class LoginController {
 	ArrayList<String> pictures = new ArrayList<String>();
 	public int indexIMGCounter = 1; // Index counter, iterating an arraylist
 
-	private static final int WIDTH = 1024;
-	private static final int HEIGHT = 732;
-	private static final int ROWS = 32;
+	/* Global variables: board */
+	private static final int WIDTH = 1532;
+	private static final int HEIGHT = 786;
+	private static final int ROWS = 350;
 	private static final int COLUMNS = ROWS;
 	private static final int SQUARE_SIZE = WIDTH / ROWS;
 	private GraphicsContext graphicsContext;
@@ -117,7 +118,7 @@ public class LoginController {
 
 				centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
 				graphicsContext = canvas.getGraphicsContext2D();
-				run();
+//				run();
 			} else {
 				pw_incorrect.setVisible(true);
 			}
@@ -143,23 +144,23 @@ public class LoginController {
 			onPlayButtonClick(event);
 	}
 
-	private void run() {
-		drawBackground(graphicsContext);
-	}
+//	private void run() {
+//		drawBackground(graphicsContext);
+//	}
 
 	// Drawing light and dark squares
-	private void drawBackground(GraphicsContext graphicsContext) {
-		for (int i = 0; i < ROWS; i++) {
-			for (int j = 0; j < COLUMNS; j++) {
-				if ((i + j) % 2 == 0) {
-					graphicsContext.setFill(Color.web("AAD751"));
-				} else {
-					graphicsContext.setFill(Color.web("A2D149"));
-				}
-				graphicsContext.fillRect(i * SQUARE_SIZE, j * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-			}
-		}
-	}
+//	private void drawBackground(GraphicsContext graphicsContext) {
+//		for (int row = 0; row < ROWS; row++) {
+//			for (int col = 0; col < COLUMNS; col++) {
+//				if ((row + col) % 2 == 0) {
+//					graphicsContext.setFill(Color.web("AAD751"));
+//				} else {
+//					graphicsContext.setFill(Color.web("A2D149"));
+//				}
+//				graphicsContext.fillRect(row * SQUARE_SIZE, col * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+//			}
+//		}
+//	}
 
 	@FXML
 	protected void onExitButtonClick(ActionEvent event) {
@@ -254,7 +255,7 @@ public class LoginController {
 			Image image = new Image(new FileInputStream(pictures.get(indexIMGCounter)));
 			avatarIMG.setImage(image);
 			indexIMGCounter++;
-			System.out.println(">> " + indexIMGCounter); // debug counter
+//			System.out.println(">> " + indexIMGCounter); // debug counter
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -264,7 +265,7 @@ public class LoginController {
 		// and disable next button
 		if (indexIMGCounter == 4)
 			nextBTN.setDisable(true);
-		
+
 		// Enable back button
 		if (indexIMGCounter == 1)
 			backBTN.setDisable(false);
@@ -274,7 +275,7 @@ public class LoginController {
 	void onBackClick(ActionEvent event) {
 		indexIMGCounter--;
 		nextBTN.setDisable(false);
-		System.out.println(">> " + indexIMGCounter); // debug counter
+//		System.out.println(">> " + indexIMGCounter); // debug counter
 		try {
 			Image image = new Image(new FileInputStream(pictures.get(indexIMGCounter)));
 			avatarIMG.setImage(image);

@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" fx:id="playGround2" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
+<Pane fx:id="playGround2" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="786.0" prefWidth="1532.0" style="-fx-background-color: #AAD751;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
    <children>
-      <Pane id="game" fx:id="playGround" focusTraversable="true" onKeyPressed="#snakeSteering" opacity="0.0" prefHeight="732.0" prefWidth="1024.0" style="-fx-background-color: #7c9e01;">
+      <Pane id="game" fx:id="playGround" focusTraversable="true" onKeyPressed="#snakeSteering" opacity="0.0" prefHeight="786.0" prefWidth="1532.0">
          <children>
             <Label fx:id="gameOver" layoutX="327.0" layoutY="285.0" text="Game Over!">
                <font>
@@ -21,7 +21,7 @@
                </font>
             </Label>
          </children></Pane>
-      <MenuBar prefHeight="32.0" prefWidth="1024.0">
+      <MenuBar prefWidth="1532.0">
         <menus>
           <Menu mnemonicParsing="false" text="Game">
                <items>
@@ -41,27 +41,28 @@
 
         </menus>
       </MenuBar>
-      <Text fx:id="namePlayer1" layoutX="10.0" layoutY="695.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 1&gt;">
+      <Text fx:id="namePlayer1" layoutX="5.0" layoutY="750.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 1&gt;">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text layoutX="10.0" layoutY="715.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:">
+      <Text layoutX="5.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text fx:id="scorePlayer1" layoutX="54.0" layoutY="715.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;">
+      <Text fx:id="scorePlayer1" layoutX="52.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text fx:id="namePlayer2" layoutX="957.0" layoutY="694.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 2&gt;">
+      <Text fx:id="namePlayer2" layoutX="1436.0" layoutY="749.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 2&gt;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="11.0" />
+         </font>
+      </Text>
+      <Text layoutX="1403.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="RIGHT">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text layoutX="925.0" layoutY="715.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="RIGHT">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="11.0" />
-         </font></Text>
-      <Text fx:id="scorePlayer2" layoutX="970.0" layoutY="715.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;" textAlignment="RIGHT">
+      <Text fx:id="scorePlayer2" layoutX="1450.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;" textAlignment="RIGHT">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
