@@ -311,12 +311,11 @@ public class ArenaController {
         snakeHead.setLayoutX(model.snakeBodyLocationsX.getFirst());
         snakeHead.setLayoutY(model.snakeBodyLocationsY.getFirst());
         //System.out.println(model.snakeBodySize);
-        for(int i = 1; i < model.snakeBodySize; i++) {
+        for(int i = 2; i <= model.snakeBodySize; i++) {
             if (i == 2) {
                 body1.setLayoutX(model.snakeBodyLocationsX.get(i));
                 body1.setLayoutY(model.snakeBodyLocationsY.get(i));
                 body1.setVisible(true);
-                System.out.println("i");
             }
             if (i == 3) {
                 body2.setLayoutX(model.snakeBodyLocationsX.get(i));
