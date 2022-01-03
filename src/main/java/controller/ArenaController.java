@@ -107,16 +107,23 @@ public class ArenaController {
 		gameOver.setVisible(false);
 		generateFood(); // initialize food
 
+		// Initialize Snakebody
+//		for (int i = 0; i < body.length; i++) {
+//			body[i] = new Circle(10);
+//			body[i].setFill(Color.BLACK);
+//			body[i].setVisible(false);
+//			playGround2.getChildren().add(body[i]);
+//		}
+
 		// Read file and set the color of the snake
 		try {
 			File myObj = new File("color.txt");
 			Scanner reader = new Scanner(myObj);
 			while (reader.hasNextLine()) {
 				String data = reader.nextLine();
-				System.out.println(data);
+//				System.out.println(data);
 				snakeHead.setFill(Color.web(data));
-				
-				// Initialize Snakebody
+
 				for (int i = 0; i < body.length; i++) {
 					body[i] = new Circle(10);
 					body[i].setFill(Color.web(data));

@@ -88,11 +88,12 @@ public class Player {
 	public void checkCollision() {
 		// Head touches a fruit
 		if (fruitBounds.intersects(snakeBounds)) {
-			System.out.println("Food collision detected"); // Debug
+//			System.out.println("Food collision detected"); // Debug
 			eatFruit = true;
-
+			
 			if (snakeBodySize < 100) {
-				snakeBodySize++;
+				// Wachstum der Schlange
+				snakeBodySize += 3;
 			}
 		}
 
