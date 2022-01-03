@@ -41,32 +41,32 @@
 
         </menus>
       </MenuBar>
-      <Text fx:id="namePlayer1" layoutX="5.0" layoutY="750.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 1&gt;">
+      <Text fx:id="namePlayer1" layoutX="15.0" layoutY="750.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 1&gt;">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text layoutX="5.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:">
+      <Text layoutX="15.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text fx:id="scorePlayer1" layoutX="52.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;">
+      <Text fx:id="scorePlayer1" layoutX="62.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text fx:id="namePlayer2" layoutX="1436.0" layoutY="749.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 2&gt;">
+      <Text fx:id="namePlayer2" layoutX="1460.0" layoutY="749.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 2&gt;">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font>
       </Text>
-      <Text layoutX="1403.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="RIGHT">
+      <Text layoutX="1427.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="RIGHT">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Text fx:id="scorePlayer2" layoutX="1450.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;" textAlignment="RIGHT">
+      <Text fx:id="scorePlayer2" layoutX="1474.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;NULL&gt;" textAlignment="RIGHT">
          <font>
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
-      <Circle fx:id="snakeHead" layoutX="211.0" layoutY="110.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="snakeHead" layoutX="211.0" layoutY="110.0" radius="10.0" strokeType="INSIDE" />
       <ImageView fx:id="foodImage" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../../../../image/raspberry.png" />

@@ -22,7 +22,7 @@ public class Player {
 	public Bounds fruitBounds;
 	public boolean eatFruit = false;
 	public boolean gameOver = false;
-	final double snakeSpeed = 2; // speed adjust
+	final double snakeSpeed = 1.5; // speed adjust
 	public int snakeBodySize = 1;
 	public LinkedList<Double> snakeBodyLocationsX = new LinkedList<>();
 	public LinkedList<Double> snakeBodyLocationsY = new LinkedList<>();
