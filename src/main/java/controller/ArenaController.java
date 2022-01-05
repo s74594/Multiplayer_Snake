@@ -76,7 +76,7 @@ public class ArenaController {
 	public static double millis = 0.3;
 	public int point_counter_player1 = 0;
 	@FXML
-	public Circle[] body = new Circle[100];
+	public Circle[] body = new Circle[1000];
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	@SuppressWarnings("rawtypes")
@@ -108,12 +108,12 @@ public class ArenaController {
 		generateFood(); // initialize food
 
 		// Initialize Snakebody
-//		for (int i = 0; i < body.length; i++) {
-//			body[i] = new Circle(10);
-//			body[i].setFill(Color.BLACK);
-//			body[i].setVisible(false);
-//			playGround2.getChildren().add(body[i]);
-//		}
+		for (int i = 0; i < body.length; i++) {
+			body[i] = new Circle(10);
+			body[i].setFill(Color.BLACK);
+			body[i].setVisible(false);
+			playGround2.getChildren().add(body[i]);
+		}
 
 		// Read file and set the color of the snake
 		try {
@@ -124,12 +124,12 @@ public class ArenaController {
 //				System.out.println(data);
 				snakeHead.setFill(Color.web(data));
 
-				for (int i = 0; i < body.length; i++) {
+/*				for (int i = 0; i < body.length; i++) {
 					body[i] = new Circle(10);
 					body[i].setFill(Color.web(data));
 					body[i].setVisible(false);
 					playGround2.getChildren().add(body[i]);
-				}
+				}*/
 			}
 			reader.close();
 			delete();

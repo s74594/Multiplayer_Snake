@@ -72,11 +72,11 @@ public class Player {
 		snakeBodyLocationsX.addFirst(snakeX);
 		snakeBodyLocationsY.addFirst(snakeY);
 
-		if (snakeBodyLocationsX.size() > 98) {
+		if (snakeBodyLocationsX.size() > 998) {
 			snakeBodyLocationsX.removeLast();
 		}
 
-		if (snakeBodyLocationsY.size() > 98) {
+		if (snakeBodyLocationsY.size() > 998) {
 			snakeBodyLocationsY.removeLast();
 		}
 
@@ -91,9 +91,9 @@ public class Player {
 //			System.out.println("Food collision detected"); // Debug
 			eatFruit = true;
 			
-			if (snakeBodySize < 100) {
+			if (snakeBodySize < 1000) {
 				// Wachstum der Schlange
-				snakeBodySize += 3;
+				snakeBodySize += 25;
 			}
 		}
 
