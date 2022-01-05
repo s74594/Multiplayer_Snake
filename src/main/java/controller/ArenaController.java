@@ -56,7 +56,7 @@ public class ArenaController {
 	public Circle snakeHead; // snake head
 	@SuppressWarnings("exports")
 	@FXML
-	public Circle snakeBody; // snake body
+	public Circle[] snakeBody = new Circle[1000]; // snake body
 	@SuppressWarnings("exports")
 	@FXML
 	public Circle snakeTailCircle; // snake tail
@@ -75,8 +75,6 @@ public class ArenaController {
 	private Timeline animation = new Timeline();
 	public static double millis = 0.3;
 	public int point_counter_player1 = 0;
-	@FXML
-	public Circle[] body = new Circle[1000];
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	@SuppressWarnings("rawtypes")
@@ -106,13 +104,12 @@ public class ArenaController {
 		scorePlayer2.setText(String.valueOf(point_counter_player1));
 		gameOver.setVisible(false);
 		generateFood(); // initialize food
-
 		// Initialize Snakebody
-		for (int i = 0; i < body.length; i++) {
-			body[i] = new Circle(10);
-			body[i].setFill(Color.BLACK);
-			body[i].setVisible(false);
-			playGround2.getChildren().add(body[i]);
+		for (int i = 0; i < snakeBody.length; i++) {
+			snakeBody[i] = new Circle(10);
+			snakeBody[i].setFill(Color.BLACK);
+			snakeBody[i].setVisible(false);
+			playGround2.getChildren().add(snakeBody[i]);
 		}
 
 		// Read file and set the color of the snake
@@ -121,15 +118,10 @@ public class ArenaController {
 			Scanner reader = new Scanner(myObj);
 			while (reader.hasNextLine()) {
 				String data = reader.nextLine();
-//				System.out.println(data);
 				snakeHead.setFill(Color.web(data));
-
-/*				for (int i = 0; i < body.length; i++) {
-					body[i] = new Circle(10);
-					body[i].setFill(Color.web(data));
-					body[i].setVisible(false);
-					playGround2.getChildren().add(body[i]);
-				}*/
+				for (int i = 0; i < snakeBody.length; i++) {
+					snakeBody[i].setFill(Color.web(data));
+				}
 			}
 			reader.close();
 			delete();
@@ -297,9 +289,9 @@ public class ArenaController {
 		snakeHead.setLayoutY(model.snakeBodyLocationsY.getFirst());
 		// System.out.println(model.snakeBodySize);
 		for (int i = 0; i <= model.snakeBodySize; i++) {
-			body[i].setLayoutX(model.snakeBodyLocationsX.get(i));
-			body[i].setLayoutY(model.snakeBodyLocationsY.get(i));
-			body[i].setVisible(true);
+			snakeBody[i].setLayoutX(model.snakeBodyLocationsX.get(i));
+			snakeBody[i].setLayoutY(model.snakeBodyLocationsY.get(i));
+			snakeBody[i].setVisible(true);
 		}
 
 		// data to server
