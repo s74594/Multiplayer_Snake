@@ -7,6 +7,8 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.SubmissionPublisher;
+
 import com.example.multiplayer_snake.model.SocketClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.json.JSONObject;
 
 public class LoginController {
 	@FXML
@@ -67,6 +70,8 @@ public class LoginController {
 	private Button backBTN;
 	@FXML
 	private Button nextBTN;
+	private static String sqlLoginUser = null;
+	private static String sqlLoginUserPass = null;
 	ArrayList<String> pictures = new ArrayList<String>();
 	public int indexIMGCounter = 1; // Index counter, iterating an arraylist
 
@@ -81,9 +86,12 @@ public class LoginController {
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	private ActionEvent event;
 
+	SubmissionPublisher source = new SubmissionPublisher<String>(); // Observer Pattern
+
 	@FXML
 	void initialize() {
 		SocketClient.connect();
+		source.subscribe(new SocketClient()); // Observer Pattern
 
 		/* add images to arraylist */
 		pictures.add("image/avatar/img_1.png");
@@ -98,9 +106,16 @@ public class LoginController {
 		try {
 			// <Play Button>: opens arena view
 
-			String expectedPW = DatabaseController.Select_Player_PW(player_name.getText());
+			//sqlLoginUserPass = DatabaseController.Select_Player_PW(player_name.getText());
+			JSONObject messageJSON = new JSONObject();
+			messageJSON.put("sql_login_user", player_name.getText());
+			source.submit(messageJSON);
 
-			if (Objects.equals(player_password.getText(), expectedPW)) {
+			while((sqlLoginUser == null) || (sqlLoginUserPass == null)) {
+				// waiting for password retrieve
+				System.out.println("test");
+			}
+			if ((sqlLoginUser == player_name.getText()) && (sqlLoginUserPass == player_password.getText())) {
 				URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
 				Parent rootParent = FXMLLoader.load(url);
 				Stage stage = (Stage) exitButton.getScene().getWindow();
@@ -122,7 +137,8 @@ public class LoginController {
 			} else {
 				pw_incorrect.setVisible(true);
 			}
-
+			sqlLoginUser = null; // reset
+			sqlLoginUserPass = null; // reset
 		} catch (Exception e) {
 			// handle error exception
 			System.err.println(e.getMessage());
@@ -134,9 +150,6 @@ public class LoginController {
 	void customizeSnakeColor(ActionEvent event) {
 		/* Instance herstellen */
 		ArenaController customSnakeColor = new ArenaController();
-//		DatabaseController customSnakeColorDB = new DatabaseController();
-		/* Übergabe des Color-Picker-Wertes an Arenacontroller */
-//		customSnakeColorDB.Insert_Custom_Snake_Color(snakeColorPicker.getValue());
 		customSnakeColor.custom_Snake_Color(snakeColorPicker.getValue());
 	}
 
@@ -145,24 +158,6 @@ public class LoginController {
 		if (e.getCode().equals(KeyCode.ENTER))
 			onPlayButtonClick(event);
 	}
-
-//	private void run() {
-//		drawBackground(graphicsContext);
-//	}
-
-	// Drawing light and dark squares
-//	private void drawBackground(GraphicsContext graphicsContext) {
-//		for (int row = 0; row < ROWS; row++) {
-//			for (int col = 0; col < COLUMNS; col++) {
-//				if ((row + col) % 2 == 0) {
-//					graphicsContext.setFill(Color.web("AAD751"));
-//				} else {
-//					graphicsContext.setFill(Color.web("A2D149"));
-//				}
-//				graphicsContext.fillRect(row * SQUARE_SIZE, col * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-//			}
-//		}
-//	}
 
 	@FXML
 	protected void onExitButtonClick(ActionEvent event) {
@@ -198,9 +193,6 @@ public class LoginController {
 	@FXML
 	protected void onSignupButtonClick(ActionEvent event) {
 		try {
-			// <Play Button>: Open a new game window
-			// Parent rootParent =
-			// FXMLLoader.load(getClass().getResource("registryView.fxml"));
 			URL url = new File("src/main/resources/com/example/multiplayer_snake/registryView.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 			Stage stage = (Stage) exitButton.getScene().getWindow();
@@ -290,5 +282,13 @@ public class LoginController {
 		// and disable back button
 		if (indexIMGCounter == 0)
 			backBTN.setDisable(true);
+	}
+
+	public static void setSqlLoginUserPass(String sqlLoginUserPass) {
+		LoginController.sqlLoginUserPass = sqlLoginUserPass;
+	}
+
+	public static void setSqlLoginUser(String sqlLoginUser) {
+		LoginController.sqlLoginUser = sqlLoginUser;
 	}
 }

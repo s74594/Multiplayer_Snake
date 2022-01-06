@@ -144,11 +144,9 @@ public class ArenaController {
 	// Customize the color of a snake
 	@SuppressWarnings("exports")
 	public void custom_Snake_Color(Color value) {
-
 		// Format a color in a web-friendly hex format
 		String webFormat = String.format("#%02x%02x%02x", (int) (255 * value.getRed()), (int) (255 * value.getGreen()),
 				(int) (255 * value.getBlue()));
-
 		// Wert muss an initialize übergeben werden..
 		// Zurzeit Auslagerung in einem File
 		// Hexadezimalwert der Variable webFormat schreiben
