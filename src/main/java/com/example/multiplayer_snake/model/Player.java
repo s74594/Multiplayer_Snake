@@ -125,11 +125,11 @@ public class Player {
 		snakeBodyLocationsX.addFirst(snakeX);
 		snakeBodyLocationsY.addFirst(snakeY);
 
-		if (snakeBodyLocationsX.size() > 98) {
+		if (snakeBodyLocationsX.size() > 998) {
 			snakeBodyLocationsX.removeLast();
 		}
 
-		if (snakeBodyLocationsY.size() > 98) {
+		if (snakeBodyLocationsY.size() > 998) {
 			snakeBodyLocationsY.removeLast();
 		}
 	}
@@ -139,11 +139,11 @@ public class Player {
 		snakeBodyLocationsXP2.addFirst(snakeXP2);
 		snakeBodyLocationsYP2.addFirst(snakeYP2);
 
-		if (snakeBodyLocationsXP2.size() > 98) {
+		if (snakeBodyLocationsXP2.size() > 998) {
 			snakeBodyLocationsXP2.removeLast();
 		}
 
-		if (snakeBodyLocationsYP2.size() > 98) {
+		if (snakeBodyLocationsYP2.size() > 998) {
 			snakeBodyLocationsYP2.removeLast();
 		}
 	}
