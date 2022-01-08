@@ -117,14 +117,15 @@ public class ArenaController {
 	@SuppressWarnings("unchecked")
 	@FXML
 	void initialize() {
+
 		model = new Player();
 		model.snakeBodyLocationsX.addFirst(250.); // store initial position in bodyparts array
 		model.snakeBodyLocationsY.addFirst(200.); // store initial position in bodyparts array
 
 		/* Player Two */
 		modelPlayerTwo = new Player();
-		modelPlayerTwo.snakeBodyLocationsXP2.addFirst(350.); // store initial position in bodyparts array
-		modelPlayerTwo.snakeBodyLocationsYP2.addFirst(300.); // store initial position in bodyparts array
+		modelPlayerTwo.snakeBodyLocationsXP2.addFirst(950.); // store initial position in bodyparts array
+		modelPlayerTwo.snakeBodyLocationsYP2.addFirst(450.); // store initial position in bodyparts array
 
 		timer.start(); // Animation Timer
 		timerPlayerTwo.start(); // Start animation timer for player two
@@ -315,7 +316,7 @@ public class ArenaController {
 	void snakeSteering(KeyEvent keyEvent) {
 
 		KeyCode key = keyEvent.getCode();
-
+		
 		// move
 		// key handling player one or two
 		if ((key == KeyCode.UP) || (key == KeyCode.RIGHT) || (key == KeyCode.DOWN) || (key == KeyCode.LEFT)) {

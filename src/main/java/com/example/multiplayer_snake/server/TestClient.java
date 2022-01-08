@@ -9,34 +9,34 @@ import java.util.Scanner;
 
 public class TestClient {
 
-    static Socket socket;
-    static PrintWriter writer;
+	static Socket socket;
+	static PrintWriter writer;
 
-    public static void main(String[] args) {
-        try {
-            // connect to server
-            socket = new Socket("127.0.0.1", 5000);
-            System.out.println(">>> Client connected using port " + socket.getLocalPort());
+	public static void main(String[] args) {
+		try {
+			// connect to server
+			socket = new Socket("127.0.0.1", 5000);
+			System.out.println(">>> Client connected using port " + socket.getLocalPort());
 
-            // create output writer
-            writer = new PrintWriter(socket.getOutputStream());
+			// create output writer
+			writer = new PrintWriter(socket.getOutputStream());
 
-            // create input reader
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			// create input reader
+			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            // start concurrent message handler
-            new Thread(new MessageHandler(reader)).start();
+			// start concurrent message handler
+			new Thread(new MessageHandler(reader)).start();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-        // Wait for messages to send to the server
-        while (true) {
-            System.out.println(">>> Write your message:");
-            Scanner scanner = new Scanner(System.in);
-            writer.println(scanner.next());
-            writer.flush();
-        }
-    }
+		// Wait for messages to send to the server
+		while (true) {
+			System.out.println(">>> Write your message:");
+			Scanner scanner = new Scanner(System.in);
+			writer.println(scanner.next());
+			writer.flush();
+		}
+	}
 }

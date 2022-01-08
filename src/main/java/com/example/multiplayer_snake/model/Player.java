@@ -149,21 +149,21 @@ public class Player {
 	}
 
 	public void checkCollision() {
-		
+
 		// Head touches any fruit
 		if (fruitBounds.intersects(snakeBounds)) {
 			eatFruit = true;
 
 			if (snakeBodySize < 1000) {
 				// Wachstum der Schlange
-				snakeBodySize += 3;
+				snakeBodySize += 5;
 			}
 		} else if (fruitBounds.intersects(snakeBoundsPlayerTwo)) {
 			eatFruit = true;
 
 			if (snakeBodySizePlayerTwo < 1000) {
 				// Wachstum der Schlange
-				snakeBodySizePlayerTwo += 3;
+				snakeBodySizePlayerTwo += 5;
 			}
 		}
 
@@ -188,7 +188,7 @@ public class Player {
 				System.out.println("Bottom border touched: Game Over!"); // Collision with bottom border
 				gameOver();
 			}
-		} else if (collisionDetectionOff == 1){
+		} else if (collisionDetectionOff == 1) {
 			return;
 		}
 	}
@@ -205,7 +205,7 @@ public class Player {
 		int minWidth = 200;
 		int maxWidth = 1500;
 		int minHeight = 25;
-		int maxHeight = 786;
+		int maxHeight = 760;
 
 		/* generates a random value */
 		int posX = (int) (Math.random() * (maxWidth - minWidth)) + minWidth;

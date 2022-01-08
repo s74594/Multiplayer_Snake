@@ -12,38 +12,38 @@ import java.util.Set;
 
 public class SnakeServer {
 
-    static Set<PrintWriter> clientWriters = new HashSet<>();
+	static Set<PrintWriter> clientWriters = new HashSet<>();
 
-    public static void main(String[] args) {
-        try {
-            ServerSocket serverSocket = new ServerSocket(5000);
+	public static void main(String[] args) {
+		try {
+			ServerSocket serverSocket = new ServerSocket(5000);
 
-            while (true) {
-                // wait for new client connection
-                Socket clientSocket = serverSocket.accept();
-                System.out.println(">>> Client connected from " + clientSocket.getRemoteSocketAddress());
+			while (true) {
+				// wait for new client connection
+				Socket clientSocket = serverSocket.accept();
+				System.out.println(">>> Client connected from " + clientSocket.getRemoteSocketAddress());
 
-                // create output writer
-                PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
-                clientWriters.add(writer);
+				// create output writer
+				PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
+				clientWriters.add(writer);
 
-                // create input reader
-                BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+				// create input reader
+				BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-                // start concurrent message handler
-                new Thread(new BroadcastMessageHandler(reader)).start();
-            }
-        } catch (SocketException e) {
-            System.out.println("Connection lost");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+				// start concurrent message handler
+				new Thread(new BroadcastMessageHandler(reader)).start();
+			}
+		} catch (SocketException e) {
+			System.out.println("Connection lost");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    static void broadcast(String message) {
-        for (PrintWriter writer : clientWriters) {
-            writer.println(message);
-            writer.flush();
-        }
-    }
+	static void broadcast(String message) {
+		for (PrintWriter writer : clientWriters) {
+			writer.println(message);
+			writer.flush();
+		}
+	}
 }
