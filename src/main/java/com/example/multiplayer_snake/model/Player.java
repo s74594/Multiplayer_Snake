@@ -154,16 +154,16 @@ public class Player {
 		if (fruitBounds.intersects(snakeBounds)) {
 			eatFruit = true;
 
-			if (snakeBodySize < 100) {
-				System.out.println("Player One: SnakeSize(" + snakeBodySize + ")");
+			if (snakeBodySize < 1000) {
+//				System.out.println("Player One: SnakeSize(" + snakeBodySize + ")");
 				// Wachstum der Schlange
 				snakeBodySize += 3;
 			}
 		} else if (fruitBounds.intersects(snakeBoundsPlayerTwo)) {
 			eatFruit = true;
 
-			if (snakeBodySizePlayerTwo < 100) {
-				System.out.println("Player Two: SnakeSize(" + snakeBodySizePlayerTwo + ")");
+			if (snakeBodySizePlayerTwo < 1000) {
+//				System.out.println("Player Two: SnakeSize(" + snakeBodySizePlayerTwo + ")");
 				// Wachstum der Schlange
 				snakeBodySizePlayerTwo += 3;
 			}
