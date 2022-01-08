@@ -12,7 +12,7 @@
 
 <Pane fx:id="playGround2" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="786.0" prefWidth="1532.0" style="-fx-background-color: #AAD751;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
    <children>
-      <Pane id="game" fx:id="playGround" focusTraversable="true" onKeyPressed="#snakeSteering" opacity="0.0" prefHeight="786.0" prefWidth="1532.0" />
+      <Pane id="game" fx:id="playGround" focusTraversable="true" onKeyPressed="#snakeSteering" opacity="0.0" />
       <MenuBar prefWidth="1532.0">
         <menus>
           <Menu mnemonicParsing="false" text="Game">
@@ -74,7 +74,7 @@
             <Image url="@../../../../../../image/raspberry.png" />
          </image>
       </ImageView>
-      <Circle fx:id="snakeHeadPlayerTwo" layoutX="350.0" layoutY="300.0" radius="10.0" strokeType="INSIDE" />
+      <Circle fx:id="snakeHeadPlayerTwo" layoutX="950.0" layoutY="450.0" radius="10.0" strokeType="INSIDE" />
       <ImageView fx:id="foodImage1" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../../../../image/pear.png" />

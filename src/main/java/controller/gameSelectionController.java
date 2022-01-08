@@ -2,10 +2,6 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
-
-import com.example.multiplayer_snake.model.Player;
-
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
