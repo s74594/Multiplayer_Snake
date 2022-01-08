@@ -84,10 +84,10 @@ public class ArenaController {
 	public int point_counter_player2 = 0;
 	@SuppressWarnings("exports")
 	@FXML
-	public Circle[] snakeBody = new Circle[100]; // snake body player one
+	public Circle[] snakeBody = new Circle[1000]; // snake body player one
 	@SuppressWarnings("exports")
 	@FXML
-	public Circle[] bodyPlayerTwoCircles = new Circle[100]; // snake body player two
+	public Circle[] bodyPlayerTwoCircles = new Circle[1000]; // snake body player two
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	@SuppressWarnings("rawtypes")
@@ -136,17 +136,17 @@ public class ArenaController {
 
 		generateFood(); // initialize food
 		generateFoodPlayerTwo(); // initialize food for Player Two
-		
+
 		// Initialize Snakebody
-				for (int i = 0; i < snakeBody.length; i++) {
-					snakeBody[i] = new Circle(10);
-					bodyPlayerTwoCircles[i] = new Circle(10);
-					snakeBody[i].setFill(Color.BLACK);
-					bodyPlayerTwoCircles[i].setFill(Color.BLACK);
-					snakeBody[i].setVisible(false);
-					bodyPlayerTwoCircles[i].setVisible(false);
-					playGround2.getChildren().addAll(snakeBody[i], bodyPlayerTwoCircles[i]);
-				}
+		for (int i = 0; i < snakeBody.length; i++) {
+			snakeBody[i] = new Circle(10);
+			bodyPlayerTwoCircles[i] = new Circle(10);
+			snakeBody[i].setFill(Color.BLACK);
+			bodyPlayerTwoCircles[i].setFill(Color.BLACK);
+			snakeBody[i].setVisible(false);
+			bodyPlayerTwoCircles[i].setVisible(false);
+			playGround2.getChildren().addAll(snakeBody[i], bodyPlayerTwoCircles[i]);
+		}
 
 		// Read file and set the color of the snake
 		try {
@@ -156,7 +156,7 @@ public class ArenaController {
 				String data = reader.nextLine();
 				snakeHead.setFill(Color.web(data)); // Color Player One
 				snakeHeadPlayerTwo.setFill(Color.web(data)); // Color Player Two
-				
+
 				for (int i = 0; i < snakeBody.length; i++) {
 					snakeBody[i].setFill(Color.web(data));
 					bodyPlayerTwoCircles[i].setFill(Color.web(data));
