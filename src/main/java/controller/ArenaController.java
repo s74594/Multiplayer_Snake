@@ -57,9 +57,6 @@ public class ArenaController {
 	public Circle snakeHead; // snake head player one
 	@SuppressWarnings("exports")
 	@FXML
-	public Circle snakeBody; // snake body player one
-	@SuppressWarnings("exports")
-	@FXML
 	public Circle snakeTailCircle; // snake tail player one
 	@FXML
 	private Circle snakeHeadPlayerTwo; // snake head player two
@@ -87,10 +84,10 @@ public class ArenaController {
 	public int point_counter_player2 = 0;
 	@SuppressWarnings("exports")
 	@FXML
-	public Circle[] body = new Circle[100];
+	public Circle[] snakeBody = new Circle[100]; // snake body player one
 	@SuppressWarnings("exports")
 	@FXML
-	public Circle[] bodyPlayerTwoCircles = new Circle[100];
+	public Circle[] bodyPlayerTwoCircles = new Circle[100]; // snake body player two
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	@SuppressWarnings("rawtypes")
@@ -139,6 +136,17 @@ public class ArenaController {
 
 		generateFood(); // initialize food
 		generateFoodPlayerTwo(); // initialize food for Player Two
+		
+		// Initialize Snakebody
+				for (int i = 0; i < snakeBody.length; i++) {
+					snakeBody[i] = new Circle(10);
+					bodyPlayerTwoCircles[i] = new Circle(10);
+					snakeBody[i].setFill(Color.BLACK);
+					bodyPlayerTwoCircles[i].setFill(Color.BLACK);
+					snakeBody[i].setVisible(false);
+					bodyPlayerTwoCircles[i].setVisible(false);
+					playGround2.getChildren().addAll(snakeBody[i], bodyPlayerTwoCircles[i]);
+				}
 
 		// Read file and set the color of the snake
 		try {
@@ -146,18 +154,12 @@ public class ArenaController {
 			Scanner reader = new Scanner(myObj);
 			while (reader.hasNextLine()) {
 				String data = reader.nextLine();
-//				System.out.println(data);
 				snakeHead.setFill(Color.web(data)); // Color Player One
 				snakeHeadPlayerTwo.setFill(Color.web(data)); // Color Player Two
-
-				for (int i = 0; i < body.length; i++) {
-					body[i] = new Circle(10);
-					bodyPlayerTwoCircles[i] = new Circle(10);
-					body[i].setFill(Color.web(data));
+				
+				for (int i = 0; i < snakeBody.length; i++) {
+					snakeBody[i].setFill(Color.web(data));
 					bodyPlayerTwoCircles[i].setFill(Color.web(data));
-					body[i].setVisible(false);
-					bodyPlayerTwoCircles[i].setVisible(false);
-					playGround2.getChildren().addAll(body[i], bodyPlayerTwoCircles[i]);
 				}
 			}
 			reader.close();
@@ -335,9 +337,9 @@ public class ArenaController {
 			snakeHead.setLayoutY(model.snakeBodyLocationsY.getFirst());
 
 			for (int i = 0; i <= model.snakeBodySize; i++) {
-				body[i].setLayoutX(model.snakeBodyLocationsX.get(i));
-				body[i].setLayoutY(model.snakeBodyLocationsY.get(i));
-				body[i].setVisible(true);
+				snakeBody[i].setLayoutX(model.snakeBodyLocationsX.get(i));
+				snakeBody[i].setLayoutY(model.snakeBodyLocationsY.get(i));
+				snakeBody[i].setVisible(true);
 			}
 
 			// data to server

@@ -169,7 +169,7 @@ public class Player {
 			}
 		}
 
-		// Head touches any border
+		// Head touches a border
 		// Kollisionserkennung
 		// 1 = Temporär ausgeschaltet
 		// 0 = Reaktiviert
