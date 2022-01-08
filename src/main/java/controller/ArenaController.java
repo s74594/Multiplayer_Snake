@@ -3,13 +3,11 @@ package controller;
 import com.example.multiplayer_snake.model.Player;
 import com.example.multiplayer_snake.model.SocketClient;
 import javafx.animation.AnimationTimer;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -34,6 +32,7 @@ import java.util.concurrent.SubmissionPublisher;
 public class ArenaController {
 
 	private Player model; // Controller -> Model connection
+	private Player modelPlayerTwo; // Controller -> Model connection
 	@SuppressWarnings("exports")
 	@FXML
 	public Text namePlayer1;
@@ -49,17 +48,25 @@ public class ArenaController {
 	@SuppressWarnings("exports")
 	@FXML
 	public Pane playGround;
+	@SuppressWarnings("exports")
 	@FXML
 	public Pane playGround2;
+	/* Snake */
 	@SuppressWarnings("exports")
 	@FXML
-	public Circle snakeHead; // snake head
+	public Circle snakeHead; // snake head player one
 	@SuppressWarnings("exports")
 	@FXML
-	public Circle snakeBody; // snake body
+	public Circle snakeBody; // snake body player one
 	@SuppressWarnings("exports")
 	@FXML
-	public Circle snakeTailCircle; // snake tail
+	public Circle snakeTailCircle; // snake tail player one
+	@FXML
+	private Circle snakeHeadPlayerTwo; // snake head player two
+	@FXML
+	private ImageView avatarPlayerOne; // avatar img player one
+	@FXML
+	private ImageView avatarPlayerTwo; // avatar img player two
 	@FXML
 	private MenuItem exitBTNMenu;
 	@FXML
@@ -70,13 +77,20 @@ public class ArenaController {
 	@FXML
 	public ImageView foodImage;
 	@FXML
-	private Label gameOver;
-	private boolean isApplicationRunning = false;
-	private Timeline animation = new Timeline();
+	private ImageView foodImage1;
+//	@FXML
+//	private Label gameOver;
+//	private boolean isApplicationRunning = false;
+//	private Timeline animation = new Timeline();
 	public static double millis = 0.3;
 	public int point_counter_player1 = 0;
+	public int point_counter_player2 = 0;
+	@SuppressWarnings("exports")
 	@FXML
 	public Circle[] body = new Circle[100];
+	@SuppressWarnings("exports")
+	@FXML
+	public Circle[] bodyPlayerTwoCircles = new Circle[100];
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	@SuppressWarnings("rawtypes")
@@ -92,28 +106,39 @@ public class ArenaController {
 		}
 	};
 
+	// Animation timer for player two
+	KeyEvent animationDirectionPlayerTwo = null;
+	final AnimationTimer timerPlayerTwo = new AnimationTimer() {
+		@Override
+		public void handle(long l) {
+			if (animationDirectionPlayerTwo != null) {
+				snakeSteering(animationDirectionPlayerTwo);
+			}
+		}
+	};
+
 	@SuppressWarnings("unchecked")
 	@FXML
 	void initialize() {
 		model = new Player();
-		model.snakeBodyLocationsX.addFirst(211.0); // store initial position in bodyparts array
-		model.snakeBodyLocationsY.addFirst(110.0); // store initial position in bodyparts array
+		model.snakeBodyLocationsX.addFirst(250.); // store initial position in bodyparts array
+		model.snakeBodyLocationsY.addFirst(200.); // store initial position in bodyparts array
+
+		/* Player Two */
+		modelPlayerTwo = new Player();
+		modelPlayerTwo.snakeBodyLocationsXP2.addFirst(350.); // store initial position in bodyparts array
+		modelPlayerTwo.snakeBodyLocationsYP2.addFirst(300.); // store initial position in bodyparts array
+
 		timer.start(); // Animation Timer
+		timerPlayerTwo.start(); // Start animation timer for player two
 		source.subscribe(new SocketClient()); // Observer Pattern
 		namePlayer1.setText("Max");
 		namePlayer2.setText("Maxi");
-		scorePlayer1.setText("9014");
-		scorePlayer2.setText(String.valueOf(point_counter_player1));
-		gameOver.setVisible(false);
-		generateFood(); // initialize food
+		scorePlayer1.setText(String.valueOf(point_counter_player1));
+		scorePlayer2.setText(String.valueOf(point_counter_player2));
 
-		// Initialize Snakebody
-//		for (int i = 0; i < body.length; i++) {
-//			body[i] = new Circle(10);
-//			body[i].setFill(Color.BLACK);
-//			body[i].setVisible(false);
-//			playGround2.getChildren().add(body[i]);
-//		}
+		generateFood(); // initialize food
+		generateFoodPlayerTwo(); // initialize food for Player Two
 
 		// Read file and set the color of the snake
 		try {
@@ -122,13 +147,17 @@ public class ArenaController {
 			while (reader.hasNextLine()) {
 				String data = reader.nextLine();
 //				System.out.println(data);
-				snakeHead.setFill(Color.web(data));
+				snakeHead.setFill(Color.web(data)); // Color Player One
+				snakeHeadPlayerTwo.setFill(Color.web(data)); // Color Player Two
 
 				for (int i = 0; i < body.length; i++) {
 					body[i] = new Circle(10);
+					bodyPlayerTwoCircles[i] = new Circle(10);
 					body[i].setFill(Color.web(data));
+					bodyPlayerTwoCircles[i].setFill(Color.web(data));
 					body[i].setVisible(false);
-					playGround2.getChildren().add(body[i]);
+					bodyPlayerTwoCircles[i].setVisible(false);
+					playGround2.getChildren().addAll(body[i], bodyPlayerTwoCircles[i]);
 				}
 			}
 			reader.close();
@@ -157,9 +186,8 @@ public class ArenaController {
 		String webFormat = String.format("#%02x%02x%02x", (int) (255 * value.getRed()), (int) (255 * value.getGreen()),
 				(int) (255 * value.getBlue()));
 
-		// Wert muss an initialize übergeben werden..
-		// Zurzeit Auslagerung in einem File
-		// Hexadezimalwert der Variable webFormat schreiben
+		// Wert des Color pickers wird als hexformat in color.txt geschrieben und in
+		// initialize() ausgelesen.
 		try {
 			FileWriter writer = new FileWriter("color.txt");
 			writer.write(webFormat);
@@ -176,6 +204,14 @@ public class ArenaController {
 		foodImage.setLayoutX(model.fruitX);
 		foodImage.setLayoutY(model.fruitY);
 		foodImage.setVisible(true);
+	}
+
+	/** Player Two **/
+	public void generateFoodPlayerTwo() {
+		modelPlayerTwo.generateFood();
+		foodImage1.setLayoutX(modelPlayerTwo.fruitX);
+		foodImage1.setLayoutY(modelPlayerTwo.fruitY);
+		foodImage1.setVisible(true);
 	}
 
 	@FXML
@@ -225,16 +261,17 @@ public class ArenaController {
 		}
 	}
 
-	private void startGame() {
-		animation.play();
-		isApplicationRunning = true;
-	}
-
-	private void stopGame() {
-		animation.stop();
-		isApplicationRunning = false;
-		gameSelection();
-	}
+	// Ungenutzte Funktionen
+//	private void startGame() {
+//		animation.play();
+//		isApplicationRunning = true;
+//	}
+//
+//	private void stopGame() {
+//		animation.stop();
+//		isApplicationRunning = false;
+//		gameSelection();
+//	}
 
 	private void gameSelection() {
 		try {
@@ -275,54 +312,100 @@ public class ArenaController {
 	@FXML
 	void snakeSteering(KeyEvent keyEvent) {
 
-		// double snakeHeadX = snakeHead.getLayoutX();
-		// double snakeHeadY = snakeHead.getLayoutY();
-		double snakeHeadX = model.snakeBodyLocationsX.getFirst();
-		double snakeHeadY = model.snakeBodyLocationsY.getFirst();
-		KeyCode direction = keyEvent.getCode();
-		animationDirection = keyEvent;
-		// System.out.println(direction.toString());
-
-		// bounds
-		model.snakeBounds = snakeHead.getBoundsInParent();
-		model.fruitBounds = foodImage.getBoundsInParent();
+		KeyCode key = keyEvent.getCode();
 
 		// move
-		model.movePlayer(snakeHeadX, snakeHeadY, direction);
-		// snakeHead.setLayoutX(model.snakeX); // calculated Snakehead position
-		// snakeHead.setLayoutY(model.snakeY); // calculated Snakehead position
+		// key handling player one or two
+		if ((key == KeyCode.UP) || (key == KeyCode.RIGHT) || (key == KeyCode.DOWN) || (key == KeyCode.LEFT)) {
+			double snakeHeadX = model.snakeBodyLocationsX.getFirst();
+			double snakeHeadY = model.snakeBodyLocationsY.getFirst();
 
-		// draw snake
-		snakeHead.setLayoutX(model.snakeBodyLocationsX.getFirst());
-		snakeHead.setLayoutY(model.snakeBodyLocationsY.getFirst());
-		// System.out.println(model.snakeBodySize);
-		for (int i = 0; i <= model.snakeBodySize; i++) {
-			body[i].setLayoutX(model.snakeBodyLocationsX.get(i));
-			body[i].setLayoutY(model.snakeBodyLocationsY.get(i));
-			body[i].setVisible(true);
-		}
+			KeyCode direction = keyEvent.getCode();
+			animationDirection = keyEvent;
 
-		// data to server
-		multiplayerSnakeStatus();
+			// bounds
+			model.snakeBounds = snakeHead.getBoundsInParent();
+			model.fruitBounds = foodImage.getBoundsInParent();
 
-		if (model.eatFruit == true) {
-			foodImage.setVisible(false); // set food invisible the snake hits its boundaries
-			model.generateFood();
-			foodImage.setLayoutX(model.fruitX);
-			foodImage.setLayoutY(model.fruitY);
-			foodImage.setVisible(true);
-			model.eatFruit = false;
-			point_counter_player1++;
-			scorePlayer2.setText(String.valueOf(point_counter_player1));
-		}
+			// move
+			model.movePlayer(snakeHeadX, snakeHeadY, direction);
 
-		if (model.gameOver == true) {
-			gameOver.setVisible(true);
-			gameOver.setText("Game Over!");
-			gameOver.setTextFill(Color.RED);
-			DatabaseController.Insert_Highscore("7", LocalDateTime.now(), point_counter_player1);
-			timer.stop();
-			gameSelection();
+			// draw snake
+			snakeHead.setLayoutX(model.snakeBodyLocationsX.getFirst());
+			snakeHead.setLayoutY(model.snakeBodyLocationsY.getFirst());
+
+			for (int i = 0; i <= model.snakeBodySize; i++) {
+				body[i].setLayoutX(model.snakeBodyLocationsX.get(i));
+				body[i].setLayoutY(model.snakeBodyLocationsY.get(i));
+				body[i].setVisible(true);
+			}
+
+			// data to server
+			multiplayerSnakeStatus();
+
+			if (model.eatFruit == true) {
+				foodImage.setVisible(false); // set food invisible the snake hits its boundaries
+				model.generateFood();
+				foodImage.setLayoutX(model.fruitX);
+				foodImage.setLayoutY(model.fruitY);
+				foodImage.setVisible(true);
+				model.eatFruit = false;
+				point_counter_player1++;
+				scorePlayer1.setText(String.valueOf(point_counter_player1));
+			}
+
+			if (model.gameOver == true) {
+				DatabaseController.Insert_Highscore("7", LocalDateTime.now(), point_counter_player1);
+				timer.stop();
+				timerPlayerTwo.stop();
+				gameSelection();
+			}
+		} else if ((key == KeyCode.W) || (key == KeyCode.D) || (key == KeyCode.S) || (key == KeyCode.A)) {
+			double snakeHeadXP2 = modelPlayerTwo.snakeBodyLocationsXP2.getFirst(); // Player Two
+			double snakeHeadYP2 = modelPlayerTwo.snakeBodyLocationsYP2.getFirst(); // Player Two
+
+			KeyCode directionPlayerTwo = keyEvent.getCode();
+			animationDirectionPlayerTwo = keyEvent;
+
+			// bounds
+			modelPlayerTwo.snakeBoundsPlayerTwo = snakeHeadPlayerTwo.getBoundsInParent(); // Player Two
+			modelPlayerTwo.fruitBounds = foodImage1.getBoundsInParent();
+
+			// move
+			modelPlayerTwo.movePlayerTwo(snakeHeadXP2, snakeHeadYP2, directionPlayerTwo); // Player Two
+
+			// draw snake
+			snakeHeadPlayerTwo.setLayoutX(modelPlayerTwo.snakeBodyLocationsXP2.getFirst()); // Player Two
+			snakeHeadPlayerTwo.setLayoutY(modelPlayerTwo.snakeBodyLocationsYP2.getFirst()); // Player Two
+
+			/** Player Two **/
+			for (int i = 0; i <= modelPlayerTwo.snakeBodySizePlayerTwo; i++) {
+				bodyPlayerTwoCircles[i].setLayoutX(modelPlayerTwo.snakeBodyLocationsXP2.get(i));
+				bodyPlayerTwoCircles[i].setLayoutY(modelPlayerTwo.snakeBodyLocationsYP2.get(i));
+				bodyPlayerTwoCircles[i].setVisible(true);
+			}
+
+			// data to server
+			multiplayerSnakeStatus();
+
+			if (modelPlayerTwo.eatFruit == true) {
+				foodImage1.setVisible(false); // set food invisible the snake hits its boundaries
+				modelPlayerTwo.generateFood();
+				foodImage1.setLayoutX(modelPlayerTwo.fruitX);
+				foodImage1.setLayoutY(modelPlayerTwo.fruitY);
+				foodImage1.setVisible(true);
+				modelPlayerTwo.eatFruit = false;
+				point_counter_player2++;
+				scorePlayer2.setText(String.valueOf(point_counter_player2));
+			}
+
+			// Kollisionserkennung der Fensterbounds nocht nicht funktionsfähig
+//			if (modelPlayerTwo.gameOver == true) {
+//				DatabaseController.Insert_Highscore("7", LocalDateTime.now(), point_counter_player2);
+//				timer.stop();
+//				timerPlayerTwo.stop();
+//				gameSelection();
+//			}
 		}
 	}
 }

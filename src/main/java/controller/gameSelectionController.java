@@ -57,5 +57,6 @@ public class gameSelectionController {
 	@FXML
 	void onRestartGameBTNClick(ActionEvent event) {
 		// Muss noch implementiert werden!!
+		// auf initialize verweisen????
 	}
 }
