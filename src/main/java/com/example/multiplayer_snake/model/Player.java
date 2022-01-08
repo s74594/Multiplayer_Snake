@@ -155,7 +155,6 @@ public class Player {
 			eatFruit = true;
 
 			if (snakeBodySize < 1000) {
-//				System.out.println("Player One: SnakeSize(" + snakeBodySize + ")");
 				// Wachstum der Schlange
 				snakeBodySize += 3;
 			}
@@ -163,7 +162,6 @@ public class Player {
 			eatFruit = true;
 
 			if (snakeBodySizePlayerTwo < 1000) {
-//				System.out.println("Player Two: SnakeSize(" + snakeBodySizePlayerTwo + ")");
 				// Wachstum der Schlange
 				snakeBodySizePlayerTwo += 3;
 			}
