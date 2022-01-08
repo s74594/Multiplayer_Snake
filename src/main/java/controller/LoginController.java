@@ -97,7 +97,6 @@ public class LoginController {
 		this.event = event;
 		try {
 			// <Play Button>: opens arena view
-
 			String expectedPW = DatabaseController.Select_Player_PW(player_name.getText());
 
 			if (Objects.equals(player_password.getText(), expectedPW)) {
@@ -112,7 +111,7 @@ public class LoginController {
 				Scene scene = new Scene(rootPane);
 				Stage arena_stage = new Stage();
 				arena_stage.setTitle("Snake");
-				arena_stage.setResizable(false);
+//				arena_stage.setResizable(false);
 				arena_stage.setScene(scene);
 				arena_stage.show();
 
