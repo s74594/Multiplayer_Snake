@@ -402,13 +402,12 @@ public class ArenaController {
 				scorePlayer2.setText(String.valueOf(point_counter_player2));
 			}
 
-			// Kollisionserkennung der Fensterbounds nocht nicht funktionsfähig
-//			if (modelPlayerTwo.gameOver == true) {
-//				DatabaseController.Insert_Highscore("7", LocalDateTime.now(), point_counter_player2);
-//				timer.stop();
-//				timerPlayerTwo.stop();
-//				gameSelection();
-//			}
+			if (modelPlayerTwo.gameOverPlayerTwo == true) {
+				DatabaseController.Insert_Highscore("7", LocalDateTime.now(), point_counter_player2);
+				timer.stop();
+				timerPlayerTwo.stop();
+				gameSelection();
+			}
 		}
 	}
 }
