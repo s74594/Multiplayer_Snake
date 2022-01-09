@@ -85,7 +85,7 @@ public class Player {
 		this.snakeYP2 = yp2;
 		eatFruit = false;
 
-		System.out.println("Key: " + direction + " SnakeX: " + snakeXP2 + " SnakeY: " + snakeYP2); // Debug
+//		System.out.println("Key: " + direction + " SnakeX: " + snakeXP2 + " SnakeY: " + snakeYP2); // Debug
 
 		if (direction != null) {
 			switch (direction) {
@@ -151,19 +151,19 @@ public class Player {
 
 	public void checkCollision() {
 
-		// Head touches any fruit
+		// Head touches a fruit
 		if (fruitBounds.intersects(snakeBounds)) {
 			eatFruit = true;
 
 			if (snakeBodySize < 1000) {
-				// Wachstum der Schlange
+				// Wachstum der Snake Player One
 				snakeBodySize += 5;
 			}
 		} else if (fruitBounds.intersects(snakeBoundsPlayerTwo)) {
 			eatFruit = true;
 
 			if (snakeBodySizePlayerTwo < 1000) {
-				// Wachstum der Schlange
+				// Wachstum der Snake Player Two
 				snakeBodySizePlayerTwo += 5;
 			}
 		}
@@ -172,9 +172,9 @@ public class Player {
 		// Kollisionserkennung
 		// 1 = Temporär ausgeschaltet
 		// 0 = Reaktiviert
-		int collisionDetectionOff = 0; // Debug
+		int collisionDetectionStatus = 0; // Debug
 
-		if (collisionDetectionOff == 0) {
+		if (collisionDetectionStatus == 0) {
 			// Collistion detection for player one
 			if (snakeX <= 15) {
 //				System.out.println("Left border touched: Game Over!"); // Collision with left border
@@ -204,7 +204,7 @@ public class Player {
 //				System.out.println("Bottom border touched: Game Over!"); // Collision with bottom border
 				gameOverPlayerTwo();
 			}
-		} else if (collisionDetectionOff == 1) {
+		} else if (collisionDetectionStatus == 1) {
 			return;
 		}
 	}

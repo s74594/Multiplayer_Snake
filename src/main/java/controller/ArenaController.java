@@ -72,9 +72,9 @@ public class ArenaController {
 	private MenuItem gameInfoBTNMenu;
 	@SuppressWarnings("exports")
 	@FXML
-	public ImageView foodImage;
+	public ImageView foodImage; // raspberry
 	@FXML
-	private ImageView foodImage1;
+	private ImageView foodImage1; // pear
 //	@FXML
 //	private Label gameOver;
 //	private boolean isApplicationRunning = false;
@@ -316,7 +316,7 @@ public class ArenaController {
 	void snakeSteering(KeyEvent keyEvent) {
 
 		KeyCode key = keyEvent.getCode();
-		
+
 		// move
 		// key handling player one or two
 		if ((key == KeyCode.UP) || (key == KeyCode.RIGHT) || (key == KeyCode.DOWN) || (key == KeyCode.LEFT)) {
@@ -372,7 +372,7 @@ public class ArenaController {
 
 			// bounds
 			modelPlayerTwo.snakeBoundsPlayerTwo = snakeHeadPlayerTwo.getBoundsInParent(); // Player Two
-			modelPlayerTwo.fruitBounds = foodImage1.getBoundsInParent();
+			modelPlayerTwo.fruitBounds = foodImage1.getBoundsInParent(); // Player Two
 
 			// move
 			modelPlayerTwo.movePlayerTwo(snakeHeadXP2, snakeHeadYP2, directionPlayerTwo); // Player Two
