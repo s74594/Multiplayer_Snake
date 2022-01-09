@@ -14,6 +14,7 @@ public class BroadcastMessageHandler extends MessageHandler {
     @Override
     public void onMessage(String message) {
         super.onMessage(message);
+        System.out.println("BroadcastMessageHandler - Message from client received: '" + message + "'");
         JSONObject messageJSON = new JSONObject(message);
         JSONObject answerJSON = new JSONObject();
         // User login

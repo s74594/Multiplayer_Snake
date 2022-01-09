@@ -126,8 +126,7 @@ public class ArenaController {
 			reader.close();
 			delete();
 		} catch (FileNotFoundException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
+			System.out.println(e.getMessage() + " - color.txt kann nicht gefunden werden");
 		}
 	}
 

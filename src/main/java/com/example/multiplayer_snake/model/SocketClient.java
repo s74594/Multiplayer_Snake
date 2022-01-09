@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.util.concurrent.Flow;
 
@@ -29,13 +30,13 @@ public class SocketClient implements Flow.Subscriber<String> {
             new Thread(new InputMessageHandler(reader)).start();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage() + " - Kann keine Verbindung zu Server herstellen, bitte Server überprüfen!!!");
         }
     }
 
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
-        System.out.println("Subscription started");
+        System.out.println("Observer Pattern - Socketclient - subscription started");
         this.subscription = subscription;
         subscription.request(1);
     }

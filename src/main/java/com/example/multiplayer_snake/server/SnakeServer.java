@@ -17,7 +17,7 @@ public class SnakeServer {
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(5000);
-
+            System.out.println("Server gestartet");
             while (true) {
                 // wait for new client connection
                 Socket clientSocket = serverSocket.accept();

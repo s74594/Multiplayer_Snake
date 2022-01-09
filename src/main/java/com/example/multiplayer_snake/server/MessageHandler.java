@@ -23,7 +23,7 @@ public class MessageHandler implements Runnable {
                 onMessage(message);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage() + " - Client hat Verbindung beendet");
         }
     }
 
