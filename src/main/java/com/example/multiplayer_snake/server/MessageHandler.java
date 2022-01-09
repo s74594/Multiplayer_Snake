@@ -1,7 +1,11 @@
 package com.example.multiplayer_snake.server;
 
+import controller.DatabaseController;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.SocketException;
 
 public class MessageHandler implements Runnable {
 
@@ -19,11 +23,11 @@ public class MessageHandler implements Runnable {
                 onMessage(message);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage() + " - Client hat Verbindung beendet");
         }
     }
 
     public void onMessage(String message) {
-        System.out.println(">>> Received: '" + message + "'");
+        System.out.println("BroadcastMessageHandler - Message from client received: '" + message + "'");
     }
 }
