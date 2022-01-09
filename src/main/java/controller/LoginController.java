@@ -72,6 +72,7 @@ public class LoginController {
 	private Button nextBTN;
 	private static String sqlLoginUser = null;
 	private static String sqlLoginUserPass = null;
+	private static String sqlRegisterUserAnswer = null;
 	ArrayList<String> pictures = new ArrayList<String>();
 	public int indexIMGCounter = 1; // Index counter, iterating an arraylist
 
@@ -104,9 +105,7 @@ public class LoginController {
 	protected void onPlayButtonClick(ActionEvent event) throws SQLException {
 		this.event = event;
 		try {
-			// <Play Button>: opens arena view
-
-			//sqlLoginUserPass = DatabaseController.Select_Player_PW(player_name.getText());
+			// send message with user and password to server
 			JSONObject messageJSON = new JSONObject();
 			messageJSON.put("sql_login_user", player_name.getText());
 			source.submit(String.valueOf(messageJSON));
@@ -114,7 +113,7 @@ public class LoginController {
 			while((sqlLoginUser == null) || (sqlLoginUserPass == null)) {
 				// waiting for password retrieve
 			}
-			System.out.println("Username SQL: " + sqlLoginUser + "  Password SQL: " + sqlLoginUserPass + "  Player Name: " + player_name.getText() + "  Player Password: " + player_password.getText());
+			// System.out.println("Username SQL: " + sqlLoginUser + "  Password SQL: " + sqlLoginUserPass + "  Player Name: " + player_name.getText() + "  Player Password: " + player_password.getText());
 			if ((sqlLoginUser.equals(player_name.getText())) && (sqlLoginUserPass.equals(player_password.getText()))) {
 				URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
 				Parent rootParent = FXMLLoader.load(url);
@@ -214,8 +213,26 @@ public class LoginController {
 
 	@SuppressWarnings("exports")
 	public void onRegisterButtonClick(ActionEvent actionEvent) {
-		String message = DatabaseController.Insert_Player(r_name.getText(), r_pw.getText(), r_pw_check.getText());
-		if (Objects.equals(message,
+		if (r_pw.getText().equals(r_pw_check.getText())) {
+			JSONObject messageJSON = new JSONObject();
+			messageJSON.put("sql_register_user", r_name.getText());
+			messageJSON.put("sql_register_pass", r_pw.getText());
+			source.submit(String.valueOf(messageJSON));
+		} else {
+			error_msg.setText("Passwords aren´t matching");
+			error_msg.setVisible(true);
+		}
+
+		while(sqlRegisterUserAnswer == null) {
+			// waiting for successfully register
+		}
+		error_msg.setText(sqlRegisterUserAnswer);
+		error_msg.setVisible(true);
+
+		sqlRegisterUserAnswer = null;  // reset
+
+		//String message = DatabaseController.Insert_Player(r_name.getText(), r_pw.getText(), r_pw_check.getText());
+/*		if (Objects.equals(message,
 				"[SQLITE_CONSTRAINT_UNIQUE] A UNIQUE constraint failed (UNIQUE constraint failed: players.name)")) {
 			error_msg.setVisible(true);
 		}
@@ -232,7 +249,7 @@ public class LoginController {
 			r_name.clear();
 			r_pw.clear();
 			r_pw_check.clear();
-		}
+		}*/
 	}
 
 	@SuppressWarnings("exports")
@@ -291,4 +308,9 @@ public class LoginController {
 	public static void setSqlLoginUser(String sqlLoginUser) {
 		LoginController.sqlLoginUser = sqlLoginUser;
 	}
+
+	public static void setSqlRegisterUserAnswer(String sqlRegisterUserAnswer) {
+		LoginController.sqlRegisterUserAnswer = sqlRegisterUserAnswer;
+	}
+
 }
