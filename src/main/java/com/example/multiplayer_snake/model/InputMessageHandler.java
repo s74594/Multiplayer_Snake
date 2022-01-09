@@ -31,8 +31,9 @@ public class InputMessageHandler implements Runnable {
         System.out.println(">>> Received: '" + message + "'");
         JSONObject messageJSON = new JSONObject(message);
         if ((messageJSON.has("sql_login_user")) && (messageJSON.has("sql_login_user_pass"))) {
-            LoginController loginController = new LoginController();
-            loginController.setSqlLoginUserPass(messageJSON.getString("sql_login_user_pass"));
+            System.out.println(("Bin in onMessage if Anweisung"));
+            LoginController.setSqlLoginUser(messageJSON.getString("sql_login_user"));
+            LoginController.setSqlLoginUserPass(messageJSON.getString("sql_login_user_pass"));
         }
     }
 

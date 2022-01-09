@@ -109,13 +109,13 @@ public class LoginController {
 			//sqlLoginUserPass = DatabaseController.Select_Player_PW(player_name.getText());
 			JSONObject messageJSON = new JSONObject();
 			messageJSON.put("sql_login_user", player_name.getText());
-			source.submit(messageJSON);
+			source.submit(String.valueOf(messageJSON));
 
 			while((sqlLoginUser == null) || (sqlLoginUserPass == null)) {
 				// waiting for password retrieve
-				System.out.println("test");
 			}
-			if ((sqlLoginUser == player_name.getText()) && (sqlLoginUserPass == player_password.getText())) {
+			System.out.println("Username SQL: " + sqlLoginUser + "  Password SQL: " + sqlLoginUserPass + "  Player Name: " + player_name.getText() + "  Player Password: " + player_password.getText());
+			if ((sqlLoginUser.equals(player_name.getText())) && (sqlLoginUserPass.equals(player_password.getText()))) {
 				URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
 				Parent rootParent = FXMLLoader.load(url);
 				Stage stage = (Stage) exitButton.getScene().getWindow();
