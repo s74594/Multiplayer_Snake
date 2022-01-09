@@ -3,13 +3,10 @@ package controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.ConnectException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.concurrent.SubmissionPublisher;
-
 import com.example.multiplayer_snake.model.SocketClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +21,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -110,8 +106,10 @@ public class LoginController {
 			JSONObject messageJSON = new JSONObject();
 			messageJSON.put("sql_login_user", player_name.getText());
 			source.submit(String.valueOf(messageJSON));
-			Thread.sleep(2000);  // waiting for password retrieve
-			// System.out.println("Username SQL: " + sqlLoginUser + "  Password SQL: " + sqlLoginUserPass + "  Player Name: " + player_name.getText() + "  Player Password: " + player_password.getText());
+			Thread.sleep(2000); // waiting for password retrieve
+			// System.out.println("Username SQL: " + sqlLoginUser + " Password SQL: " +
+			// sqlLoginUserPass + " Player Name: " + player_name.getText() + " Player
+			// Password: " + player_password.getText());
 			if ((sqlLoginUser.equals(player_name.getText())) && (sqlLoginUserPass.equals(player_password.getText()))) {
 				URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
 				Parent rootParent = FXMLLoader.load(url);
@@ -221,34 +219,31 @@ public class LoginController {
 			error_msg.setVisible(true);
 		}
 
-		while(sqlRegisterUserAnswer == null) {
+		while (sqlRegisterUserAnswer == null) {
 			// waiting for successfully register
 		}
 		Thread.sleep(2000); // waiting for password retrieve
 		error_msg.setText(sqlRegisterUserAnswer);
 		error_msg.setVisible(true);
 
-		sqlRegisterUserAnswer = null;  // reset
+		sqlRegisterUserAnswer = null; // reset
 
-		//String message = DatabaseController.Insert_Player(r_name.getText(), r_pw.getText(), r_pw_check.getText());
-/*		if (Objects.equals(message,
-				"[SQLITE_CONSTRAINT_UNIQUE] A UNIQUE constraint failed (UNIQUE constraint failed: players.name)")) {
-			error_msg.setVisible(true);
-		}
-
-		if (Objects.equals(message, "Passwörter stimmen nicht überein")) {
-			error_msg.setText("Passwords aren´t matching");
-			error_msg.setVisible(true);
-		}
-
-		if (Objects.equals(message, "Query does not return ResultSet")) {
-			error_msg.setText("User " + "'" + r_name.getText() + "'" + " successfully added.");
-			error_msg.setTextFill(Color.BLUE);
-			error_msg.setVisible(true);
-			r_name.clear();
-			r_pw.clear();
-			r_pw_check.clear();
-		}*/
+		// String message = DatabaseController.Insert_Player(r_name.getText(),
+		// r_pw.getText(), r_pw_check.getText());
+		/*
+		 * if (Objects.equals(message,
+		 * "[SQLITE_CONSTRAINT_UNIQUE] A UNIQUE constraint failed (UNIQUE constraint failed: players.name)"
+		 * )) { error_msg.setVisible(true); }
+		 * 
+		 * if (Objects.equals(message, "Passwörter stimmen nicht überein")) {
+		 * error_msg.setText("Passwords aren´t matching"); error_msg.setVisible(true); }
+		 * 
+		 * if (Objects.equals(message, "Query does not return ResultSet")) {
+		 * error_msg.setText("User " + "'" + r_name.getText() + "'" +
+		 * " successfully added."); error_msg.setTextFill(Color.BLUE);
+		 * error_msg.setVisible(true); r_name.clear(); r_pw.clear(); r_pw_check.clear();
+		 * }
+		 */
 	}
 
 	@SuppressWarnings("exports")

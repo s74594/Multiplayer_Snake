@@ -69,13 +69,13 @@
             <Font name="Arial Rounded MT Bold" size="11.0" />
          </font></Text>
       <Circle fx:id="snakeHead" layoutX="250.0" layoutY="200.0" radius="10.0" strokeType="INSIDE" />
-      <ImageView fx:id="foodImage" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <Circle fx:id="snakeHeadPlayerTwo" layoutX="950.0" layoutY="450.0" radius="10.0" strokeType="INSIDE" />
+      <ImageView fx:id="foodImage" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);" visible="false">
          <image>
             <Image url="@../../../../../../image/raspberry.png" />
          </image>
       </ImageView>
-      <Circle fx:id="snakeHeadPlayerTwo" layoutX="950.0" layoutY="450.0" radius="10.0" strokeType="INSIDE" />
-      <ImageView fx:id="foodImage1" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="foodImage1" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);" visible="false">
          <image>
             <Image url="@../../../../../../image/pear.png" />
          </image>
