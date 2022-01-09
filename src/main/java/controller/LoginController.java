@@ -110,10 +110,7 @@ public class LoginController {
 			JSONObject messageJSON = new JSONObject();
 			messageJSON.put("sql_login_user", player_name.getText());
 			source.submit(String.valueOf(messageJSON));
-
-			while((sqlLoginUser == null) || (sqlLoginUserPass == null)) {
-				// waiting for password retrieve
-			}
+			Thread.sleep(2000);  // waiting for password retrieve
 			// System.out.println("Username SQL: " + sqlLoginUser + "  Password SQL: " + sqlLoginUserPass + "  Player Name: " + player_name.getText() + "  Player Password: " + player_password.getText());
 			if ((sqlLoginUser.equals(player_name.getText())) && (sqlLoginUserPass.equals(player_password.getText()))) {
 				URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
@@ -213,7 +210,7 @@ public class LoginController {
 	}
 
 	@SuppressWarnings("exports")
-	public void onRegisterButtonClick(ActionEvent actionEvent) {
+	public void onRegisterButtonClick(ActionEvent actionEvent) throws InterruptedException {
 		if (r_pw.getText().equals(r_pw_check.getText())) {
 			JSONObject messageJSON = new JSONObject();
 			messageJSON.put("sql_register_user", r_name.getText());
@@ -227,6 +224,7 @@ public class LoginController {
 		while(sqlRegisterUserAnswer == null) {
 			// waiting for successfully register
 		}
+		Thread.sleep(2000); // waiting for password retrieve
 		error_msg.setText(sqlRegisterUserAnswer);
 		error_msg.setVisible(true);
 

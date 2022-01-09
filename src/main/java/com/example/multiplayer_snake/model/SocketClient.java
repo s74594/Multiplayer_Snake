@@ -36,16 +36,16 @@ public class SocketClient implements Flow.Subscriber<String> {
 
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
-        System.out.println("Observer Pattern - Socketclient - subscription started");
+        System.out.println("Observer Pattern (Flow API) - Socketclient - subscription started");
         this.subscription = subscription;
         subscription.request(1);
     }
 
     @Override
     public void onNext(String item) {
-        System.out.printf("SocketClient - Received new state = %s\n", item);
         writer.println(item);
         writer.flush();
+        System.out.println("SocketClient - Message send to server: " + item);
         this.subscription.request(1);
     }
 

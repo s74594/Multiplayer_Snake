@@ -28,6 +28,6 @@ public class MessageHandler implements Runnable {
     }
 
     public void onMessage(String message) {
-        System.out.println(">>> Received: '" + message + "'");
+        System.out.println("BroadcastMessageHandler - Message from client received: '" + message + "'");
     }
 }
