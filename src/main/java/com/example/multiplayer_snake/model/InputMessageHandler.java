@@ -39,6 +39,10 @@ public class InputMessageHandler implements Runnable {
         if (messageJSON.has("sql_register_user_answer")) {
             LoginController.setSqlRegisterUserAnswer(messageJSON.getString("sql_register_user_answer"));
         }
+        // highscore answer from server
+        if (messageJSON.has("sql_highscore_answer")) {
+            System.out.println(messageJSON.getString("sql_highscore_answer"));
+        }
     }
 
 }

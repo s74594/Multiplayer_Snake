@@ -166,8 +166,7 @@ public class ArenaController {
 			reader.close();
 			delete();
 		} catch (FileNotFoundException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
+			System.out.println("color.txt not found");
 		}
 	}
 
@@ -311,7 +310,14 @@ public class ArenaController {
 		}
 		source.submit(String.valueOf(snakeStatus));
 	}
-
+	
+	private void setHighscore(String p, int points) {
+		JSONObject messageJSON = new JSONObject();
+		messageJSON.put("sql_highscore_player", p);
+		messageJSON.put("sql_highscore_points", points);
+		source.submit(String.valueOf(messageJSON));
+	}
+	
 	@FXML
 	void snakeSteering(KeyEvent keyEvent) {
 
@@ -344,7 +350,7 @@ public class ArenaController {
 			}
 
 			// data to server
-			multiplayerSnakeStatus();
+			// multiplayerSnakeStatus();
 
 			if (model.eatFruit == true) {
 				foodImage.setVisible(false); // set food invisible the snake hits its boundaries
@@ -358,7 +364,7 @@ public class ArenaController {
 			}
 
 			if (model.gameOver == true) {
-				DatabaseController.Insert_Highscore("7", LocalDateTime.now(), point_counter_player1);
+				setHighscore(namePlayer1.getText(), point_counter_player1);  // set highscore on server database
 				timer.stop();
 				timerPlayerTwo.stop();
 				gameSelection();
@@ -389,7 +395,7 @@ public class ArenaController {
 			}
 
 			// data to server
-			multiplayerSnakeStatus();
+			// multiplayerSnakeStatus();
 
 			if (modelPlayerTwo.eatFruit == true) {
 				foodImage1.setVisible(false); // set food invisible the snake hits its boundaries
@@ -403,7 +409,7 @@ public class ArenaController {
 			}
 
 			if (modelPlayerTwo.gameOverPlayerTwo == true) {
-				DatabaseController.Insert_Highscore("7", LocalDateTime.now(), point_counter_player2);
+				setHighscore(namePlayer2.getText(), point_counter_player2);  // set highscore on server database
 				timer.stop();
 				timerPlayerTwo.stop();
 				gameSelection();
