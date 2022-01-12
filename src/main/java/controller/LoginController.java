@@ -67,6 +67,7 @@ public class LoginController {
 	private Button backBTN;
 	@FXML
 	private Button nextBTN;
+	
 	private static String sqlLoginUser = null;
 	private static String sqlLoginUserPass = null;
 	private static String sqlRegisterUserAnswer = null;

@@ -25,7 +25,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.concurrent.SubmissionPublisher;
 
@@ -74,7 +73,7 @@ public class ArenaController {
 	@FXML
 	public ImageView foodImage; // raspberry
 	@FXML
-	private ImageView foodImage1; // pear
+	public ImageView foodImage1; // pear
 //	@FXML
 //	private Label gameOver;
 //	private boolean isApplicationRunning = false;
@@ -135,8 +134,34 @@ public class ArenaController {
 		scorePlayer1.setText(String.valueOf(point_counter_player1));
 		scorePlayer2.setText(String.valueOf(point_counter_player2));
 
-		generateFood(); // initialize food
-		generateFoodPlayerTwo(); // initialize food for Player Two
+//		generateFood(); // initialize food
+//		generateFoodPlayerTwo(); // initialize food for Player Two
+
+		/* Threading - Nebenläufigkeit */
+		/**
+		 * Generierte Frucht wird nach einer bestimmten Zeit an einem neuen Punkt erneut
+		 * generiert.
+		 */
+		Thread thread = new Thread() {
+			public void run() {
+				System.out.println("Thread Running");
+
+				try {
+					generateFood();
+					generateFoodPlayerTwo();
+					Thread.sleep(10L * 1000L);
+					foodImage.setVisible(false);
+					foodImage1.setVisible(false);
+					generateFood();
+					generateFoodPlayerTwo();
+					run();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+
+		thread.start();
 
 		// Initialize Snakebody
 		for (int i = 0; i < snakeBody.length; i++) {
@@ -263,18 +288,6 @@ public class ArenaController {
 		}
 	}
 
-	// Ungenutzte Funktionen
-//	private void startGame() {
-//		animation.play();
-//		isApplicationRunning = true;
-//	}
-//
-//	private void stopGame() {
-//		animation.stop();
-//		isApplicationRunning = false;
-//		gameSelection();
-//	}
-
 	private void gameSelection() {
 		try {
 			URL url = new File("src/main/resources/com/example/multiplayer_snake/gameSelectionView.fxml").toURI()
@@ -310,14 +323,14 @@ public class ArenaController {
 		}
 		source.submit(String.valueOf(snakeStatus));
 	}
-	
+
 	private void setHighscore(String p, int points) {
 		JSONObject messageJSON = new JSONObject();
 		messageJSON.put("sql_highscore_player", p);
 		messageJSON.put("sql_highscore_points", points);
 		source.submit(String.valueOf(messageJSON));
 	}
-	
+
 	@FXML
 	void snakeSteering(KeyEvent keyEvent) {
 
@@ -353,7 +366,7 @@ public class ArenaController {
 			// multiplayerSnakeStatus();
 
 			if (model.eatFruit == true) {
-				foodImage.setVisible(false); // set food invisible the snake hits its boundaries
+				foodImage.setVisible(false); // set food invisible if the snake hits its boundaries
 				model.generateFood();
 				foodImage.setLayoutX(model.fruitX);
 				foodImage.setLayoutY(model.fruitY);
@@ -364,7 +377,7 @@ public class ArenaController {
 			}
 
 			if (model.gameOver == true) {
-				setHighscore(namePlayer1.getText(), point_counter_player1);  // set highscore on server database
+				setHighscore(namePlayer1.getText(), point_counter_player1); // set highscore on server database
 				timer.stop();
 				timerPlayerTwo.stop();
 				gameSelection();
@@ -398,7 +411,7 @@ public class ArenaController {
 			// multiplayerSnakeStatus();
 
 			if (modelPlayerTwo.eatFruit == true) {
-				foodImage1.setVisible(false); // set food invisible the snake hits its boundaries
+				foodImage1.setVisible(false); // set food invisible if the snake hits its boundaries
 				modelPlayerTwo.generateFood();
 				foodImage1.setLayoutX(modelPlayerTwo.fruitX);
 				foodImage1.setLayoutY(modelPlayerTwo.fruitY);
@@ -409,7 +422,7 @@ public class ArenaController {
 			}
 
 			if (modelPlayerTwo.gameOverPlayerTwo == true) {
-				setHighscore(namePlayer2.getText(), point_counter_player2);  // set highscore on server database
+				setHighscore(namePlayer2.getText(), point_counter_player2); // set highscore on server database
 				timer.stop();
 				timerPlayerTwo.stop();
 				gameSelection();

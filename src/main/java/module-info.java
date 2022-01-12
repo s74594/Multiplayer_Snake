@@ -5,6 +5,7 @@ module com.example.multiplayer_snake {
 	requires java.sql;
 	requires javafx.graphics;
 	requires org.json;
+	requires java.logging;
 
 	opens com.example.multiplayer_snake to javafx.fxml;
 	opens controller to javafx.fxml;
