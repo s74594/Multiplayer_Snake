@@ -152,8 +152,8 @@ public class ArenaController {
 					Thread.sleep(10L * 1000L);
 					foodImage.setVisible(false);
 					foodImage1.setVisible(false);
-					generateFood();
 					generateFoodPlayerTwo();
+					generateFood();
 					run();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
