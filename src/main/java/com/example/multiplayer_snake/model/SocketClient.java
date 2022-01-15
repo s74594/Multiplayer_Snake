@@ -8,11 +8,11 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.util.concurrent.Flow;
 
-public class SocketClient implements Flow.Subscriber<String> {
+public class SocketClient {
 
     public static Socket socket;
     public static PrintWriter writer;
-    Flow.Subscription subscription;
+    public static BufferedReader reader;
 
     public static void connect() {
         try {
@@ -24,38 +24,13 @@ public class SocketClient implements Flow.Subscriber<String> {
             writer = new PrintWriter(socket.getOutputStream());
 
             // create input reader
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             // start concurrent input message handler
-            new Thread(new InputMessageHandler(reader)).start();
+            // new Thread(new InputMessageHandler(reader)).start();
 
         } catch (IOException e) {
             System.out.println(e.getMessage() + " - Kann keine Verbindung zu Server herstellen, bitte Server überprüfen!!!");
         }
-    }
-
-    @Override
-    public void onSubscribe(Flow.Subscription subscription) {
-        System.out.println("Observer Pattern (Flow API) - Socketclient - subscription started");
-        this.subscription = subscription;
-        subscription.request(1);
-    }
-
-    @Override
-    public void onNext(String item) {
-        writer.println(item);
-        writer.flush();
-        System.out.println("SocketClient - Message send to server: " + item);
-        this.subscription.request(1);
-    }
-
-    @Override
-    public void onError(Throwable throwable) {
-
-    }
-
-    @Override
-    public void onComplete() {
-        System.out.println("Subscription ended");
     }
 }
