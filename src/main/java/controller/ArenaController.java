@@ -90,7 +90,6 @@ public class ArenaController {
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	@SuppressWarnings("rawtypes")
-	SubmissionPublisher source = new SubmissionPublisher<String>(); // Observer Pattern
 
 	KeyEvent animationDirection = null;
 	final AnimationTimer timer = new AnimationTimer() {
@@ -128,7 +127,6 @@ public class ArenaController {
 
 		timer.start(); // Animation Timer
 		timerPlayerTwo.start(); // Start animation timer for player two
-		source.subscribe(new SocketClient()); // Observer Pattern
 		namePlayer1.setText("Max");
 		namePlayer2.setText("Maxi");
 		scorePlayer1.setText(String.valueOf(point_counter_player1));
@@ -306,31 +304,6 @@ public class ArenaController {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	private void multiplayerSnakeStatus() {
-		// Observer Pattern
-		JSONObject snakeStatus = new JSONObject();
-		try {
-			snakeStatus.put("Player", String.valueOf(model.name));
-			snakeStatus.put("Points", String.valueOf(model.points));
-			snakeStatus.put("Eatfruit", String.valueOf(model.eatFruit));
-			snakeStatus.put("Gameover", String.valueOf(model.gameOver));
-			snakeStatus.put("SnakeX", String.valueOf(model.snakeX));
-			snakeStatus.put("SnakeY", String.valueOf(model.snakeY));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		source.submit(String.valueOf(snakeStatus));
-	}
-
-	private void setHighscore(String p, int points) {
-		JSONObject messageJSON = new JSONObject();
-		messageJSON.put("sql_highscore_player", p);
-		messageJSON.put("sql_highscore_points", points);
-		source.submit(String.valueOf(messageJSON));
-	}
-
 	@FXML
 	void snakeSteering(KeyEvent keyEvent) {
 
@@ -377,7 +350,7 @@ public class ArenaController {
 			}
 
 			if (model.gameOver == true) {
-				setHighscore(namePlayer1.getText(), point_counter_player1); // set highscore on server database
+				NetworkController.setHighscore(namePlayer1.getText(), point_counter_player1); // set highscore on server database
 				timer.stop();
 				timerPlayerTwo.stop();
 				gameSelection();
@@ -422,7 +395,7 @@ public class ArenaController {
 			}
 
 			if (modelPlayerTwo.gameOverPlayerTwo == true) {
-				setHighscore(namePlayer2.getText(), point_counter_player2); // set highscore on server database
+				NetworkController.setHighscore(namePlayer2.getText(), point_counter_player2); // set highscore on server database
 				timer.stop();
 				timerPlayerTwo.stop();
 				gameSelection();

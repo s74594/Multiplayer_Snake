@@ -45,6 +45,6 @@ public class SnakeServer {
             writer.println(message);
             writer.flush();
         }
-        System.out.println("SnakeServer - Message send to client: " + message);
+        System.out.println("OUT: " + message);
     }
 }
