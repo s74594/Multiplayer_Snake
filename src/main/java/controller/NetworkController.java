@@ -15,7 +15,7 @@ public class NetworkController {
         // send message with user and password to server
         JSONObject messageOut = new JSONObject();
         messageOut.put("sql_login_user", name);
-        SocketClient.writer.println(String.valueOf(messageOut));
+        SocketClient.writer.println(messageOut);
         SocketClient.writer.flush();
         // answer message
         String messageIn;
@@ -44,7 +44,7 @@ public class NetworkController {
         JSONObject messageOutJSON = new JSONObject();
         messageOutJSON.put("sql_register_user", name);
         messageOutJSON.put("sql_register_pass", password);
-        SocketClient.writer.println(String.valueOf(messageOutJSON));
+        SocketClient.writer.println(messageOutJSON);
         SocketClient.writer.flush();
         // answer message
         String messageIn;
@@ -72,7 +72,7 @@ public class NetworkController {
         JSONObject messageOutJSON = new JSONObject();
         messageOutJSON.put("sql_highscore_player", p);
         messageOutJSON.put("sql_highscore_points", points);
-        SocketClient.writer.println(String.valueOf(messageOutJSON));
+        SocketClient.writer.println(messageOutJSON);
         SocketClient.writer.flush();
         // answer message
         String messageIn;

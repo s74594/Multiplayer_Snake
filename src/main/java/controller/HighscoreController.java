@@ -1,6 +1,5 @@
 package controller;
 
-import com.example.multiplayer_snake.model.SocketClient;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -9,7 +8,6 @@ import org.json.JSONObject;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.SubmissionPublisher;
 
 public class HighscoreController {
 
@@ -47,7 +45,7 @@ public class HighscoreController {
 	public TableView highscore_table;
 	private static List<String[]> highscoreList;
 
-	Label arr[];
+	Label[] arr;
 
 	{
 		arr = new Label[] { Player_Pos1, Player_Pos2, Player_Pos3, Player_Pos4, Player_Pos5 };

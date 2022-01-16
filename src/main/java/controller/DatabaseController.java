@@ -1,12 +1,13 @@
 package controller;
 
+import javafx.scene.paint.Color;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import javafx.scene.paint.Color;
 
 public class DatabaseController {
 

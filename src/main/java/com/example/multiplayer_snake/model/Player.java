@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
+
 import java.util.LinkedList;
 
 public class Player {

@@ -1,7 +1,6 @@
 package controller;
 
 import com.example.multiplayer_snake.model.Player;
-import com.example.multiplayer_snake.model.SocketClient;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,15 +17,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.concurrent.SubmissionPublisher;
 
 public class ArenaController {
 
