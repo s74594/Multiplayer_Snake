@@ -4,51 +4,48 @@
 '+ Indicates public
 '# Indicates protected
 
-package Client {
-    package Main {
-        class Snake {}
+package client {
+    class Snake {}
+
+    package model {
+        class Player {}
+
+        class InputMessageHandler {}
+
+        class SocketClient {}
     }
 
-    package Model {
-        class Player{
-        -playerID
-        -name
-        -password
-        +void addPlayer()
-        }
+    package resources {
+        class arenaView {}
 
-        class Highscore{
-        -playerID
-        -highscore
-        -datetime
-        +void updateHighscore()
-        }
+        class frameGameInfo {}
+
+        class gameSelectionView {}
+
+        class highscoreView {}
+
+        class loginView {}
+
+        class registryView {}
+
+        class scoreView {}
     }
 
-    package View {
-        class scoreView{}
-
-        class registryView{}
-
-        class loginView{}
-
-        class arenaView{}
-    }
-
-    package Controller {
-        class ScoreController {}
-
-        class DatabaseServerController {
-        -checkPlayer
-        -addPlayer
-        +Connection connector()
-        }
+    package controller {
 
         class ArenaController {
         +void onExitMenuClick(ActionEvent event)
         +void onGameInfoMenuClick(ActionEvent event)
         +void centerWindowOnScreen(Stage stage)
         }
+
+        class CenterWindowScreen {}
+
+        class DatabaseController {}
+
+        class gameSelectionController {}
+
+        class HighscoreController {}
 
         class LoginController {
         +void initialize(URL location, ResourceBundle resources)
@@ -59,30 +56,20 @@ package Client {
         +void centerWindowOnScreen(Stage stage)
         #void onSignupButtonClick(ActionEvent event)
         }
+
+        class NetworkController {}
     }
     'connections
-    registryView --> Player
-    loginView --> Player
-    Highscore <-- scoreView
-    Snake <-- loginView
-    scoreView <-- ScoreController
-    registryView <-- DatabaseServerController
-    loginView <-- DatabaseServerController
-    arenaView <-- ArenaController
-    ArenaController --> Snake
-    ScoreController --> Highscore
-    LoginController --> loginView
-    arenaView --> Player
-    arenaView --> Highscore
     }
 
 package Server {
-    class SnakeServer
+    class SnakeServer {}
     class Database {}
+    class MessageHandler {}
+    class BroadcastMessageHandler{}
     'connections
     SnakeServer <--> Database
 }
 
 'connections
-DatabaseServerController <--> SnakeServer :network
 @enduml
