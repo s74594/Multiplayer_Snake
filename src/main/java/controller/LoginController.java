@@ -1,13 +1,5 @@
 package controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.net.URL;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.concurrent.SubmissionPublisher;
-import com.example.multiplayer_snake.model.SocketClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +16,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LoginController {
 	@FXML
@@ -68,7 +66,7 @@ public class LoginController {
 	@FXML
 	private Button nextBTN;
 
-	private static String sqlRegisterUserAnswer = null;
+	private static final String sqlRegisterUserAnswer = null;
 	ArrayList<String> pictures = new ArrayList<String>();
 	public int indexIMGCounter = 1; // Index counter, iterating an arraylist
 

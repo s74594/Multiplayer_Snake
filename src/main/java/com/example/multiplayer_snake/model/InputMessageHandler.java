@@ -1,7 +1,5 @@
 package com.example.multiplayer_snake.model;
 
-import controller.HighscoreController;
-import controller.LoginController;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
