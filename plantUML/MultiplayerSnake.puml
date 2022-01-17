@@ -4,85 +4,271 @@
 '+ Indicates public
 '# Indicates protected
 
-package Client {
-    package Main {
-        class Snake {}
+package client {
+    class Snake {
+        +start(Stage) : void
+        +{static}main(String[]) : void
     }
 
-    package Model {
-        class Player{
-        -playerID
-        -name
-        -password
-        +void addPlayer()
+    package model {
+        class Player {
+            +points : Text
+            +name : Text
+            +snakeX : double
+            +snakeY : double
+            +snakeXP2 : double
+            +snakeYP2 : double
+            +fruitX : double
+            +fruitY : double
+            +snakeBounds : Bounds
+            +snakeBoundsPlayerTwo : Bounds
+            +fruitBounds : Bounds
+            +eatfruit : boolean
+            +gameOver : boolean
+            +gameOverPlayerTwo : boolean
+            ~snakeSpeed : double
+            +snakeBodySize : int
+            +snakeBodySizePlayerTwo : int
+            +snakeBodyLocationsX : LinkedList<Double>
+            +snakeBodyLocationsY : LinkedList<Double>
+            +snakeBodyLocationsXP2 : LinkedList<Double>
+            +snakeBodyLocationsYP2 : LinkedList<Double>
+            +movePlayer(double, double, KeyCode) : void
+            +movePlayerTwo(double, double, KeyCode) : void
+            -snakeBodyLocations() : void
+            -snakeBodyLocationsPlayerTwo() : void
+            +checkCollision() : void
+            -gameOver() : void
+            -gameOverPlayerTwo() : void
+            +generateFood() : void
         }
 
-        class Highscore{
-        -playerID
-        -highscore
-        -datetime
-        +void updateHighscore()
+        class InputMessageHandler {
+            ~reader : BufferedReader
+            +InputMessageHandler(BufferedReader)
+            +run() : void
+            +onMessage(String) : void
+        }
+
+        class SocketClient {
+            +{static}socket : Socket
+            +{static}writer : PrintWriter
+            +{static}reader : BufferedReader
+            +{static}connect() : void
         }
     }
 
-    package View {
-        class scoreView{}
+    package resources {
+        class arenaView_fxml {}
 
-        class registryView{}
+        class frameGameInfo_fxml {}
 
-        class loginView{}
+        class gameSelectionView_fxml {}
 
-        class arenaView{}
+        class highscoreView_fxml {}
+
+        class loginView_fxml {}
+
+        class registryView_fxml {}
     }
 
-    package Controller {
-        class ScoreController {}
-
-        class DatabaseServerController {
-        -checkPlayer
-        -addPlayer
-        +Connection connector()
+    package controller {
+    together {
+        class HighscoreController {
+                    +Player_Pos1 : Label
+                    +Player_Pos2 : Label
+                    +Player_Pos3 : Label
+                    -Player_Pos4 : Label
+                    -Player_Pos5 : Label
+                    -Player_Pos1_Points : Label
+                    -Player_Pos2_Points : Label
+                    -Player_Pos3_Points : Label
+                    -Player_Pos4_Points : Label
+                    -Player_Pos5_Points : Label
+                    -Player_Pos1_Date : Label
+                    -Player_Pos2_Date : Label
+                    -Player_Pos3_Date : Label
+                    -Player_Pos4_Date : Label
+                    -Player_Pos5_Date : Label
+                    +highscore_table : TableView
+                    -{static}highscoreList : List<String[]>
+                    ~arr : Label[]
+                    ~initialize() : void
+                    +{static}setHighscoreList(JSONArray) : void
         }
-
         class ArenaController {
-        +void onExitMenuClick(ActionEvent event)
-        +void onGameInfoMenuClick(ActionEvent event)
-        +void centerWindowOnScreen(Stage stage)
+            -model : Player
+            -modelPlayerTwo : Player
+            +namePlayer1 : Text
+            +namePlayer2 : Text
+            +scorePlayer1 : Text
+            +scorePlayer2 : Text
+            +playGround1 : Pane
+            +playGround2 : Pane
+            +snakeHead : Circle
+            -snakeHeadPlayerTwo : Circle
+            -avatarPlayerOne : ImageView
+            -avatarPlayerTwo : ImageView
+            +snakeTailCircle : Circle
+            -exitBTNMenu : MenuItem
+            -HighscoreBTN : MenuItem
+            -gameInfoBTNMenu : MenuItem
+            +foodImage : ImageView
+            +foodImage1 : ImageView
+            +{static}millis : double
+            +point_counter_player1 : int
+            +point_counter_player2 : int
+            +snakeBody : Circle[]
+            +bodyPlayerTwoCircles : Circle[]
+            ~centerWindowScreen : CenterWindowScreen
+            ~animationDirection : KeyEvent
+            ~animationDirectionPlayerTwo : KeyEvent
+            ~timer : AnimationTimer
+            ~timerPlayerTwo : AnimationTimer
+            ~initialize() : void
+            +delete() : void
+            +custom_Snake_Color(Color) : void
+            +generateFood() : void
+            +generateFoodPlayerTwo() : void
+            ~onExitMenuClick(ActionEvent) : void
+            ~onGameInfoMenuClick(ActionEvent) : void
+            ~onHighscoreBTNClick((ActionEvent) : void
+            -gameSelection() : void
+            ~snakeSteering(KeyEvent) : void
         }
 
         class LoginController {
-        +void initialize(URL location, ResourceBundle resources)
-        #void onPlayButtonClick(ActionEvent event)
-        -void run()
-        -void drawBackground(GraphicsContext graphicsContext)
-        -void onExitButtonClick(ActionEvent event)
-        +void centerWindowOnScreen(Stage stage)
-        #void onSignupButtonClick(ActionEvent event)
+            -playButton : Button
+            -button_signup : Button
+            -exitButton : Button
+            -exitBTNMenu : MenuItem
+            -gameInfoBTNMenu : MenuItem
+            -scoreLabel : Text
+            -scoreLabelNumber : Label
+            -player_name : TextField
+            -player_password : PasswordField
+            -pw_incorrect : Label
+            -error_msg : Label
+            -r_name : TextField
+            -r_pw : TextField
+            -rw_pw_check : TextField
+            -backButton : Button
+            -snakeColorPicker : ColorPicker
+            -avatarIMG : ImageView
+            -backBTN : Button
+            -nextBTN : Button
+            -{static}sqlRegisterUserAnswer : String
+            ~pictures : ArrayList<String>
+            +indexIMGCounter : int
+            -{static}WIDTH : int
+            -{static}HEIGHT : int
+            -{static}ROWS : int
+            -{static}COLUMNS : int
+            -{static}SQUARE_SIZE : int
+            -graphicsContext : GraphicsContext
+            ~centerWindowScreen : CenterWindowScreen
+            -event : ActionEvent
+            ~initialize() : void
+            #onPlayButtonClick(ActionEvent) : void
+            ~customizeSnakeColor(ActionEvent) : void
+            #Enter_Play(KeyEvent) : void
+            #onExitButtonClick(ActionEvent) : void
+            #onBackButton_Click(ActionEvent) : void
+            #onSignupButtonClick(ActionEvent) : void
+            +onRegisterButtonClick(ActionEvent) : void
+            +onClearClick(ActionEvent) : void
+            ~onNextClick(ActionEvent) : void
+            ~onBackClick(ActionEvent) : void
         }
+
+
+        class NetworkController {
+                    +{static}connect() : void
+                    +{static}login(String, String) : boolean
+                    +{static}register(String, String) : boolean
+                    +{static}setHighscore(String, int) : boolean
+        }
+
+        class GameSelectionController {
+                    -exitBTN : Button
+                    -highscoreBTN : Button
+                    -restartBTN : Button
+                    ~centerWindowScreen : CenterWindowScreen
+                    ~onExitButtonClick(ActionEvent) : void
+                    ~onHighscoreBTNClick(ActionEvent) : void
+                    ~onRestartGameBTNClick(ActionEvent) : void
+                }
     }
+
+    class CenterWindowScreen {
+        +CenterScreen(Stage) : void
+    }
+    }
+
     'connections
-    registryView --> Player
-    loginView --> Player
-    Highscore <-- scoreView
-    Snake <-- loginView
-    scoreView <-- ScoreController
-    registryView <-- DatabaseServerController
-    loginView <-- DatabaseServerController
-    arenaView <-- ArenaController
-    ArenaController --> Snake
-    ScoreController --> Highscore
-    LoginController --> loginView
-    arenaView --> Player
-    arenaView --> Highscore
+    Snake -- loginView_fxml
+
+    ArenaController --> Player
+    ArenaController --> arenaView_fxml
+    ArenaController -- NetworkController
+    ArenaController -- CenterWindowScreen
+    ArenaController -- frameGameInfo_fxml
+    LoginController --> loginView_fxml
+    LoginController --> registryView_fxml
+    LoginController -- NetworkController
+    LoginController -- CenterWindowScreen
+    GameSelectionController -- HighscoreController
+    GameSelectionController --> gameSelectionView_fxml
+    GameSelectionController -- CenterWindowScreen
+    HighscoreController --> highscoreView_fxml
+    HighscoreController -- NetworkController
+    NetworkController -- SocketClient
+    SocketClient -- InputMessageHandler
     }
+
+    'layout
+    LoginController -[hidden]> ArenaController
+    ArenaController -[hidden]> HighscoreController
+    HighscoreController -[hidden]> GameSelectionController
+    GameSelectionController -[hidden]> NetworkController
+
 
 package Server {
-    class SnakeServer
-    class Database {}
-    'connections
-    SnakeServer <--> Database
-}
+    class SnakeServer {
+    ~{static}clientWriters : Set<PrintWriter>
+    +{static}main(String[]) : void
+    ~{static}broadcast(String) : void
+    }
 
+    class DatabaseController {
+        +{static}connect() : Connection
+        +{static}Select_Player_PW(String) : String
+        +{static}Insert_Player(String, String, String) : String
+        +{static}Get_Highscore() : List<String[]>
+        +{static}Insert_Highscore(String, LocalDateTime, int) : void
+        +Insert_Custom_Snake_Color(Color) : void
+    }
+
+    class Database {}
+
+    class MessageHandler {
+        ~reader : BufferedReader
+        +MessageHandler(BufferedReader)
+        +run() : void
+        +onMessage(String) : void
+    }
+
+    class BroadcastMessageHandler{
+        +BroadcastMessageHandler(BufferedReader)
+        +onMessage(String) : void
+    }
+
+    'connections
+    SnakeServer -- DatabaseController
+    DatabaseController <--> Database
+    SnakeServer -- BroadcastMessageHandler
+    BroadcastMessageHandler --> MessageHandler
+}
 'connections
-DatabaseServerController <--> SnakeServer :network
+SocketClient <..> SnakeServer : Network
 @enduml
