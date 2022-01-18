@@ -13,5 +13,4 @@ module com.example.multiplayer_snake {
 	exports com.example.multiplayer_snake;
 	exports com.example.multiplayer_snake.model;
 	exports controller;
-	exports com.example.multiplayer_snake.main;
 }
