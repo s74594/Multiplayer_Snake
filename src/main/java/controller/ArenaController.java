@@ -123,9 +123,8 @@ public class ArenaController {
 		modelPlayerTwo.snakeBodyLocationsYP2.addFirst(450.); // store initial position in bodyparts array
 
 		timer.start(); // Animation Timer
-		timerPlayerTwo.start(); // Start animation timer for player two
-		namePlayer1.setText("Max");
-		namePlayer2.setText("Maxi");
+		timerPlayerTwo.start(); // Start animation timer for player tw
+		namePlayer2.setText("Max");
 		scorePlayer1.setText(String.valueOf(point_counter_player1));
 		scorePlayer2.setText(String.valueOf(point_counter_player2));
 
@@ -221,6 +220,7 @@ public class ArenaController {
 		}
 	}
 
+
 	public void generateFood() {
 		model.generateFood();
 		foodImage.setLayoutX(model.fruitX);
@@ -285,8 +285,7 @@ public class ArenaController {
 
 	private void gameSelection() {
 		try {
-			URL url = new File("src/main/resources/com/example/multiplayer_snake/gameSelectionView.fxml").toURI()
-					.toURL();
+			URL url = new File("src/main/resources/com/example/multiplayer_snake/gameSelectionView.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 			Scene scene = new Scene(rootParent);
 			Stage stage = new Stage();
@@ -398,5 +397,9 @@ public class ArenaController {
 				gameSelection();
 			}
 		}
+	}
+
+	public void setLabelText(String text){
+		namePlayer1.setText("Thomas");
 	}
 }
