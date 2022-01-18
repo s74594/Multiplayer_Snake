@@ -101,10 +101,14 @@ public class LoginController {
 		try {
 			if (NetworkController.login(player_name.getText(), player_password.getText())) {
 				URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
-				Parent rootParent = FXMLLoader.load(url);
+				//Parent rootParent = FXMLLoader.load(url);
 
-				ArenaController arenaController = new ArenaController();
+				FXMLLoader loader = new FXMLLoader(url); // change
+				Parent rootParent = loader.load(); // change
+
+				ArenaController arenaController = loader.getController(); // change
 				arenaController.setLabelText(player_name.getText());
+
 
 				Stage stage = (Stage) exitButton.getScene().getWindow();
 				stage.close();

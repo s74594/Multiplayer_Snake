@@ -124,6 +124,7 @@ public class ArenaController {
 
 		timer.start(); // Animation Timer
 		timerPlayerTwo.start(); // Start animation timer for player tw
+		namePlayer1.setText("Maxi");
 		namePlayer2.setText("Max");
 		scorePlayer1.setText(String.valueOf(point_counter_player1));
 		scorePlayer2.setText(String.valueOf(point_counter_player2));
@@ -400,6 +401,6 @@ public class ArenaController {
 	}
 
 	public void setLabelText(String text){
-		namePlayer1.setText("Thomas");
+		namePlayer1.setText(text);
 	}
 }
