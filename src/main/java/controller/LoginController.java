@@ -24,6 +24,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * controls the login window
+ */
 public class LoginController {
 	@FXML
 	private Button playButton;
@@ -81,6 +84,12 @@ public class LoginController {
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 	private ActionEvent event;
 
+	/**
+	 * first method
+	 *
+	 * connects to server
+	 * adds avatar images to list
+	 */
 	@FXML
 	void initialize() {
 		NetworkController.connect();
@@ -92,6 +101,12 @@ public class LoginController {
 		pictures.add("image/avatar/img_4.png");
 	}
 
+	/**
+	 * if play button clicked method will be executed
+	 *
+	 * @param event
+	 * @throws SQLException
+	 */
 	@FXML
 	protected void onPlayButtonClick(ActionEvent event) throws SQLException {
 		this.event = event;
@@ -124,20 +139,34 @@ public class LoginController {
 		}
 	}
 
-	// Customize the color of a snake
+	/**
+	 * customize the color of the snake
+	 *
+	 * @param event
+	 */
 	@FXML
 	void customizeSnakeColor(ActionEvent event) {
-		/* Instance herstellen */
 		ArenaController customSnakeColor = new ArenaController();
 		customSnakeColor.custom_Snake_Color(snakeColorPicker.getValue());
 	}
 
+	/**
+	 * toDo
+	 *
+	 * @param e
+	 * @throws SQLException
+	 */
 	@FXML
 	protected void Enter_Play(KeyEvent e) throws SQLException {
 		if (e.getCode().equals(KeyCode.ENTER))
 			onPlayButtonClick(event);
 	}
 
+	/**
+	 * if exit button clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	protected void onExitButtonClick(ActionEvent event) {
 		try {
@@ -150,6 +179,11 @@ public class LoginController {
 		}
 	}
 
+	/**
+	 * if back button clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	protected void onBackButton_Click(ActionEvent event) {
 		try {
@@ -169,6 +203,11 @@ public class LoginController {
 		}
 	}
 
+	/**
+	 * if signup button clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	protected void onSignupButtonClick(ActionEvent event) {
 		try {
@@ -191,7 +230,13 @@ public class LoginController {
 		}
 	}
 
-	@SuppressWarnings("exports")
+
+	/**
+	 * if register button clicked method will be executed
+	 *
+	 * @param actionEvent
+	 * @throws InterruptedException
+	 */
 	public void onRegisterButtonClick(ActionEvent actionEvent) throws InterruptedException {
 		if (r_pw.getText().equals(r_pw_check.getText())) {
 			if(NetworkController.register(r_name.getText(), r_pw.getText()) == true) {
@@ -207,21 +252,29 @@ public class LoginController {
 		}
 	}
 
-	@SuppressWarnings("exports")
+
+	/**
+	 * if clear button clicked method will be executed
+	 *
+	 * @param actionEvent
+	 */
 	public void onClearClick(ActionEvent actionEvent) {
 		r_name.clear();
 		r_pw.clear();
 		r_pw_check.clear();
 	}
 
-	/* Image slider */
+	/**
+	 * if image slider selection clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	void onNextClick(ActionEvent event) {
 		try {
 			Image image = new Image(new FileInputStream(pictures.get(indexIMGCounter)));
 			avatarIMG.setImage(image);
 			indexIMGCounter++;
-//			System.out.println(">> " + indexIMGCounter); // debug counter
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -237,6 +290,11 @@ public class LoginController {
 			backBTN.setDisable(false);
 	}
 
+	/**
+	 * if back button clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	void onBackClick(ActionEvent event) {
 		indexIMGCounter--;

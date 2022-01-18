@@ -9,6 +9,9 @@ import org.json.JSONObject;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * controls highscore window
+ */
 public class HighscoreController {
 
 	@FXML
@@ -44,7 +47,6 @@ public class HighscoreController {
 	@FXML
 	public TableView highscore_table;
 	private static List<String[]> highscoreList;
-
 	Label[] arr;
 
 	{
@@ -53,6 +55,11 @@ public class HighscoreController {
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 
+	/**
+	 * first method that will be executed, requests highscore data from server, fills local array
+	 *
+	 * @throws InterruptedException
+	 */
 	@FXML
 	void initialize() throws InterruptedException {
 		// List<String[]> highscore_list = DatabaseController.GetHighscore();
@@ -88,6 +95,11 @@ public class HighscoreController {
 		Player_Pos5_Date.setText(highscoreList.get(4)[2]);
 	}
 
+	/**
+	 * toDo
+	 *
+	 * @param list
+	 */
 	public static void setHighscoreList(JSONArray list) {
 		HighscoreController.highscoreList = null;
 		HighscoreController.highscoreList = Collections.singletonList(list.join(",").split(","));

@@ -10,10 +10,19 @@ import java.net.SocketException;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * server for multiplayer snake
+ *
+ */
 public class SnakeServer {
 
     static Set<PrintWriter> clientWriters = new HashSet<>();
 
+    /**
+     * starts server socket, creates reader and writer for receiving and sending data
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(5000);
@@ -40,6 +49,11 @@ public class SnakeServer {
         }
     }
 
+    /**
+     * broadcasts messages to all connected clients
+     *
+     * @param message
+     */
     static void broadcast(String message) {
         for (PrintWriter writer : clientWriters) {
             writer.println(message);

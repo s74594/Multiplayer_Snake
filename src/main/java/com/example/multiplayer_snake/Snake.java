@@ -15,6 +15,12 @@ public class Snake extends Application {
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 
+	/**
+	 * JavaFX start method
+	 *
+	 * @param stage
+	 * @throws IOException
+	 */
 	@SuppressWarnings("exports")
 	@Override
 	public void start(Stage stage) throws IOException {

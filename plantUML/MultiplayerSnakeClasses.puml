@@ -249,7 +249,8 @@ package Server {
         +Insert_Custom_Snake_Color(Color) : void
     }
 
-    class Database {}
+    database "Database" {
+    }
 
     class MessageHandler {
         ~reader : BufferedReader
@@ -265,7 +266,7 @@ package Server {
 
     'connections
     SnakeServer -- DatabaseController
-    DatabaseController <--> Database
+    DatabaseController <--> "Database"
     SnakeServer -- BroadcastMessageHandler
     BroadcastMessageHandler --> MessageHandler
 }

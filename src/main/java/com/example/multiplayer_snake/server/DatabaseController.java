@@ -9,12 +9,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * handles communication with database
+ */
 public class DatabaseController {
 
-	@SuppressWarnings("exports")
+	/**
+	 * starts connection to database
+	 *
+	 * @return database connection
+	 */
 	public static Connection connect() {
-		// SQLite connection string
-		// String url = "jdbc:sqlite:src/SQL Lite Database/Snake_System.db";
 		String url = "jdbc:sqlite:src/SQL Lite Database/Snake_System.db";
 		Connection conn = null;
 		try {
@@ -25,6 +30,12 @@ public class DatabaseController {
 		return conn;
 	}
 
+	/**
+	 * retrieves password for given user from database
+	 *
+	 * @param name
+	 * @return the password
+	 */
 	public static String Select_Player_PW(String name) {
 		try {
 			String sql = "SELECT players.password FROM players WHERE players.name='" + name + "'";
@@ -39,6 +50,15 @@ public class DatabaseController {
 		}
 	}
 
+
+	/**
+	 * inserts database entry for new player (registration)
+	 *
+	 * @param name
+	 * @param pw
+	 * @param pw_check
+	 * @return success or not
+	 */
 	public static String Insert_Player(String name, String pw, String pw_check) {
 		Connection conn = DatabaseController.connect();
 		try {
@@ -60,6 +80,11 @@ public class DatabaseController {
 		return "Notwendige Returnmeldung";
 	}
 
+	/**
+	 * retrieves highscore list from database
+	 *
+	 * @return the highscore list
+	 */
 	public static List<String[]> GetHighscore() {
 		List<String[]> highscoreList = new LinkedList<String[]>();
 		try {
@@ -82,6 +107,13 @@ public class DatabaseController {
 		return highscoreList;
 	}
 
+	/**
+	 * inserts new highscore in database
+	 *
+	 * @param player_id
+	 * @param datenow
+	 * @param points
+	 */
 	public static void Insert_Highscore(String player_id, LocalDateTime datenow, int points) {
 		Connection conn = DatabaseController.connect();
 
@@ -102,13 +134,13 @@ public class DatabaseController {
 
 	/**
 	 * Insert a new row into the 'snakecolor' table
+	 *
 	 * @param value
 	 */
-	@SuppressWarnings("exports")
 	public void Insert_Custom_Snake_Color(Color value) {
 		Connection conn = DatabaseController.connect();
 
-//		String sqlInsertString = "INSERT INTO snakecolor (id, hexcolor) VALUES (1, '" + value + "' )";
+		// String sqlInsertString = "INSERT INTO snakecolor (id, hexcolor) VALUES (1, '" + value + "' )";
 		String sqlUpdateString = "UPDATE snakecolor SET hexcolor = '" + value + "' WHERE snakecolor.id = 1;";
 
 		try {

@@ -3,6 +3,9 @@ package com.example.multiplayer_snake.server;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * handles incoming messages
+ */
 public class MessageHandler implements Runnable {
 
     BufferedReader reader;
