@@ -7,23 +7,21 @@ import javafx.scene.text.Text;
 
 import java.util.LinkedList;
 
+/**
+ * holds player information and controls them
+ */
 public class Player {
 
-	@SuppressWarnings("exports")
 	public Text points;
-	@SuppressWarnings("exports")
 	public Text name;
 	public double snakeX;
 	public double snakeY;
-	public double snakeXP2; // Player Two
-	public double snakeYP2; // Player Two
+	public double snakeXP2;
+	public double snakeYP2;
 	public double fruitX;
 	public double fruitY;
-	@SuppressWarnings("exports")
 	public Bounds snakeBounds;
-	@SuppressWarnings("exports")
-	public Bounds snakeBoundsPlayerTwo; // Player Two
-	@SuppressWarnings("exports")
+	public Bounds snakeBoundsPlayerTwo;
 	public Bounds fruitBounds;
 	public boolean eatFruit = false;
 	public boolean gameOver = false;
@@ -33,16 +31,22 @@ public class Player {
 	public int snakeBodySizePlayerTwo = 1;
 	public LinkedList<Double> snakeBodyLocationsX = new LinkedList<>();
 	public LinkedList<Double> snakeBodyLocationsY = new LinkedList<>();
-	public LinkedList<Double> snakeBodyLocationsXP2 = new LinkedList<>(); // Player Two
-	public LinkedList<Double> snakeBodyLocationsYP2 = new LinkedList<>(); // Player Two
+	public LinkedList<Double> snakeBodyLocationsXP2 = new LinkedList<>();
+	public LinkedList<Double> snakeBodyLocationsYP2 = new LinkedList<>();
 
-	@SuppressWarnings("exports")
+	/**
+	 * player1 snake moving
+	 *
+	 * @param x
+	 * @param y
+	 * @param direction
+	 */
 	public void movePlayer(double x, double y, KeyCode direction) {
 		this.snakeX = x;
 		this.snakeY = y;
 		eatFruit = false;
 
-//		System.out.println("Key: " + direction + " SnakeX: " + snakeX + " SnakeY: " + snakeY); // Debug
+		// System.out.println("Key: " + direction + " SnakeX: " + snakeX + " SnakeY: " + snakeY); // Debug
 
 		if (direction != null) {
 			switch (direction) {
@@ -79,8 +83,13 @@ public class Player {
 		snakeBodyLocations();
 	}
 
-	/** Player Two **/
-	@SuppressWarnings("exports")
+	/**
+	 * player2 snake moving
+	 *
+	 * @param xp2
+	 * @param yp2
+	 * @param direction
+	 */
 	public void movePlayerTwo(double xp2, double yp2, KeyCode direction) {
 		this.snakeXP2 = xp2;
 		this.snakeYP2 = yp2;
@@ -123,6 +132,9 @@ public class Player {
 		snakeBodyLocationsPlayerTwo();
 	}
 
+	/**
+	 * snake body coordinates player1
+	 */
 	private void snakeBodyLocations() {
 		snakeBodyLocationsX.addFirst(snakeX);
 		snakeBodyLocationsY.addFirst(snakeY);
@@ -136,7 +148,9 @@ public class Player {
 		}
 	}
 
-	/** Player Two **/
+	/**
+	 * snake body coordinates player2
+	 */
 	private void snakeBodyLocationsPlayerTwo() {
 		snakeBodyLocationsXP2.addFirst(snakeXP2);
 		snakeBodyLocationsYP2.addFirst(snakeYP2);
@@ -176,33 +190,33 @@ public class Player {
 		int collisionDetectionStatus = 0; // Debug
 
 		if (collisionDetectionStatus == 0) {
-			// Collistion detection for player one
+			// Collision detection for player one
 			if (snakeX <= 15) {
-//				System.out.println("Left border touched: Game Over!"); // Collision with left border
+			// System.out.println("Left border touched: Game Over!"); // Collision with left border
 				gameOver();
 			} else if (snakeX >= 1520) {
-//				System.out.println("Right border touched: Game Over!"); // Collision with right border
+			// System.out.println("Right border touched: Game Over!"); // Collision with right border
 				gameOver();
 			} else if (snakeY <= 40) {
-//				System.out.println("Top border touched: Game Over!"); // Collision with top border
+			// System.out.println("Top border touched: Game Over!"); // Collision with top border
 				gameOver();
 			} else if (snakeY > 770) {
-//				System.out.println("Bottom border touched: Game Over!"); // Collision with bottom border
+			// System.out.println("Bottom border touched: Game Over!"); // Collision with bottom border
 				gameOver();
 			}
 
 			// Collistion detection for player two
 			if (snakeXP2 <= 15) {
-//				System.out.println("Left border touched: Game Over!"); // Collision with left border
+			// System.out.println("Left border touched: Game Over!"); // Collision with left border
 				gameOverPlayerTwo();
 			} else if (snakeXP2 >= 1520) {
-//				System.out.println("Right border touched: Game Over!"); // Collision with right border
+			// System.out.println("Right border touched: Game Over!"); // Collision with right border
 				gameOverPlayerTwo();
 			} else if (snakeYP2 <= 40) {
-//				System.out.println("Top border touched: Game Over!"); // Collision with top border
+			// System.out.println("Top border touched: Game Over!"); // Collision with top border
 				gameOverPlayerTwo();
 			} else if (snakeYP2 > 770) {
-//				System.out.println("Bottom border touched: Game Over!"); // Collision with bottom border
+			// System.out.println("Bottom border touched: Game Over!"); // Collision with bottom border
 				gameOverPlayerTwo();
 			}
 		} else if (collisionDetectionStatus == 1) {
@@ -210,18 +224,26 @@ public class Player {
 		}
 	}
 
+	/**
+	 * sets gameover player1
+	 */
 	@FXML
 	private void gameOver() {
 		gameOver = true;
 	}
 
+	/**
+	 * sets gameover player2
+	 */
 	private void gameOverPlayerTwo() {
 		gameOverPlayerTwo = true;
 	}
 
-	/* Method to generate food at a random position(x,y) */
-	public void generateFood() {
 
+	/**
+	 *  generates food at a random positions
+	 */
+	public void generateFood() {
 		/* place food within defined borders */
 		int minWidth = 200;
 		int maxWidth = 1500;
@@ -236,6 +258,6 @@ public class Player {
 		fruitX = posX;
 		fruitY = posY;
 
-//		System.out.println("Fruit location(x): " + fruitX + " Fruit location(y): " + fruitY); // Debug
+		// System.out.println("Fruit location(x): " + fruitX + " Fruit location(y): " + fruitY); // Debug
 	}
 }

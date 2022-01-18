@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
+/**
+ * controls the main game window
+ */
 public class ArenaController {
 
 	private Player model; // Controller -> Model connection
@@ -71,23 +74,16 @@ public class ArenaController {
 	public ImageView foodImage; // raspberry
 	@FXML
 	public ImageView foodImage1; // pear
-//	@FXML
-//	private Label gameOver;
-//	private boolean isApplicationRunning = false;
-//	private Timeline animation = new Timeline();
+
 	public static double millis = 0.3;
 	public int point_counter_player1 = 0;
 	public int point_counter_player2 = 0;
-	@SuppressWarnings("exports")
 	@FXML
 	public Circle[] snakeBody = new Circle[1000]; // snake body player one
-	@SuppressWarnings("exports")
 	@FXML
 	public Circle[] bodyPlayerTwoCircles = new Circle[1000]; // snake body player two
-
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
-	@SuppressWarnings("rawtypes")
-
+	// Animation timer for player one
 	KeyEvent animationDirection = null;
 	final AnimationTimer timer = new AnimationTimer() {
 		@Override
@@ -97,7 +93,6 @@ public class ArenaController {
 			}
 		}
 	};
-
 	// Animation timer for player two
 	KeyEvent animationDirectionPlayerTwo = null;
 	final AnimationTimer timerPlayerTwo = new AnimationTimer() {
@@ -109,7 +104,9 @@ public class ArenaController {
 		}
 	};
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * initializes main game window...snake, food, sets playernames, scorefields...
+	 */
 	@FXML
 	void initialize() {
 
@@ -129,11 +126,9 @@ public class ArenaController {
 		scorePlayer1.setText(String.valueOf(point_counter_player1));
 		scorePlayer2.setText(String.valueOf(point_counter_player2));
 
-//		generateFood(); // initialize food
-//		generateFoodPlayerTwo(); // initialize food for Player Two
-
-		/* Threading - Nebenläufigkeit */
-		/**
+		/*
+		 * Threading - Nebenläufigkeit
+		 *
 		 * Generierte Frucht wird nach einer bestimmten Zeit an einem neuen Punkt erneut
 		 * generiert.
 		 */
@@ -155,7 +150,6 @@ public class ArenaController {
 				}
 			}
 		};
-
 		thread.start();
 
 		// Initialize Snakebody
@@ -190,7 +184,9 @@ public class ArenaController {
 		}
 	}
 
-	/* Löschen des Files, wenn die Farbe der Snake gesetzt wurde */
+	/**
+	 * deletes file, if snake color is set
+	 */
 	public void delete() {
 		File myObj = new File("color.txt");
 		if (myObj.delete()) {
@@ -200,8 +196,11 @@ public class ArenaController {
 		}
 	}
 
-	// Customize the color of a snake
-	@SuppressWarnings("exports")
+	/**
+	 * customizes the color of a snake
+	 *
+	 * @param value
+	 */
 	public void custom_Snake_Color(Color value) {
 
 		// Format a color in a web-friendly hex format
@@ -221,6 +220,9 @@ public class ArenaController {
 		}
 	}
 
+	/**
+	 * generates food for player1
+	 */
 	public void generateFood() {
 		model.generateFood();
 		foodImage.setLayoutX(model.fruitX);
@@ -228,7 +230,9 @@ public class ArenaController {
 		foodImage.setVisible(true);
 	}
 
-	/** Player Two **/
+	/**
+	 * generates food for player2
+	 */
 	public void generateFoodPlayerTwo() {
 		modelPlayerTwo.generateFood();
 		foodImage1.setLayoutX(modelPlayerTwo.fruitX);
@@ -236,6 +240,11 @@ public class ArenaController {
 		foodImage1.setVisible(true);
 	}
 
+	/**
+	 * if exit button clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	void onExitMenuClick(ActionEvent event) {
 		try {
@@ -247,6 +256,11 @@ public class ArenaController {
 		}
 	}
 
+	/**
+	 * if game info button clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	void onGameInfoMenuClick(ActionEvent event) {
 		try {
@@ -265,6 +279,11 @@ public class ArenaController {
 		}
 	}
 
+	/**
+	 * if highscore button clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	void onHighscoreBTNClick(ActionEvent event) {
 		try {
@@ -283,6 +302,9 @@ public class ArenaController {
 		}
 	}
 
+	/**
+	 * starts the game selection view (normally after game over)
+	 */
 	private void gameSelection() {
 		try {
 			URL url = new File("src/main/resources/com/example/multiplayer_snake/gameSelectionView.fxml").toURI()
@@ -301,11 +323,14 @@ public class ArenaController {
 		}
 	}
 
+	/**
+	 * keyboard control of snakes
+	 *
+	 * @param keyEvent
+	 */
 	@FXML
 	void snakeSteering(KeyEvent keyEvent) {
-
 		KeyCode key = keyEvent.getCode();
-
 		// move
 		// key handling player one or two
 		if ((key == KeyCode.UP) || (key == KeyCode.RIGHT) || (key == KeyCode.DOWN) || (key == KeyCode.LEFT)) {

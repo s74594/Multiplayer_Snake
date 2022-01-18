@@ -13,9 +13,9 @@ import java.io.File;
 import java.net.URL;
 
 /**
- * Buttons: Restart game, Show Highscore, Exit Game
+ * controls gameover screen
  */
-public class gameSelectionController {
+public class GameSelectionController {
 	
 	@FXML
 	private Button exitBTN;
@@ -25,7 +25,12 @@ public class gameSelectionController {
 	private Button restartBTN;
 	
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
-	
+
+	/**
+	 * if exit button clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	void onExitBTNClick(ActionEvent event) {
 		try {
@@ -36,7 +41,12 @@ public class gameSelectionController {
 			System.err.println(e.getMessage());
 		}
 	}
-	
+
+	/**
+	 * if highscore button clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	void onHigshoreBTNClick(ActionEvent event) {
 		try {
@@ -54,9 +64,14 @@ public class gameSelectionController {
 			System.err.println(e.getMessage());
 		}
 	}
-	
+
+	/**
+	 * if restart button clicked method will be executed
+	 *
+	 * @param event
+	 */
 	@FXML
 	void onRestartGameBTNClick(ActionEvent event) {
-		// Muss noch implementiert werden!!
+		// toDo
 	}
 }

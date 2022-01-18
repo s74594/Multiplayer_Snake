@@ -8,12 +8,20 @@ import java.io.BufferedReader;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * handles incoming messages and broadcasts them
+ */
 public class BroadcastMessageHandler extends MessageHandler {
 
     public BroadcastMessageHandler(BufferedReader reader) {
         super(reader);
     }
 
+    /**
+     * evaluates incoming messages and delivers the requested information as json string
+     *
+     * @param message
+     */
     @Override
     public void onMessage(String message) {
         super.onMessage(message);

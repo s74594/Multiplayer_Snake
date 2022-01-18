@@ -5,12 +5,26 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+/**
+ * handles communication with server
+ */
 public class NetworkController {
 
+    /**
+     * starts the socket connection between client and server
+     */
     public static void connect() {
         SocketClient.connect();
     }
 
+    /**
+     * requests password for given user from server and
+     * compare it with user entered password
+     *
+     * @param name
+     * @param password
+     * @return if user entered password is same as in server database saved
+     */
     public static boolean login(String name, String password) {
         // send message with user and password to server
         JSONObject messageOut = new JSONObject();
@@ -39,6 +53,13 @@ public class NetworkController {
         return false;
     }
 
+    /**
+     * registers an user in server database
+     *
+     * @param name
+     * @param password
+     * @return successfully insert into database
+     */
     public static boolean register(String name, String password) {
         // send message
         JSONObject messageOutJSON = new JSONObject();
@@ -67,6 +88,13 @@ public class NetworkController {
         return false;
     }
 
+    /**
+     * sets highscore in server database
+     *
+     * @param p
+     * @param points
+     * @return successfully insert in database
+     */
     public static boolean setHighscore(String p, int points) {
         //send message
         JSONObject messageOutJSON = new JSONObject();
@@ -93,18 +121,5 @@ public class NetworkController {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public void onMessage(String message) {
-        System.out.println("InputMessageHandler - Message from server received: '" + message + "'");
-        JSONObject messageJSON = new JSONObject(message);
-        // highscore answer from server
-        if (messageJSON.has("sql_highscore_answer")) {
-            System.out.println(messageJSON.getString("sql_highscore_answer"));
-        }
-        // highscore table answer from server
-        if (messageJSON.has("sql_highscore_table_answer")) {
-            //HighscoreController.setHighscoreList(messageJSON.getJSONArray("sql_highscore_table_answer"));
-        }
     }
 }

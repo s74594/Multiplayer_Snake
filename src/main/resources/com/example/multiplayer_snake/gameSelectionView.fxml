@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.gameSelectionController">
+<AnchorPane prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameSelectionController">
    <children>
       <Button fx:id="exitBTN" layoutX="222.0" layoutY="91.0" mnemonicParsing="false" onAction="#onExitBTNClick" style="-fx-background-color: #e89f02;" text="Exit Game" />
       <Button fx:id="restartBTN" layoutX="10.0" layoutY="91.0" mnemonicParsing="false" onAction="#onRestartGameBTNClick" style="-fx-background-color: #e89f02;" text="Restart Game" visible="false" />
