@@ -1,6 +1,7 @@
 package controller;
 
 import com.example.multiplayer_snake.model.SocketClient;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -121,5 +122,21 @@ public class NetworkController {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void multiplayerSnakeStatus(String name, String points, String eatFruit, String gameOver, String snakeX, String snakeY) {
+        JSONObject snakeStatus = new JSONObject();
+        try {
+            snakeStatus.put("Player", name);
+            snakeStatus.put("Points", points);
+            snakeStatus.put("Eatfruit", eatFruit);
+            snakeStatus.put("Gameover", gameOver);
+            snakeStatus.put("SnakeX", snakeX);
+            snakeStatus.put("SnakeY", snakeY);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        SocketClient.writer.println(snakeStatus);
+        SocketClient.writer.flush();
     }
 }
