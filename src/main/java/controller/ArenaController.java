@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,11 +19,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Scanner;
 
 public class ArenaController {
@@ -71,6 +72,20 @@ public class ArenaController {
 	public ImageView foodImage; // raspberry
 	@FXML
 	public ImageView foodImage1; // pear
+
+	@FXML
+	public String player1_id;
+	@FXML
+	public String player2_id;
+	@FXML
+	public LocalDateTime game_start;
+	@FXML
+	public LocalDateTime gameEnd;
+	@FXML
+	public int gameDuration;
+
+	Date startDate;
+	Date endDate;
 //	@FXML
 //	private Label gameOver;
 //	private boolean isApplicationRunning = false;
@@ -124,10 +139,13 @@ public class ArenaController {
 
 		timer.start(); // Animation Timer
 		timerPlayerTwo.start(); // Start animation timer for player tw
-		namePlayer1.setText("Maxi");
 		namePlayer2.setText("Max");
 		scorePlayer1.setText(String.valueOf(point_counter_player1));
 		scorePlayer2.setText(String.valueOf(point_counter_player2));
+
+		game_start= LocalDateTime.now();
+		startDate = new Date();
+		player2_id = "3";
 
 //		generateFood(); // initialize food
 //		generateFoodPlayerTwo(); // initialize food for Player Two
@@ -348,6 +366,14 @@ public class ArenaController {
 
 			if (model.gameOver == true) {
 				NetworkController.setHighscore(namePlayer1.getText(), point_counter_player1); // set highscore on server database
+				gameEnd= LocalDateTime.now();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
+				String formatDateTime = gameEnd.format(formatter);
+				String formatDateTimeStart = game_start.format(formatter);
+				endDate = new Date();
+				gameDuration = (int)((endDate.getTime() - startDate.getTime()) / 1000);
+				player1_id= DatabaseController.getPlayerId(namePlayer1.getText());
+				DatabaseController.setSpielstand(player1_id,player2_id,point_counter_player1,point_counter_player2,formatDateTimeStart,formatDateTime, gameDuration);
 				timer.stop();
 				timerPlayerTwo.stop();
 				gameSelection();
@@ -393,6 +419,14 @@ public class ArenaController {
 
 			if (modelPlayerTwo.gameOverPlayerTwo == true) {
 				NetworkController.setHighscore(namePlayer2.getText(), point_counter_player2); // set highscore on server database
+				gameEnd= LocalDateTime.now();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
+				String formatDateTime = gameEnd.format(formatter);
+				String formatDateTimeStart = game_start.format(formatter);
+				endDate = new Date();
+				gameDuration = (int)((endDate.getTime() - startDate.getTime()) / 1000);
+				player1_id= DatabaseController.getPlayerId(namePlayer1.getText());
+				DatabaseController.setSpielstand(player1_id,player2_id,point_counter_player1,point_counter_player2,formatDateTimeStart,formatDateTime, gameDuration);
 				timer.stop();
 				timerPlayerTwo.stop();
 				gameSelection();
@@ -400,7 +434,8 @@ public class ArenaController {
 		}
 	}
 
-	public void setLabelText(String text){
+	public void passValues(String text, Image Image){
 		namePlayer1.setText(text);
+		avatarPlayerOne.setImage(Image);
 	}
 }

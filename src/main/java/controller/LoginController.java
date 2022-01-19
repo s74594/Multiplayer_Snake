@@ -107,8 +107,8 @@ public class LoginController {
 				Parent rootParent = loader.load(); // change
 
 				ArenaController arenaController = loader.getController(); // change
-				arenaController.setLabelText(player_name.getText());
-
+				Image image = new Image(new FileInputStream(pictures.get(indexIMGCounter-1)));
+				arenaController.passValues(player_name.getText(), image);
 
 				Stage stage = (Stage) exitButton.getScene().getWindow();
 				stage.close();
