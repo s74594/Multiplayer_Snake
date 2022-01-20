@@ -3,6 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -12,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -113,13 +116,22 @@ public class LoginController {
 		try {
 			if (NetworkController.login(player_name.getText(), player_password.getText())) {
 				URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
-				Parent rootParent = FXMLLoader.load(url);
+				//Parent rootParent = FXMLLoader.load(url);
+
+				FXMLLoader loader = new FXMLLoader(url); // change
+				Parent rootParent = loader.load(); // change
+
+				ArenaController arenaController = loader.getController(); // change
+				Image image = new Image(new FileInputStream(pictures.get(indexIMGCounter-1)));
+				arenaController.passValues(player_name.getText(), image);
+
 				Stage stage = (Stage) exitButton.getScene().getWindow();
 				stage.close();
 				// Setting a frame on top of the scene builders created frame
 				Pane rootPane = new Pane();
 				Canvas canvas = new Canvas(WIDTH, HEIGHT);
 				rootPane.getChildren().addAll(canvas, rootParent);
+
 				Scene scene = new Scene(rootPane);
 				Stage arena_stage = new Stage();
 				arena_stage.setTitle("Snake");
@@ -129,6 +141,7 @@ public class LoginController {
 
 				centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
 				graphicsContext = canvas.getGraphicsContext2D();
+
 //				run();
 			} else {
 				pw_incorrect.setVisible(true);
@@ -313,4 +326,5 @@ public class LoginController {
 		if (indexIMGCounter == 0)
 			backBTN.setDisable(true);
 	}
+
 }

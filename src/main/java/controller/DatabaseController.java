@@ -100,6 +100,52 @@ public class DatabaseController {
 		}
 	}
 
+	public static String getPlayerId(String player_name) {
+		Connection conn = DatabaseController.connect();
+		System.out.println("SELECT player_id FROM players WHERE name=" + player_name + ";");
+
+		try {
+			String sql = "SELECT players.player_id FROM players WHERE players.name='" + player_name + "';";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			String player_ID = rs.getString(1);
+			System.out.println(rs);
+			conn.close();
+
+			return player_ID.toString();
+		} catch (SQLException e) {
+			String x = e.getMessage();
+			return x;
+		}
+	}
+
+
+
+	public static void setSpielstand(String player1id,
+									 String player2id,
+									 int player1_points,
+									 int player2_points,
+									 String startTime,
+									 String datenow,
+									 int duration) {
+		Connection conn = DatabaseController.connect();
+
+		try {
+			System.out.println(player1id + ", " + player2id +
+					", "+ player1_points + ", " + player2_points + ", " +startTime + ", " + datenow + ", " + duration +");");
+
+			String sql = "INSERT INTO games( player1_id, player2_id,player1_points,player2_points,start_datetime,end_datetime, duration) VALUES (" + player1id + ", " + player2id +
+					", "+ player1_points + ", " + player2_points + ", " +startTime + ", " + datenow + ", " + duration +");";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.println(rs);
+			conn.close();
+		} catch (SQLException e) {
+			String x = e.getMessage();
+			System.out.println(e);
+		}
+	}
+
 	/**
 	 * Insert a new row into the 'snakecolor' table
 	 * @param value
