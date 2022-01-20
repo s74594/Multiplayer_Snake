@@ -142,13 +142,14 @@ public class ArenaController {
 		namePlayer2.setText("Max");
 		scorePlayer1.setText(String.valueOf(point_counter_player1));
 		scorePlayer2.setText(String.valueOf(point_counter_player2));
+		game_start= LocalDateTime.now();
+		startDate = new Date();
+		player2_id = "3";
 
 		/*
 		 * Threading - Nebenläufigkeit
 		 *
-		game_start= LocalDateTime.now();
-		startDate = new Date();
-		player2_id = "3";
+
 
 //		generateFood(); // initialize food
 //		generateFoodPlayerTwo(); // initialize food for Player Two
