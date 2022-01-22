@@ -1,10 +1,20 @@
 package controller;
 
 import com.example.multiplayer_snake.model.SocketClient;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * handles communication with server
@@ -111,6 +121,80 @@ public class NetworkController {
                 if ((messageInJSON.has("sql_highscore_answer"))) {
                     if (messageInJSON.getString("sql_highscore_answer").equals("true")) {
                         System.out.println("Highscore successfully set");
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * retrives highscore table data from server database
+     *
+     * @return the highscore table
+     */
+    public static List<String[]> getHighscoreTable() {
+        LinkedList<String[]> highscoreTable = new LinkedList<>();
+        //send message
+        JSONObject messageOutJSON = new JSONObject();
+        messageOutJSON.put("sql_get_highscore_table", "true");
+        SocketClient.writer.println(messageOutJSON);
+        SocketClient.writer.flush();
+        // answer message
+        String messageIn;
+        try {
+            while ((messageIn = SocketClient.reader.readLine()) != null) {
+                JSONObject messageInJSON = new JSONObject(messageIn);
+                if ((messageInJSON.has("sql_highscore_table_answer"))) {
+                    Type listType = new TypeToken<LinkedList<String[]>>() {}.getType();
+                    highscoreTable = new Gson().fromJson(messageInJSON.getString("sql_highscore_table_answer"), listType);
+                    return highscoreTable;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return highscoreTable;
+    }
+
+    /**
+     * sets game data in server database
+     *
+     * @param player1id
+     * @param player2id
+     * @param player1_points
+     * @param player2_points
+     * @param startTime
+     * @param datenow
+     * @param duration
+     */
+    public static boolean setSpielstand(String player1id, String player2id, int player1_points, int player2_points, String startTime, String datenow, int duration) {
+        //send message
+        JSONObject messageOutJSON = new JSONObject();
+        messageOutJSON.put("sql_set_gamedata", "true");
+        messageOutJSON.put("sql_set_gamedata_player1id", "player1id");
+        messageOutJSON.put("sql_set_gamedata_player2id", "player2id");
+        messageOutJSON.put("sql_set_gamedata_player1_points", player1_points);
+        messageOutJSON.put("sql_set_gamedata_player2_points", player2_points);
+        messageOutJSON.put("sql_set_gamedata_startTime", startTime);
+        messageOutJSON.put("sql_set_gamedata_datenow", "datenow");
+        messageOutJSON.put("sql_set_gamedata_duration", duration);
+        SocketClient.writer.println(messageOutJSON);
+        SocketClient.writer.flush();
+        // answer message
+        String messageIn;
+        try {
+            while ((messageIn = SocketClient.reader.readLine()) != null) {
+                JSONObject messageInJSON = new JSONObject(messageIn);
+                if ((messageInJSON.has("sql_set_gamedata_answer"))) {
+                    if (messageInJSON.getString("sql_set_gamedata_answer").equals("true")) {
+                        System.out.println("Game data successfully set");
                         return true;
                     } else {
                         return false;
