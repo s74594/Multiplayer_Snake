@@ -46,11 +46,10 @@ public class HighscoreController {
 	private Label Player_Pos5_Date;
 	@FXML
 	public TableView highscore_table;
-	private static List<String[]> highscoreList;
-	Label[] arr;
+	Label arr[];
 
 	{
-		arr = new Label[] { Player_Pos1, Player_Pos2, Player_Pos3, Player_Pos4, Player_Pos5 };
+		arr = new Label[]{Player_Pos1, Player_Pos2, Player_Pos3, Player_Pos4, Player_Pos5};
 	}
 
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
@@ -62,46 +61,32 @@ public class HighscoreController {
 	 */
 	@FXML
 	void initialize() throws InterruptedException {
-		// List<String[]> highscore_list = DatabaseController.GetHighscore();
-		JSONObject messageJSON = new JSONObject();
-		messageJSON.put("sql_get_highscore", "true");
-		//source.submit(String.valueOf(messageJSON));
-		Thread.sleep(2000);
+		List<String[]> highscore_list = DatabaseController.GetHighscore();
 
-		for (int i = 0; i < highscoreList.size(); ++i) {
-			for (int j = 0; j < highscoreList.get(i).length; ++j) {
-				System.out.println(highscoreList.get(i)[j]);
-				Player_Pos1.setText(highscoreList.get(i)[j]);
+		for (int i = 0; i < highscore_list.size(); ++i) {
+			for (int j = 0; j < highscore_list.get(i).length; ++j) {
+				System.out.println(highscore_list.get(i)[j]);
+				Player_Pos1.setText(highscore_list.get(i)[j]);
 			}
 		}
 
 		// ToDo : Auslagern in eine schöne Schleife
-		Player_Pos1.setText(highscoreList.get(0)[0]);
-		Player_Pos2.setText(highscoreList.get(1)[0]);
-		Player_Pos3.setText(highscoreList.get(2)[0]);
-		Player_Pos4.setText(highscoreList.get(3)[0]);
-		Player_Pos5.setText(highscoreList.get(4)[0]);
+		Player_Pos1.setText(highscore_list.get(0)[0]);
+		Player_Pos2.setText(highscore_list.get(1)[0]);
+		Player_Pos3.setText(highscore_list.get(2)[0]);
+		Player_Pos4.setText(highscore_list.get(3)[0]);
+		Player_Pos5.setText(highscore_list.get(4)[0]);
 
-		Player_Pos1_Points.setText(highscoreList.get(0)[1]);
-		Player_Pos2_Points.setText(highscoreList.get(1)[1]);
-		Player_Pos3_Points.setText(highscoreList.get(2)[1]);
-		Player_Pos4_Points.setText(highscoreList.get(3)[1]);
-		Player_Pos5_Points.setText(highscoreList.get(4)[1]);
+		Player_Pos1_Points.setText(highscore_list.get(0)[1]);
+		Player_Pos2_Points.setText(highscore_list.get(1)[1]);
+		Player_Pos3_Points.setText(highscore_list.get(2)[1]);
+		Player_Pos4_Points.setText(highscore_list.get(3)[1]);
+		Player_Pos5_Points.setText(highscore_list.get(4)[1]);
 
-		Player_Pos1_Date.setText(highscoreList.get(0)[2]);
-		Player_Pos2_Date.setText(highscoreList.get(1)[2]);
-		Player_Pos3_Date.setText(highscoreList.get(2)[2]);
-		Player_Pos4_Date.setText(highscoreList.get(3)[2]);
-		Player_Pos5_Date.setText(highscoreList.get(4)[2]);
-	}
-
-	/**
-	 * toDo
-	 *
-	 * @param list
-	 */
-	public static void setHighscoreList(JSONArray list) {
-		HighscoreController.highscoreList = null;
-		HighscoreController.highscoreList = Collections.singletonList(list.join(",").split(","));
+		Player_Pos1_Date.setText(highscore_list.get(0)[2]);
+		Player_Pos2_Date.setText(highscore_list.get(1)[2]);
+		Player_Pos3_Date.setText(highscore_list.get(2)[2]);
+		Player_Pos4_Date.setText(highscore_list.get(3)[2]);
+		Player_Pos5_Date.setText(highscore_list.get(4)[2]);
 	}
 }

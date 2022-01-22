@@ -74,11 +74,9 @@ public class DatabaseController {
 				String[] currentRow = new String[] { set.getString(1), set.getString(2), set.getString(3) };
 				highscoreList.add(currentRow);
 			}
-
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-
 		return highscoreList;
 	}
 
