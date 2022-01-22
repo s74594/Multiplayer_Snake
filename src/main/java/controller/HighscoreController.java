@@ -66,7 +66,7 @@ public class HighscoreController {
 
 		for (int i = 0; i < highscore_list.size(); ++i) {
 			for (int j = 0; j < highscore_list.get(i).length; ++j) {
-				System.out.println(highscore_list.get(i)[j]);
+				// System.out.println(highscore_list.get(i)[j]);
 				Player_Pos1.setText(highscore_list.get(i)[j]);
 			}
 		}

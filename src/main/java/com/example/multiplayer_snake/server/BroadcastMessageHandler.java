@@ -47,6 +47,18 @@ public class BroadcastMessageHandler extends MessageHandler {
             String highscoreTableJSONString = new Gson().toJson(highscoreTable);
             answerJSON.put("sql_highscore_table_answer", highscoreTableJSONString);
         }
+        // Set game data
+        if (messageJSON.has("sql_set_gamedata") == true) {
+            String player1_id = messageJSON.getString("sql_set_gamedata_player1id");
+            String player2_id = messageJSON.getString("sql_set_gamedata_player2id");
+            int point_counter_player1 = messageJSON.getInt("sql_set_gamedata_player1_points");
+            int point_counter_player2 = messageJSON.getInt("sql_set_gamedata_player2_points");
+            String formatDateTimeStart = messageJSON.getString("sql_set_gamedata_startTime");
+            String formatDateTime = messageJSON.getString("sql_set_gamedata_datenow");
+            int gameDuration = messageJSON.getInt("sql_set_gamedata_duration");
+            DatabaseController.setSpielstand(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);
+            answerJSON.put("sql_set_gamedata_answer", "true");
+        }
         SnakeServer.broadcast(String.valueOf(answerJSON));
     }
 }
