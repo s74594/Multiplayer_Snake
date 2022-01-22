@@ -1,10 +1,20 @@
 package controller;
 
 import com.example.multiplayer_snake.model.SocketClient;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * handles communication with server
@@ -122,6 +132,30 @@ public class NetworkController {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static List<String[]> getHighscoreTable() {
+        LinkedList<String[]> highscoreTable = new LinkedList<>();
+        //send message
+        JSONObject messageOutJSON = new JSONObject();
+        messageOutJSON.put("sql_get_highscore_table", "true");
+        SocketClient.writer.println(messageOutJSON);
+        SocketClient.writer.flush();
+        // answer message
+        String messageIn;
+        try {
+            while ((messageIn = SocketClient.reader.readLine()) != null) {
+                JSONObject messageInJSON = new JSONObject(messageIn);
+                if ((messageInJSON.has("sql_highscore_table_answer"))) {
+                    Type listType = new TypeToken<LinkedList<String[]>>() {}.getType();
+                    highscoreTable = new Gson().fromJson(messageInJSON.getString("sql_highscore_table_answer"), listType);
+                    return highscoreTable;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return highscoreTable;
     }
 
     public void multiplayerSnakeStatus(String name, String points, String eatFruit, String gameOver, String snakeX, String snakeY) {

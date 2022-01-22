@@ -6,8 +6,9 @@ module com.example.multiplayer_snake {
 	requires javafx.graphics;
 	requires org.json;
 	requires java.logging;
+    requires gson;
 
-	opens com.example.multiplayer_snake to javafx.fxml;
+    opens com.example.multiplayer_snake to javafx.fxml;
 	opens controller to javafx.fxml;
 
 	exports com.example.multiplayer_snake;

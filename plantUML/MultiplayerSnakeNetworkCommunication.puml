@@ -38,6 +38,6 @@ note left
 optional for future
 multi-client multiplayer feature
 end note
-Client -> Server: "Player 2" Status : {"Player": name, "Points": points, "Eatfruit": eatFruit, "Gameover": gameOver, "SnakeX": snakeX, "SnakeY": snakeY}
+Client <- Server: "Player 2" Status : {"Player": name, "Points": points, "Eatfruit": eatFruit, "Gameover": gameOver, "SnakeX": snakeX, "SnakeY": snakeY}
 note over Client, Server: All messages are JSON Strings
 @enduml

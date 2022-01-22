@@ -1,12 +1,11 @@
 package com.example.multiplayer_snake.server;
 
 import controller.DatabaseController;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
+import org.json.JSONObject;;
 import java.io.BufferedReader;
 import java.time.LocalDateTime;
 import java.util.List;
+import com.google.gson.*;
 
 /**
  * handles incoming messages and broadcasts them
@@ -42,12 +41,11 @@ public class BroadcastMessageHandler extends MessageHandler {
             DatabaseController.Insert_Highscore(messageJSON.getString("sql_highscore_player"), LocalDateTime.now(), messageJSON.getInt("sql_highscore_points"));
             answerJSON.put("sql_highscore_answer", "true");
         }
-        // Get highscore
+        // Get highscore table
         if (messageJSON.has("sql_get_highscore_table") == true) {
-            JSONArray highscoreTableJSON = new JSONArray();
             List<String[]> highscoreTable = DatabaseController.GetHighscore();
-            highscoreTableJSON.putAll(highscoreTable);
-            answerJSON.put("sql_highscore_table_answer", highscoreTableJSON);
+            String highscoreTableJSONString = new Gson().toJson(highscoreTable);
+            answerJSON.put("sql_highscore_table_answer", highscoreTableJSONString);
         }
         SnakeServer.broadcast(String.valueOf(answerJSON));
     }

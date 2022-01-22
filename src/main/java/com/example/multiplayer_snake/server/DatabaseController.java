@@ -9,17 +9,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * handles communication with database
- */
 public class DatabaseController {
 
-	/**
-	 * starts connection to database
-	 *
-	 * @return database connection
-	 */
+	@SuppressWarnings("exports")
 	public static Connection connect() {
+		// SQLite connection string
+		// String url = "jdbc:sqlite:src/SQL Lite Database/Snake_System.db";
 		String url = "jdbc:sqlite:src/SQL Lite Database/Snake_System.db";
 		Connection conn = null;
 		try {
@@ -30,12 +25,6 @@ public class DatabaseController {
 		return conn;
 	}
 
-	/**
-	 * retrieves password for given user from database
-	 *
-	 * @param name
-	 * @return the password
-	 */
 	public static String Select_Player_PW(String name) {
 		try {
 			String sql = "SELECT players.password FROM players WHERE players.name='" + name + "'";
@@ -50,15 +39,6 @@ public class DatabaseController {
 		}
 	}
 
-
-	/**
-	 * inserts database entry for new player (registration)
-	 *
-	 * @param name
-	 * @param pw
-	 * @param pw_check
-	 * @return success or not
-	 */
 	public static String Insert_Player(String name, String pw, String pw_check) {
 		Connection conn = DatabaseController.connect();
 		try {
@@ -80,11 +60,6 @@ public class DatabaseController {
 		return "Notwendige Returnmeldung";
 	}
 
-	/**
-	 * retrieves highscore list from database
-	 *
-	 * @return the highscore list
-	 */
 	public static List<String[]> GetHighscore() {
 		List<String[]> highscoreList = new LinkedList<String[]>();
 		try {
@@ -99,21 +74,12 @@ public class DatabaseController {
 				String[] currentRow = new String[] { set.getString(1), set.getString(2), set.getString(3) };
 				highscoreList.add(currentRow);
 			}
-
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-
 		return highscoreList;
 	}
 
-	/**
-	 * inserts new highscore in database
-	 *
-	 * @param player_id
-	 * @param datenow
-	 * @param points
-	 */
 	public static void Insert_Highscore(String player_id, LocalDateTime datenow, int points) {
 		Connection conn = DatabaseController.connect();
 
@@ -132,15 +98,61 @@ public class DatabaseController {
 		}
 	}
 
+	public static String getPlayerId(String player_name) {
+		Connection conn = DatabaseController.connect();
+		System.out.println("SELECT player_id FROM players WHERE name=" + player_name + ";");
+
+		try {
+			String sql = "SELECT players.player_id FROM players WHERE players.name='" + player_name + "';";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			String player_ID = rs.getString(1);
+			System.out.println(rs);
+			conn.close();
+
+			return player_ID.toString();
+		} catch (SQLException e) {
+			String x = e.getMessage();
+			return x;
+		}
+	}
+
+
+
+	public static void setSpielstand(String player1id,
+									 String player2id,
+									 int player1_points,
+									 int player2_points,
+									 String startTime,
+									 String datenow,
+									 int duration) {
+		Connection conn = DatabaseController.connect();
+
+		try {
+			System.out.println(player1id + ", " + player2id +
+					", "+ player1_points + ", " + player2_points + ", " +startTime + ", " + datenow + ", " + duration +");");
+
+			String sql = "INSERT INTO games( player1_id, player2_id,player1_points,player2_points,start_datetime,end_datetime, duration) VALUES (" + player1id + ", " + player2id +
+					", "+ player1_points + ", " + player2_points + ", " +startTime + ", " + datenow + ", " + duration +");";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.println(rs);
+			conn.close();
+		} catch (SQLException e) {
+			String x = e.getMessage();
+			System.out.println(e);
+		}
+	}
+
 	/**
 	 * Insert a new row into the 'snakecolor' table
-	 *
 	 * @param value
 	 */
+	@SuppressWarnings("exports")
 	public void Insert_Custom_Snake_Color(Color value) {
 		Connection conn = DatabaseController.connect();
 
-		// String sqlInsertString = "INSERT INTO snakecolor (id, hexcolor) VALUES (1, '" + value + "' )";
+//		String sqlInsertString = "INSERT INTO snakecolor (id, hexcolor) VALUES (1, '" + value + "' )";
 		String sqlUpdateString = "UPDATE snakecolor SET hexcolor = '" + value + "' WHERE snakecolor.id = 1;";
 
 		try {
