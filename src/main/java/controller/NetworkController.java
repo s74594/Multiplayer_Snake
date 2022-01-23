@@ -2,17 +2,12 @@ package controller;
 
 import com.example.multiplayer_snake.model.SocketClient;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -109,8 +104,8 @@ public class NetworkController {
     public static boolean setHighscore(String p, int points) {
         //send message
         JSONObject messageOutJSON = new JSONObject();
-        messageOutJSON.put("sql_highscore_player", p);
-        messageOutJSON.put("sql_highscore_points", points);
+        messageOutJSON.put("sql_set_highscore_player", p);
+        messageOutJSON.put("sql_set_highscore_points", points);
         SocketClient.writer.println(messageOutJSON);
         SocketClient.writer.flush();
         // answer message
@@ -118,8 +113,8 @@ public class NetworkController {
         try {
             while ((messageIn = SocketClient.reader.readLine()) != null) {
                 JSONObject messageInJSON = new JSONObject(messageIn);
-                if ((messageInJSON.has("sql_highscore_answer"))) {
-                    if (messageInJSON.getString("sql_highscore_answer").equals("true")) {
+                if ((messageInJSON.has("sql_set_highscore_answer"))) {
+                    if (messageInJSON.getString("sql_set_highscore_answer").equals("true")) {
                         System.out.println("Highscore successfully set");
                         return true;
                     } else {
@@ -174,7 +169,7 @@ public class NetworkController {
      * @param datenow
      * @param duration
      */
-    public static boolean setSpielstand(String player1id, String player2id, int player1_points, int player2_points, String startTime, String datenow, int duration) {
+    public static boolean setGamedata(String player1id, String player2id, int player1_points, int player2_points, String startTime, String datenow, int duration) {
         //send message
         JSONObject messageOutJSON = new JSONObject();
         messageOutJSON.put("sql_set_gamedata", "true");
@@ -207,6 +202,28 @@ public class NetworkController {
         }
         return false;
     }
+
+    public static String getPlayerId(String playerName) {
+        //send message
+        JSONObject messageOutJSON = new JSONObject();
+        messageOutJSON.put("sql_get_playerid", playerName);
+        SocketClient.writer.println(messageOutJSON);
+        SocketClient.writer.flush();
+        // answer message
+        String messageIn;
+        try {
+            while ((messageIn = SocketClient.reader.readLine()) != null) {
+                JSONObject messageInJSON = new JSONObject(messageIn);
+                if ((messageInJSON.has("sql_get_playerid_answer"))) {
+                    return messageInJSON.getString("sql_get_playerid_answer");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "error getPlayerID";
+    }
+
 
     public void multiplayerSnakeStatus(String name, String points, String eatFruit, String gameOver, String snakeX, String snakeY) {
         JSONObject snakeStatus = new JSONObject();

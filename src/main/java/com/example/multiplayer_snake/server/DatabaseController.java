@@ -11,10 +11,12 @@ import java.util.Objects;
 
 public class DatabaseController {
 
-    @SuppressWarnings("exports")
+    /**
+     * opens connection to database
+     *
+     * @return database connection
+     */
     public static Connection connect() {
-        // SQLite connection string
-        // String url = "jdbc:sqlite:src/SQL Lite Database/Snake_System.db";
         String url = "jdbc:sqlite:src/SQL Lite Database/Snake_System.db";
         Connection conn = null;
         try {
@@ -25,6 +27,12 @@ public class DatabaseController {
         return conn;
     }
 
+    /**
+     * retrives password for selected player from database
+     *
+     * @param name
+     * @return users password
+     */
     public static String Select_Player_PW(String name) {
         try {
             String sql = "SELECT players.password FROM players WHERE players.name='" + name + "'";
@@ -39,6 +47,14 @@ public class DatabaseController {
         }
     }
 
+    /**
+     * creates player in database
+     *
+     * @param name
+     * @param pw
+     * @param pw_check
+     * @return success of operation
+     */
     public static String Insert_Player(String name, String pw, String pw_check) {
         Connection conn = DatabaseController.connect();
         try {
@@ -60,6 +76,11 @@ public class DatabaseController {
         return "Notwendige Returnmeldung";
     }
 
+    /**
+     * retrieves data for highscore table from database
+     *
+     * @return highscore table
+     */
     public static List<String[]> GetHighscore() {
         List<String[]> highscoreList = new LinkedList<String[]>();
         try {
@@ -80,6 +101,13 @@ public class DatabaseController {
         return highscoreList;
     }
 
+    /**
+     * creates highscore in database
+     *
+     * @param player_id
+     * @param datenow
+     * @param points
+     */
     public static void Insert_Highscore(String player_id, LocalDateTime datenow, int points) {
         Connection conn = DatabaseController.connect();
 
@@ -98,6 +126,12 @@ public class DatabaseController {
         }
     }
 
+    /**
+     * retrieves playerID from database
+     *
+     * @param player_name
+     * @return playerID
+     */
     public static String getPlayerId(String player_name) {
         Connection conn = DatabaseController.connect();
         System.out.println("SELECT player_id FROM players WHERE name=" + player_name + ";");
@@ -118,13 +152,24 @@ public class DatabaseController {
     }
 
 
-    public static void setSpielstand(String player1id,
-                                     String player2id,
-                                     int player1_points,
-                                     int player2_points,
-                                     String startTime,
-                                     String datenow,
-                                     int duration) {
+    /**
+     * creates list of played games in database
+     *
+     * @param player1id
+     * @param player2id
+     * @param player1_points
+     * @param player2_points
+     * @param startTime
+     * @param datenow
+     * @param duration
+     */
+    public static void setGamedata(String player1id,
+                                   String player2id,
+                                   int player1_points,
+                                   int player2_points,
+                                   String startTime,
+                                   String datenow,
+                                   int duration) {
         Connection conn = DatabaseController.connect();
 
         try {

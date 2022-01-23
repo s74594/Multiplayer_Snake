@@ -409,9 +409,10 @@ public class ArenaController {
                 String formatDateTimeStart = game_start.format(formatter);
                 endDate = new Date();
                 gameDuration = (int) ((endDate.getTime() - startDate.getTime()) / 1000);
-                player1_id = DatabaseController.getPlayerId(namePlayer1.getText());
+                // player1_id = DatabaseController.getPlayerId(namePlayer1.getText());  // local
+                player1_id = NetworkController.getPlayerId(namePlayer1.getText());  // network
                 // DatabaseController.setSpielstand(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);  // local
-                NetworkController.setSpielstand(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);  // network
+                NetworkController.setGamedata(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);  // network
                 timer.stop();
                 timerPlayerTwo.stop();
                 gameSelection();
@@ -463,9 +464,10 @@ public class ArenaController {
                 String formatDateTimeStart = game_start.format(formatter);
                 endDate = new Date();
                 gameDuration = (int) ((endDate.getTime() - startDate.getTime()) / 1000);
-                player1_id = DatabaseController.getPlayerId(namePlayer1.getText());
+                // player1_id = DatabaseController.getPlayerId(namePlayer1.getText());  // local
+                player1_id = NetworkController.getPlayerId(namePlayer1.getText());  // network
                 // DatabaseController.setSpielstand(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);  // local
-				NetworkController.setSpielstand(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);  // network
+				NetworkController.setGamedata(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);  // network
                 timer.stop();
                 timerPlayerTwo.stop();
                 gameSelection();

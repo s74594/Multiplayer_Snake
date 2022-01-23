@@ -1,6 +1,5 @@
 package com.example.multiplayer_snake.server;
 
-import controller.DatabaseController;
 import org.json.JSONObject;;
 import java.io.BufferedReader;
 import java.time.LocalDateTime;
@@ -37,9 +36,9 @@ public class BroadcastMessageHandler extends MessageHandler {
             answerJSON.put("sql_register_user_answer", "true");
         }
         // Set highscore
-        if (messageJSON.has("sql_highscore_player") == true) {
-            DatabaseController.Insert_Highscore(messageJSON.getString("sql_highscore_player"), LocalDateTime.now(), messageJSON.getInt("sql_highscore_points"));
-            answerJSON.put("sql_highscore_answer", "true");
+        if (messageJSON.has("sql_set_highscore_player") == true) {
+            DatabaseController.Insert_Highscore(messageJSON.getString("sql_set_highscore_player"), LocalDateTime.now(), messageJSON.getInt("sql_set_highscore_points"));
+            answerJSON.put("sql_set_highscore_answer", "true");
         }
         // Get highscore table
         if (messageJSON.has("sql_get_highscore_table") == true) {
@@ -56,8 +55,13 @@ public class BroadcastMessageHandler extends MessageHandler {
             String formatDateTimeStart = messageJSON.getString("sql_set_gamedata_startTime");
             String formatDateTime = messageJSON.getString("sql_set_gamedata_datenow");
             int gameDuration = messageJSON.getInt("sql_set_gamedata_duration");
-            DatabaseController.setSpielstand(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);
+            DatabaseController.setGamedata(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);
             answerJSON.put("sql_set_gamedata_answer", "true");
+        }
+        // Get playerID
+        if (messageJSON.has("sql_get_playerid") == true) {
+            String playerID = DatabaseController.getPlayerId(messageJSON.getString("sql_get_playerid"));
+            answerJSON.put("sql_get_playerid_answer", playerID);
         }
         SnakeServer.broadcast(String.valueOf(answerJSON));
     }

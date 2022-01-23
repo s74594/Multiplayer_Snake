@@ -24,20 +24,35 @@ Client -> Server: User Registration Request: {"sql_register_user": name, "sql_re
 Client <-- Server: User Registration Response: {"sql_register_user_answer": "true"}
 == Set Highscore ==
 autonumber 30 "<font color=red><b>message "
-Client -> Server: Set Highscore Request: {"sql_highscore_player": p, "sql_highscore_points": points}
-Client <-- Server: Set Highscore Response: {"sql_highscore_answer": "true"}
+Client -> Server: Set Highscore Request: {"sql_set_highscore_player": p, "sql_set_highscore_points": points}
+Client <-- Server: Set Highscore Response: {"sql_set_highscore_answer": "true"}
 == Get Highscore Table ==
 autonumber 40 "<font color=red><b>message "
 Client -> Server: Get Highscore Table Request JSON: {"sql_get_highscore_table": "true"}
+Client <-- Server: Get Highscore Table Response: {"sql_get_highscore_table_answer": array[]}
+== Get PlayerID ==
+autonumber 50 "<font color=red><b>message "
+Client -> Server: Get PlayerID Request: {"sql_get_playerid": player}
+Client <-- Server: Get PlayerID Response: {"sql_get_playerid_answer": "true"}
+== Set Gamedata ==
+autonumber 60 "<font color=red><b>message "
+Client -> Server: Set Gamedata Request JSON: {"sql_set_gamedata": "true", "sql_set_gamedata_player1id": "player1id", "sql_set_gamedata_player2id": "player2id", "sql_set_gamedata_player1_points": player1_points}
+note right
+message 60
+         =
+one message
+end note
+autonumber 60 "<font color=red><b>message "
+Client -> Server: Set Gamedata Request JSON: {"sql_set_gamedata_player2_points": player2_points, "sql_set_gamedata_startTime": startTime, "sql_set_gamedata_datenow": "datenow", "sql_set_gamedata_duration", duration}
 Client <-- Server: Get Highscore Table Response: {"sql_get_highscore_table_answer": tableArray}
 
 == Player Status ==
-autonumber 50 "<font color=red><b>message "
+autonumber 70 "<font color=red><b>message "
 Client -> Server: "Player 1" Status : {"Player": name, "Points": points, "Eatfruit": eatFruit, "Gameover": gameOver, "SnakeX": snakeX, "SnakeY": snakeY}
 note left
 optional for future
 multi-client multiplayer feature
 end note
 Client <- Server: "Player 2" Status : {"Player": name, "Points": points, "Eatfruit": eatFruit, "Gameover": gameOver, "SnakeX": snakeX, "SnakeY": snakeY}
-note over Client, Server: All messages are JSON Strings
+note over Client, Server: All messages are JSON strings
 @enduml
