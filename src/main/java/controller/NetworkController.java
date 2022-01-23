@@ -173,12 +173,12 @@ public class NetworkController {
         //send message
         JSONObject messageOutJSON = new JSONObject();
         messageOutJSON.put("sql_set_gamedata", "true");
-        messageOutJSON.put("sql_set_gamedata_player1id", "player1id");
-        messageOutJSON.put("sql_set_gamedata_player2id", "player2id");
+        messageOutJSON.put("sql_set_gamedata_player1id", player1id);
+        messageOutJSON.put("sql_set_gamedata_player2id", player2id);
         messageOutJSON.put("sql_set_gamedata_player1_points", player1_points);
         messageOutJSON.put("sql_set_gamedata_player2_points", player2_points);
         messageOutJSON.put("sql_set_gamedata_startTime", startTime);
-        messageOutJSON.put("sql_set_gamedata_datenow", "datenow");
+        messageOutJSON.put("sql_set_gamedata_datenow", datenow);
         messageOutJSON.put("sql_set_gamedata_duration", duration);
         SocketClient.writer.println(messageOutJSON);
         SocketClient.writer.flush();

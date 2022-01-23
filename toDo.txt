@@ -1,0 +1,7 @@
+//todo
+- ausloggen muss noch implementiert werden
+- einfache Auswertung fehlt noch
+- Highscore Liste Schleife (optional)
+- Frucht so implementieren das beide Schlangen Frucht essen können -> Daniel
+- Schlangenfarbe in Datenbank speichern -> Susanne
+- Entwurfsmuster suchen und implementieren -> Andreas
