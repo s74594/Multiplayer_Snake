@@ -35,12 +35,12 @@
       </MenuBar>
       <ImageView fx:id="avatarPlayerOne" fitHeight="40.0" fitWidth="40.0" layoutX="15.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../image/avatar/img_4.png" />
+            <Image url="@image/avatar/img_4.png" />
          </image>
       </ImageView>
       <ImageView fx:id="avatarPlayerTwo" fitHeight="40.0" fitWidth="40.0" layoutX="15.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../image/avatar/img_3.png" />
+            <Image url="@image/avatar/img_3.png" />
          </image>
       </ImageView>
       <Text fx:id="namePlayer1" layoutX="60.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Player 1&gt;">
@@ -72,12 +72,12 @@
       <Circle fx:id="snakeHeadPlayerTwo" layoutX="950.0" layoutY="450.0" radius="10.0" strokeType="INSIDE" />
       <ImageView fx:id="foodImage" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);" visible="false">
          <image>
-            <Image url="@../../../../../../image/raspberry.png" />
+            <Image url="@image/raspberry.png" />
          </image>
       </ImageView>
       <ImageView fx:id="foodImage1" fitHeight="20.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);" visible="false">
          <image>
-            <Image url="@../../../../../../image/pear.png" />
+            <Image url="@image/pear.png" />
          </image>
       </ImageView>
    </children>

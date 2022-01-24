@@ -18,7 +18,7 @@
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../glyphicons/png/glyphicons-214-arrow-up.png" />
+                  <Image url="@glyphicons/png/glyphicons-214-arrow-up.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -29,7 +29,7 @@
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../glyphicons/png/glyphicons-211-arrow-left.png" />
+                  <Image url="@glyphicons/png/glyphicons-211-arrow-left.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -40,7 +40,7 @@
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../glyphicons/png/glyphicons-213-arrow-down.png" />
+                  <Image url="@glyphicons/png/glyphicons-213-arrow-down.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -51,7 +51,7 @@
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../glyphicons/png/glyphicons-212-arrow-right.png" />
+                  <Image url="@glyphicons/png/glyphicons-212-arrow-right.png" />
                </image>
             </ImageView>
          </graphic></Button>

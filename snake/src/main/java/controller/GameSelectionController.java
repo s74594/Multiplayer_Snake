@@ -50,7 +50,7 @@ public class GameSelectionController {
 	@FXML
 	void onHigshoreBTNClick(ActionEvent event) {
 		try {
-			URL url = new File("src/main/resources/com/example/multiplayer_snake/highscoreView.fxml").toURI().toURL();
+			URL url = new File("snake/src/main/resources/com/example/snake/highscoreView.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 			Scene scene = new Scene(rootParent);
 			Stage stage = new Stage();

@@ -1,7 +1,7 @@
 package snakeserver.handler;
 
 import com.google.gson.Gson;
-import snakeserver.controller.DatabaseController;
+import snakeserver.database.DatabaseController;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.time.LocalDateTime;

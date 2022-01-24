@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Snake_System.db" uuid="2c48dc32-9b41-4f58-9fa9-95ca5e61ded6">
-      <driver-ref>sqlite.xerial</driver-ref>
+    <data-source source="LOCAL" name="Snake_System driver - Snake_System.db" uuid="2c48dc32-9b41-4f58-9fa9-95ca5e61ded6">
+      <driver-ref>4fe507f7-a597-4ef3-a347-eb765ba91eb4</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/server/src/snakeserver/database/Snake_System.db</jdbc-url>

@@ -96,10 +96,10 @@ public class LoginController {
 		NetworkFacade.connect();
 
 		/* add images to arraylist */
-		pictures.add("image/avatar/img_1.png");
-		pictures.add("image/avatar/img_2.png");
-		pictures.add("image/avatar/img_3.png");
-		pictures.add("image/avatar/img_4.png");
+		pictures.add("snake/src/main/resources/com/example/snake/image/avatar/img_1.png");
+		pictures.add("snake/src/main/resources/com/example/snake/image/avatar/img_2.png");
+		pictures.add("snake/src/main/resources/com/example/snake/image/avatar/img_3.png");
+		pictures.add("snake/src/main/resources/com/example/snake/image/avatar/img_4.png");
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class LoginController {
 		this.event = event;
 		try {
 			if (NetworkFacade.login(player_name.getText(), player_password.getText())) {
-				URL url = new File("src/main/resources/com/example/multiplayer_snake/arenaView.fxml").toURI().toURL();
+				URL url = new File("snake/src/main/resources/com/example/snake/arenaView.fxml").toURI().toURL();
 				//Parent rootParent = FXMLLoader.load(url);
 
 				FXMLLoader loader = new FXMLLoader(url); // change
@@ -199,7 +199,7 @@ public class LoginController {
 		try {
 			Stage stage = (Stage) backButton.getScene().getWindow();
 			stage.close();
-			URL url = new File("src/main/resources/com/example/multiplayer_snake/loginView.fxml").toURI().toURL();
+			URL url = new File("snake/src/main/resources/com/example/snake/loginView.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 			Scene scene = new Scene(rootParent);
 			stage.setTitle("Snake");
@@ -221,7 +221,7 @@ public class LoginController {
 	@FXML
 	protected void onSignupButtonClick(ActionEvent event) {
 		try {
-			URL url = new File("src/main/resources/com/example/multiplayer_snake/registryView.fxml").toURI().toURL();
+			URL url = new File("snake/src/main/resources/com/example/snake/registryView.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 			Stage stage = (Stage) exitButton.getScene().getWindow();
 			stage.hide();

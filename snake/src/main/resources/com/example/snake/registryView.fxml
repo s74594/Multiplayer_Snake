@@ -28,17 +28,17 @@
             <PasswordField fx:id="r_pw_check" layoutX="50.0" layoutY="115.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;" />
             <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="14.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../glyphicons/png/glyphicons-4-user.png" />
+                  <Image url="@glyphicons/png/glyphicons-4-user.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="15.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../glyphicons/png/glyphicons-205-unlock.png" />
+                  <Image url="@glyphicons/png/glyphicons-205-unlock.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="15.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../glyphicons/png/glyphicons-205-unlock.png" />
+                  <Image url="@glyphicons/png/glyphicons-205-unlock.png" />
                </image>
             </ImageView>
             <Button fx:id="register" layoutX="29.0" layoutY="204.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02; -fx-cursor: hand;" text="Sign-up">
@@ -64,7 +64,7 @@
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../glyphicons/png/glyphicons-211-arrow-left.png" />
+                  <Image url="@glyphicons/png/glyphicons-211-arrow-left.png" />
                </image>
             </ImageView>
          </graphic>

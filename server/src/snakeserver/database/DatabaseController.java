@@ -1,4 +1,4 @@
-package snakeserver.controller;
+package snakeserver.database;
 
 import javafx.scene.paint.Color;
 
