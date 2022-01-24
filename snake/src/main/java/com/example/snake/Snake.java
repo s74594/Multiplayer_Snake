@@ -25,7 +25,7 @@ public class Snake extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		try {
-			URL url = new File("src/main/resources/com/example/multiplayer_snake/loginView.fxml").toURI().toURL();
+			URL url = new File("snake/src/main/resources/com/example/snake/loginView.fxml").toURI().toURL();
 			Parent rootParent = FXMLLoader.load(url);
 			Scene scene = new Scene(rootParent);
 			stage.setTitle("Snake");

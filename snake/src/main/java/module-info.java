@@ -4,5 +4,5 @@ module com.example.snake {
     requires network;
     requires java.sql;
 
-    opens com.example.snake to javafx.fxml;
+    opens com.example.snake to javafx.fxml, javafx.graphics;
 }

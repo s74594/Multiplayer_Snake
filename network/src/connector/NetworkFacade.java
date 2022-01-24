@@ -240,4 +240,8 @@ public class NetworkFacade {
         SocketClient.writer.println(snakeStatus);
         SocketClient.writer.flush();
     }
+
+    public static void main(String[] args) {
+        connect();
+    }
 }
