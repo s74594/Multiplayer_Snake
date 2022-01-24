@@ -1,35 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Snake_System" uuid="cd48199d-606e-4261-be5c-d7f9ec9ec632">
+    <data-source source="LOCAL" name="Snake_System.db" uuid="2c48dc32-9b41-4f58-9fa9-95ca5e61ded6">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:src\SQL Lite Database\Snake_System.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/server/src/snakeserver/database/Snake_System.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
-        </library>
-        <library>
-          <url>file://$PROJECT_DIR$/SQL Lite Database/sqlite-jdbc-3.36.0.3.jar</url>
-        </library>
-      </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="Snake_System [2]" uuid="a254ca22-992b-4936-92e3-099c2d8aa0fb">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\0_Intellij\Multiplayer_Snake\src\SQL Lite Database\Snake_System.db</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
-        </library>
-        <library>
-          <url>file://$PROJECT_DIR$/SQL Lite Database/sqlite-jdbc-3.36.0.3.jar</url>
-        </library>
-      </libraries>
     </data-source>
   </component>
 </project>

@@ -26,7 +26,9 @@ public class Snake extends Application {
 	public void start(Stage stage) throws IOException {
 		try {
 			URL url = new File("snake/src/main/resources/com/example/snake/loginView.fxml").toURI().toURL();
+			//FXMLLoader url = new FXMLLoader(getClass().getResource("loginView.fxml"));
 			Parent rootParent = FXMLLoader.load(url);
+			//Parent rootParent = url.load();
 			Scene scene = new Scene(rootParent);
 			stage.setTitle("Snake");
 			stage.setResizable(false);
@@ -36,7 +38,8 @@ public class Snake extends Application {
 			centerWindowScreen.CenterScreen(stage);
 		} catch (Exception e) {
 			// handle exception
-			System.err.println(e.getMessage());
+			//System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

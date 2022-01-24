@@ -17,7 +17,7 @@ public class DatabaseController {
      * @return database connection
      */
     public static Connection connect() {
-        String url = "jdbc:sqlite:src/SQL Lite Database/Snake_System.db";
+        String url = "jdbc:sqlite:server/src/snakeserver/database/Snake_System.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);

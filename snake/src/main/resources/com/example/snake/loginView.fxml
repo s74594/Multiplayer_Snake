@@ -59,12 +59,12 @@
                   </Button>
                   <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="50.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../glyphicons/png/glyphicons-4-user.png" />
+                        <Image url="@./glyphicons/png/glyphicons-4-user.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="50.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../glyphicons/png/glyphicons-205-unlock.png" />
+                        <Image url="@./glyphicons/png/glyphicons-205-unlock.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="pw_incorrect" layoutX="50.0" layoutY="110.0" prefHeight="25.0" prefWidth="180.0" text="Password or name incorrect !" textFill="RED" visible="false">
@@ -92,7 +92,7 @@
                   </Label>
                   <ImageView fx:id="avatarIMG" fitHeight="80.0" fitWidth="80.0" layoutX="99.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../image/avatar/img_1.png" />
+                        <Image url="@./image/avatar/img_1.png" />
                      </image></ImageView>
                   <Button fx:id="nextBTN" layoutX="173.0" layoutY="249.0" mnemonicParsing="false" onAction="#onNextClick" style="-fx-background-color: transparent;" text="&gt;" textFill="WHITE">
                      <font>
