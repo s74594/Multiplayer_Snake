@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #7c9e01;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="358.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="51.0" layoutY="6.0" prefHeight="425.0" prefWidth="270.0" style="-fx-background-color: #607a00; -fx-background-radius: 10px;">
+               <children>
+                  <TextField id="player_name" fx:id="player_name" layoutX="72.0" layoutY="25.0" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;" text="Testaccount">
+                     <tooltip>
+                        <Tooltip text="Set your user name" />
+                     </tooltip>
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="12.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField fx:id="player_password" layoutX="72.0" layoutY="64.0" onKeyReleased="#Enter_Play" style="-fx-background-color: transparent; -fx-border-color: #e89f02; -fx-border-width: 0px 0px 2px 0px;" text="Test">
+                     <tooltip>
+                        <Tooltip text="Set your password" />
+                     </tooltip>
+                  </PasswordField>
+                  <Button fx:id="button_play" layoutX="50.0" layoutY="343.0" mnemonicParsing="false" onAction="#onPlayButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02;" text="Play">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="exitButton" layoutX="141.0" layoutY="343.0" mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #e89f02;" text="Exit">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Text layoutX="50.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not a member?">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="button_signup" layoutX="161.0" layoutY="385.0" mnemonicParsing="false" onAction="#onSignupButtonClick" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign up!" textFill="#110eed" underline="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="50.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@glyphicons/png/glyphicons-4-user.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="50.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@glyphicons/png/glyphicons-205-unlock.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="pw_incorrect" layoutX="50.0" layoutY="110.0" prefHeight="25.0" prefWidth="180.0" text="Password or name incorrect !" textFill="RED" visible="false">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <ColorPicker fx:id="snakeColorPicker" layoutX="141.0" layoutY="153.0" onAction="#customizeSnakeColor" prefWidth="80.0" style="-fx-background-color: #e89f02;">
+                     <value>
+                        <Color />
+                     </value>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ColorPicker>
+                  <Label layoutX="50.0" layoutY="159.0" text="Snake Color:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="100.0" layoutY="193.0" text="Select Avatar:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="avatarIMG" fitHeight="80.0" fitWidth="80.0" layoutX="99.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/avatar/img_1.png" />
+                     </image></ImageView>
+                  <Button fx:id="nextBTN" layoutX="173.0" layoutY="249.0" mnemonicParsing="false" onAction="#onNextClick" style="-fx-background-color: transparent;" text="&gt;" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="backBTN" layoutX="64.0" layoutY="249.0" mnemonicParsing="false" onAction="#onBackClick" style="-fx-background-color: transparent;" text="&lt;" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </right>
+   <top>
+      <AnchorPane prefHeight="117.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="234.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Snake" textAlignment="CENTER">
+               <font>
+                  <Font name="Harrington" size="50.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="160.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="160.0" layoutY="65.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="140.0" layoutY="105.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="180.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="140.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="140.0" layoutY="65.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="140.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1e609e" height="20.0" layoutX="120.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="200.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Circle fill="#fdff1f" layoutX="84.0" layoutY="135.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
