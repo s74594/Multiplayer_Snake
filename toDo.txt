@@ -4,4 +4,4 @@
 - Highscore Liste Schleife (optional)
 - Frucht so implementieren das beide Schlangen Frucht essen können -> Daniel
 - Schlangenfarbe in Datenbank speichern -> Susanne
-- Entwurfsmuster suchen und implementieren -> Andreas
+- Entwurfsmuster suchen und implementieren -> erledigt

@@ -4,7 +4,7 @@
 '+ Indicates public
 '# Indicates protected
 
-package client {
+package "snake <module>" {
     class Snake {
         +start(Stage) : void
         +{static}main(String[]) : void
@@ -42,20 +42,6 @@ package client {
             -gameOverPlayerTwo() : void
             +generateFood() : void
         }
-
-        class InputMessageHandler {
-            ~reader : BufferedReader
-            +InputMessageHandler(BufferedReader)
-            +run() : void
-            +onMessage(String) : void
-        }
-
-        class SocketClient {
-            +{static}socket : Socket
-            +{static}writer : PrintWriter
-            +{static}reader : BufferedReader
-            +{static}connect() : void
-        }
     }
 
     package resources {
@@ -73,7 +59,6 @@ package client {
     }
 
     package controller {
-    together {
         class HighscoreController {
                     +Player_Pos1 : Label
                     +Player_Pos2 : Label
@@ -180,15 +165,6 @@ package client {
             ~onNextClick(ActionEvent) : void
             ~onBackClick(ActionEvent) : void
         }
-
-
-        class NetworkController {
-                    +{static}connect() : void
-                    +{static}login(String, String) : boolean
-                    +{static}register(String, String) : boolean
-                    +{static}setHighscore(String, int) : boolean
-        }
-
         class GameSelectionController {
                     -exitBTN : Button
                     -highscoreBTN : Button
@@ -197,78 +173,119 @@ package client {
                     ~onExitButtonClick(ActionEvent) : void
                     ~onHighscoreBTNClick(ActionEvent) : void
                     ~onRestartGameBTNClick(ActionEvent) : void
-                }
-    }
+        }
 
-    class CenterWindowScreen {
-        +CenterScreen(Stage) : void
+        class CenterWindowScreen {
+            +CenterScreen(Stage) : void
+        }
     }
-    }
-
     'connections
     Snake -- loginView_fxml
 
     ArenaController --> Player
-    ArenaController --> arenaView_fxml
-    ArenaController -- NetworkController
+    ArenaController -u-> arenaView_fxml
+
     ArenaController -- CenterWindowScreen
     ArenaController -- frameGameInfo_fxml
-    LoginController --> loginView_fxml
-    LoginController --> registryView_fxml
-    LoginController -- NetworkController
+    LoginController -u-> loginView_fxml
+    LoginController -u-> registryView_fxml
+
     LoginController -- CenterWindowScreen
-    GameSelectionController -- HighscoreController
-    GameSelectionController --> gameSelectionView_fxml
-    GameSelectionController -- CenterWindowScreen
-    HighscoreController --> highscoreView_fxml
-    HighscoreController -- NetworkController
-    NetworkController -- SocketClient
-    SocketClient -- InputMessageHandler
-    }
+    GameSelectionController -u- HighscoreController
+    GameSelectionController -u-> gameSelectionView_fxml
+    GameSelectionController -r- CenterWindowScreen
+    HighscoreController -u-> highscoreView_fxml
 
     'layout
-    LoginController -[hidden]> ArenaController
-    ArenaController -[hidden]> HighscoreController
-    HighscoreController -[hidden]> GameSelectionController
-    GameSelectionController -[hidden]> NetworkController
+    ArenaController -[hidden]> Player
 
+    package "network <module>" {
+        package connector {
+            class NetworkFacade {
+                +{static}connect() : void
+                +{static}login(String, String) : boolean
+                +{static}register(String, String) : boolean
+                +{static}setHighscore(String, int) : boolean
+            }
+            'connections
+            HighscoreController -- NetworkFacade
+            LoginController -- NetworkFacade
+            ArenaController -- NetworkFacade
+        }
+        package "socket <module>" {
+                package client {
+                    class InputMessageHandler {
+                        ~reader : BufferedReader
+                        +InputMessageHandler(BufferedReader)
+                        +run() : void
+                        +onMessage(String) : void
+                    }
 
-package Server {
-    class SnakeServer {
-    ~{static}clientWriters : Set<PrintWriter>
-    +{static}main(String[]) : void
-    ~{static}broadcast(String) : void
+                    class SocketClient {
+                        +{static}socket : Socket
+                        +{static}writer : PrintWriter
+                        +{static}reader : BufferedReader
+                        +{static}connect() : void
+                    }
+                    'connections
+                    NetworkFacade -- SocketClient
+                    SocketClient -- InputMessageHandler
+
+                    'layout
+                    NetworkFacade -[hidden]r> SocketClient
+                }
+            }
     }
 
-    class DatabaseController {
-        +{static}connect() : Connection
-        +{static}Select_Player_PW(String) : String
-        +{static}Insert_Player(String, String, String) : String
-        +{static}Get_Highscore() : List<String[]>
-        +{static}Insert_Highscore(String, LocalDateTime, int) : void
-        +Insert_Custom_Snake_Color(Color) : void
-    }
 
-    database "Database" {
-    }
+}
 
-    class MessageHandler {
-        ~reader : BufferedReader
-        +MessageHandler(BufferedReader)
-        +run() : void
-        +onMessage(String) : void
-    }
+package "server <module>" {
+    package snakeserver {
+            class SnakeServer {
+                +{static}main(String[] args) : void
+            }
 
-    class BroadcastMessageHandler{
-        +BroadcastMessageHandler(BufferedReader)
-        +onMessage(String) : void
-    }
+        package database {
+            class DatabaseController {
+                +{static}connect() : Connection
+                +{static}Select_Player_PW(String) : String
+                +{static}Insert_Player(String, String, String) : String
+                +{static}Get_Highscore() : List<String[]>
+                +{static}Insert_Highscore(String, LocalDateTime, int) : void
+                +Insert_Custom_Snake_Color(Color) : void
+            }
 
-    'connections
-    SnakeServer -- DatabaseController
-    DatabaseController <--> "Database"
-    SnakeServer -- BroadcastMessageHandler
-    BroadcastMessageHandler --> MessageHandler
+            database "Database" {
+            }
+        }
+
+        package handler {
+            class BroadcastMessageHandler{
+                +BroadcastMessageHandler(BufferedReader)
+                +onMessage(String) : void
+            }
+
+            class MessageHandler {
+                ~reader : BufferedReader
+                +MessageHandler(BufferedReader)
+                +run() : void
+                +onMessage(String) : void
+            }
+
+            class Socket {
+                ~{static}clientWriters : Set<PrintWriter>
+                +{static}start(String[]) : void
+                ~{static}broadcast(String) : void
+            }
+        }
+        'connections
+        SnakeServer -- Socket
+        Socket -- DatabaseController
+        DatabaseController <--> "Database"
+        Socket -- BroadcastMessageHandler
+        BroadcastMessageHandler --> MessageHandler
+    }
 }
 'connections
 SocketClient <..> SnakeServer : Network
