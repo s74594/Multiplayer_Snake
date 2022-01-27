@@ -37,29 +37,20 @@ public class ArenaController {
 
     private Player model; // Controller -> Model connection
     private Player modelPlayerTwo; // Controller -> Model connection
-    @SuppressWarnings("exports")
     @FXML
     public Text namePlayer1;
-    @SuppressWarnings("exports")
     @FXML
     public Text scorePlayer1;
-    @SuppressWarnings("exports")
     @FXML
     public Text namePlayer2;
-    @SuppressWarnings("exports")
     @FXML
     public Text scorePlayer2;
-    @SuppressWarnings("exports")
     @FXML
     public Pane playGround;
-    @SuppressWarnings("exports")
     @FXML
     public Pane playGround2;
-    /* Snake */
-    @SuppressWarnings("exports")
     @FXML
     public Circle snakeHead; // snake head player one
-    @SuppressWarnings("exports")
     @FXML
     public Circle snakeTailCircle; // snake tail player one
     @FXML
@@ -74,12 +65,10 @@ public class ArenaController {
     private MenuItem HighscoreBTN;
     @FXML
     private MenuItem gameInfoBTNMenu;
-    @SuppressWarnings("exports")
     @FXML
     public ImageView foodImage; // raspberry
     @FXML
     public ImageView foodImage1; // pear
-
     @FXML
     public String player1_id;
     @FXML
@@ -90,13 +79,8 @@ public class ArenaController {
     public LocalDateTime gameEnd;
     @FXML
     public int gameDuration;
-
     Date startDate;
     Date endDate;
-    //	@FXML
-//	private Label gameOver;
-//	private boolean isApplicationRunning = false;
-//	private Timeline animation = new Timeline();
     public static double millis = 0.3;
     public int point_counter_player1 = 0;
     public int point_counter_player2 = 0;
@@ -105,6 +89,7 @@ public class ArenaController {
     @FXML
     public Circle[] bodyPlayerTwoCircles = new Circle[1000]; // snake body player two
     CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
+
     // Animation timer for player one
     KeyEvent animationDirection = null;
     final AnimationTimer timer = new AnimationTimer() {
@@ -150,14 +135,6 @@ public class ArenaController {
         startDate = new Date();
         player2_id = "3";
 
-		/*
-		 * Threading - Nebenläufigkeit
-		 *
-
-
-//		generateFood(); // initialize food
-//		generateFoodPlayerTwo(); // initialize food for Player Two
-
 		/* Threading - Nebenläufigkeit */
         /**
          * Generierte Frucht wird nach einer bestimmten Zeit an einem neuen Punkt erneut
@@ -166,7 +143,6 @@ public class ArenaController {
         Thread thread = new Thread() {
             public void run() {
                 System.out.println("Thread Running");
-
                 try {
                     generateFood();
                     generateFoodPlayerTwo();
@@ -237,7 +213,6 @@ public class ArenaController {
         // Format a color in a web-friendly hex format
         String webFormat = String.format("#%02x%02x%02x", (int) (255 * value.getRed()), (int) (255 * value.getGreen()),
                 (int) (255 * value.getBlue()));
-
         // Wert des Color pickers wird als hexformat in color.txt geschrieben und in
         // initialize() ausgelesen.
         try {
@@ -410,9 +385,7 @@ public class ArenaController {
                 String formatDateTimeStart = game_start.format(formatter);
                 endDate = new Date();
                 gameDuration = (int) ((endDate.getTime() - startDate.getTime()) / 1000);
-                // player1_id = DatabaseController.getPlayerId(namePlayer1.getText());  // local
                 player1_id = NetworkFacade.getPlayerId(namePlayer1.getText());  // network
-                // DatabaseController.setSpielstand(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);  // local
                 NetworkFacade.setGamedata(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);  // network
                 timer.stop();
                 timerPlayerTwo.stop();
@@ -465,9 +438,7 @@ public class ArenaController {
                 String formatDateTimeStart = game_start.format(formatter);
                 endDate = new Date();
                 gameDuration = (int) ((endDate.getTime() - startDate.getTime()) / 1000);
-                // player1_id = DatabaseController.getPlayerId(namePlayer1.getText());  // local
                 player1_id = NetworkFacade.getPlayerId(namePlayer1.getText());  // network
-                // DatabaseController.setSpielstand(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);  // local
 				NetworkFacade.setGamedata(player1_id, player2_id, point_counter_player1, point_counter_player2, formatDateTimeStart, formatDateTime, gameDuration);  // network
                 timer.stop();
                 timerPlayerTwo.stop();

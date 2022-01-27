@@ -59,12 +59,10 @@ public class HighscoreController {
 	 */
 	@FXML
 	void initialize() throws InterruptedException {
-		// List<String[]> highscore_list = DatabaseController.GetHighscore();  // local
 		List<String[]> highscore_list = NetworkFacade.getHighscoreTable();  // network
 
 		for (int i = 0; i < highscore_list.size(); ++i) {
 			for (int j = 0; j < highscore_list.get(i).length; ++j) {
-				// System.out.println(highscore_list.get(i)[j]);
 				Player_Pos1.setText(highscore_list.get(i)[j]);
 			}
 		}
