@@ -95,7 +95,7 @@ public class Player {
 		this.snakeYP2 = yp2;
 		eatFruit = false;
 
-//		System.out.println("Key: " + direction + " SnakeX: " + snakeXP2 + " SnakeY: " + snakeYP2); // Debug
+		// System.out.println("Key: " + direction + " SnakeX: " + snakeXP2 + " SnakeY: " + snakeYP2); // Debug
 
 		if (direction != null) {
 			switch (direction) {
@@ -165,7 +165,6 @@ public class Player {
 	}
 
 	public void checkCollision() {
-
 		// Head touches a fruit
 		if (fruitBounds.intersects(snakeBounds)) {
 			eatFruit = true;
@@ -182,7 +181,6 @@ public class Player {
 				snakeBodySizePlayerTwo += 5;
 			}
 		}
-
 		// Head touches a border
 		// Kollisionserkennung
 		// 1 = Temporär ausgeschaltet
@@ -257,7 +255,6 @@ public class Player {
 		/* set fruit */
 		fruitX = posX;
 		fruitY = posY;
-
 		// System.out.println("Fruit location(x): " + fruitX + " Fruit location(y): " + fruitY); // Debug
 	}
 }

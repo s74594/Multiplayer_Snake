@@ -138,8 +138,6 @@ public class LoginController {
 
 				centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
 				graphicsContext = canvas.getGraphicsContext2D();
-
-//				run();
 			} else {
 				pw_incorrect.setVisible(true);
 			}
@@ -232,10 +230,8 @@ public class LoginController {
 			signUp_stage.setResizable(false);
 			signUp_stage.setScene(scene);
 			signUp_stage.show();
-
 			centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
 		} catch (Exception e) {
-			// handle error exception
 			System.err.println(e.getMessage());
 		}
 	}
@@ -286,7 +282,6 @@ public class LoginController {
 			avatarIMG.setImage(image);
 			indexIMGCounter++;
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -309,7 +304,7 @@ public class LoginController {
 	void onBackClick(ActionEvent event) {
 		indexIMGCounter--;
 		nextBTN.setDisable(false);
-//		System.out.println(">> " + indexIMGCounter); // debug counter
+		// System.out.println(">> " + indexIMGCounter); // debug counter
 		try {
 			Image image = new Image(new FileInputStream(pictures.get(indexIMGCounter)));
 			avatarIMG.setImage(image);
@@ -317,9 +312,7 @@ public class LoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// Prevent index out of bounds error
-		// and disable back button
+		// Prevent index out of bounds error and disable back button
 		if (indexIMGCounter == 0)
 			backBTN.setDisable(true);
 	}
