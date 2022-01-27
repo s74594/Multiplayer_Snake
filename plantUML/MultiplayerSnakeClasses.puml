@@ -60,9 +60,9 @@ package "snake <module>" {
 
     package controller {
         class HighscoreController {
-                    +Player_Pos1 : Label
-                    +Player_Pos2 : Label
-                    +Player_Pos3 : Label
+                    -Player_Pos1 : Label
+                    -Player_Pos2 : Label
+                    -Player_Pos3 : Label
                     -Player_Pos4 : Label
                     -Player_Pos5 : Label
                     -Player_Pos1_Points : Label

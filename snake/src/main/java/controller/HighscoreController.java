@@ -13,11 +13,11 @@ import java.util.List;
 public class HighscoreController {
 
 	@FXML
-	public Label Player_Pos1;
+	private Label Player_Pos1;
 	@FXML
-	public Label Player_Pos2;
+	private Label Player_Pos2;
 	@FXML
-	public Label Player_Pos3;
+	private Label Player_Pos3;
 	@FXML
 	private Label Player_Pos4;
 	@FXML
