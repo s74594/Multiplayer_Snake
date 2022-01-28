@@ -20,9 +20,10 @@
                   <MenuItem fx:id="exitBTNMenu" mnemonicParsing="false" onAction="#onExitMenuClick" text="Exit Game" />
                </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Highscore">
+            <Menu mnemonicParsing="false" text="Player">
                <items>
                   <MenuItem fx:id="HighscoreBTN" mnemonicParsing="false" onAction="#onHighscoreBTNClick" text="Highscore" />
+                   <MenuItem fx:id="RatingBTN" mnemonicParsing="false" onAction="#onRatingBTNClick" text="Played Games" />
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">

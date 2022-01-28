@@ -90,8 +90,6 @@ public class DatabaseController {
             ResultSet set = stmt.executeQuery(sql);
 
             while (set.next()) {
-                // String datum = set.getString(3);
-                // Date date = new Date(Long.parseLong(datum));
                 String[] currentRow = new String[]{set.getString(1), set.getString(2), set.getString(3)};
                 highscoreList.add(currentRow);
             }
@@ -186,6 +184,24 @@ public class DatabaseController {
             String x = e.getMessage();
             System.out.println(e);
         }
+    }
+
+    public static List<String[]> GetRating(String playerName) {
+        List<String[]> ratingList = new LinkedList<String[]>();
+        try {
+            String sql = "SELECT COUNT(Games.game_id), ROUND(AVG(Games.player1_points),2), SUM(Games.duration) from Games WHERE Games.player1_id = " + getPlayerId(playerName);
+            Connection conn = DatabaseController.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet set = stmt.executeQuery(sql);
+
+            while (set.next()) {
+                String[] currentRow = new String[]{set.getString(1), set.getString(2), set.getString(3)};
+                ratingList.add(currentRow);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return ratingList;
     }
 
     /**

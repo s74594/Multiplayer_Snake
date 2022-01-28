@@ -27,8 +27,8 @@ public class NetworkFacade {
      * requests password for given user from server and
      * compare it with user entered password
      *
-     * @param name
-     * @param password
+     * @param name player name
+     * @param password player password
      * @return if user entered password is same as in server database saved
      */
     public static boolean login(String name, String password) {
@@ -62,8 +62,8 @@ public class NetworkFacade {
     /**
      * registers an user in server database
      *
-     * @param name
-     * @param password
+     * @param name future player name
+     * @param password future player password
      * @return successfully insert into database
      */
     public static boolean register(String name, String password) {
@@ -97,8 +97,8 @@ public class NetworkFacade {
     /**
      * sets highscore in server database
      *
-     * @param p
-     * @param points
+     * @param p player name
+     * @param points new highscore
      * @return successfully insert in database
      */
     public static boolean setHighscore(String p, int points) {
@@ -161,13 +161,13 @@ public class NetworkFacade {
     /**
      * sets game data in server database
      *
-     * @param player1id
-     * @param player2id
-     * @param player1_points
-     * @param player2_points
-     * @param startTime
-     * @param datenow
-     * @param duration
+     * @param player1id player 1 ID
+     * @param player2id player 2 ID
+     * @param player1_points player 1 points
+     * @param player2_points player 2 points
+     * @param startTime game start time
+     * @param datenow game end date and time
+     * @param duration game duration
      */
     public static boolean setGamedata(String player1id, String player2id, int player1_points, int player2_points, String startTime, String datenow, int duration) {
         //send message
@@ -203,6 +203,12 @@ public class NetworkFacade {
         return false;
     }
 
+    /**
+     * retrieves playerID from database
+     *
+     * @param playerName player name
+     * @return playerID
+     */
     public static String getPlayerId(String playerName) {
         //send message
         JSONObject messageOutJSON = new JSONObject();
@@ -224,7 +230,46 @@ public class NetworkFacade {
         return "error getPlayerID";
     }
 
+    /**
+     * retrieves data of played games
+     *
+     * @return rating table
+     */
+    public static List<String[]> getRatingTable(String playerName) {
+        LinkedList<String[]> ratingTable = new LinkedList<>();
+        //send message
+        JSONObject messageOutJSON = new JSONObject();
+        messageOutJSON.put("sql_get_rating_table", playerName);
+        SocketClient.writer.println(messageOutJSON);
+        SocketClient.writer.flush();
+        // answer message
+        String messageIn;
+        try {
+            while ((messageIn = SocketClient.reader.readLine()) != null) {
+                JSONObject messageInJSON = new JSONObject(messageIn);
+                if ((messageInJSON.has("sql_rating_table_answer"))) {
+                    Type listType = new TypeToken<LinkedList<String[]>>() {}.getType();
+                    ratingTable = new Gson().fromJson(messageInJSON.getString("sql_rating_table_answer"), listType);
+                    return ratingTable;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ratingTable;
+    }
 
+
+    /**
+     * realtime status of snake (for multiplayer)
+     *
+     * @param name player name
+     * @param points points
+     * @param eatFruit fruit eated
+     * @param gameOver gameover
+     * @param snakeX snake x position
+     * @param snakeY snake y position
+     */
     public void multiplayerSnakeStatus(String name, String points, String eatFruit, String gameOver, String snakeX, String snakeY) {
         JSONObject snakeStatus = new JSONObject();
         try {
