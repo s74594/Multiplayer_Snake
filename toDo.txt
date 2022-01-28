@@ -1,7 +1,7 @@
 //todo
-- ausloggen muss noch implementiert werden
+- ausloggen muss noch implementiert werden -> restart button aktiviert, altes Fenster muss noch geschlossen werden
 - einfache Auswertung fehlt noch
-- Highscore Liste Schleife (optional)
+- Highscore Liste Schleife (optional) -> meiner Meinung ist gut so (keep it simple prinzip)
 - Frucht so implementieren das beide Schlangen Frucht essen können -> Daniel
 - Schlangenfarbe in Datenbank speichern -> Susanne
 - Entwurfsmuster suchen und implementieren -> erledigt

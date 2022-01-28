@@ -271,7 +271,7 @@ public class ArenaController {
     @FXML
     void onGameInfoMenuClick(ActionEvent event) {
         try {
-            URL url = new File("snake/src/main/resources/com/example/snake/frameGameInfo.fxml").toURI().toURL();
+            URL url = new File("snake/src/main/resources/com/example/snake/infoView.fxml").toURI().toURL();
             Parent rootParent = FXMLLoader.load(url);
             Scene scene = new Scene(rootParent);
             Stage stage = new Stage();
@@ -314,7 +314,7 @@ public class ArenaController {
      */
     private void gameSelection() {
         try {
-            URL url = new File("snake/src/main/resources/com/example/snake/gameSelectionView.fxml").toURI().toURL();
+            URL url = new File("snake/src/main/resources/com/example/snake/selectionView.fxml").toURI().toURL();
             Parent rootParent = FXMLLoader.load(url);
             Scene scene = new Scene(rootParent);
             Stage stage = new Stage();

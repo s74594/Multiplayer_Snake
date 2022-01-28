@@ -206,7 +206,6 @@ public class LoginController {
 			stage.show();
 			centerWindowScreen.CenterScreen(stage);
 		} catch (Exception e) {
-			// handle error exception
 			System.err.println(e.getMessage());
 		}
 	}
