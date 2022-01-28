@@ -47,9 +47,9 @@ package "snake <module>" {
     package resources {
         class arenaView_fxml {}
 
-        class frameGameInfo_fxml {}
+        class infoView_fxml {}
 
-        class gameSelectionView_fxml {}
+        class selectionView_fxml {}
 
         class highscoreView_fxml {}
 
@@ -165,7 +165,7 @@ package "snake <module>" {
             ~onNextClick(ActionEvent) : void
             ~onBackClick(ActionEvent) : void
         }
-        class GameSelectionController {
+        class SelectionController {
                     -exitBTN : Button
                     -highscoreBTN : Button
                     -restartBTN : Button
@@ -186,14 +186,14 @@ package "snake <module>" {
     ArenaController -u-> arenaView_fxml
 
     ArenaController -- CenterWindowScreen
-    ArenaController -- frameGameInfo_fxml
+    ArenaController -- infoView_fxml
     LoginController -u-> loginView_fxml
     LoginController -u-> registryView_fxml
 
     LoginController -- CenterWindowScreen
-    GameSelectionController -u- HighscoreController
-    GameSelectionController -u-> gameSelectionView_fxml
-    GameSelectionController -r- CenterWindowScreen
+    SelectionController -u- HighscoreController
+    SelectionController -u-> selectionView_fxml
+    SelectionController -r- CenterWindowScreen
     HighscoreController -u-> highscoreView_fxml
 
     'layout
