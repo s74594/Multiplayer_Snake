@@ -34,7 +34,6 @@ import java.util.Scanner;
  * controls the main game window
  */
 public class ArenaController {
-
     private Player model; // Controller -> Model connection
     private Player modelPlayerTwo; // Controller -> Model connection
     @FXML
@@ -206,7 +205,7 @@ public class ArenaController {
     /**
      * customizes the color of a snake
      *
-     * @param value
+     * @param value snake color
      */
     public void custom_Snake_Color(Color value) {
 
@@ -250,7 +249,7 @@ public class ArenaController {
     /**
      * if exit button clicked method will be executed
      *
-     * @param event
+     * @param event click on exit button in menu
      */
     @FXML
     void onExitMenuClick(ActionEvent event) {
@@ -266,7 +265,7 @@ public class ArenaController {
     /**
      * if game info button clicked method will be executed
      *
-     * @param event
+     * @param event click on info button in menu
      */
     @FXML
     void onGameInfoMenuClick(ActionEvent event) {
@@ -289,7 +288,7 @@ public class ArenaController {
     /**
      * if highscore button clicked method will be executed
      *
-     * @param event
+     * @param event click on highscore button
      */
     @FXML
     void onHighscoreBTNClick(ActionEvent event) {
@@ -332,7 +331,7 @@ public class ArenaController {
     /**
      * keyboard control of snakes
      *
-     * @param keyEvent
+     * @param keyEvent steering event of snakes
      */
     @FXML
     void snakeSteering(KeyEvent keyEvent) {

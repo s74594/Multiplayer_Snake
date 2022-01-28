@@ -12,7 +12,7 @@ public class CenterWindowScreen {
 	/**
 	 * centers application window on screen
 	 *
-	 * @param stage
+	 * @param stage that will be centered
 	 */
 	public void CenterScreen(Stage stage) {
 		Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();

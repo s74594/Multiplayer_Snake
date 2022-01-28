@@ -18,8 +18,6 @@ public class Socket {
 
     /**
      * starts server socket, creates reader and writer for receiving and sending data
-     *
-     * @param args
      */
     public static void start() {
         try {
@@ -50,7 +48,7 @@ public class Socket {
     /**
      * broadcasts messages to all connected clients
      *
-     * @param message
+     * @param message to broadcast to all connected clients
      */
     static void broadcast(String message) {
         for (PrintWriter writer : clientWriters) {

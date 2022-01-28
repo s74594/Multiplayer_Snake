@@ -21,7 +21,7 @@ public class Snake extends Application {
     /**
      * JavaFX start method
      *
-     * @param stage
+     * @param stage loginView
      */
     @SuppressWarnings("exports")
     @Override

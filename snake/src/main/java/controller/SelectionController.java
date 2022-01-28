@@ -44,7 +44,7 @@ public class SelectionController {
     /**
      * if highscore button clicked method will be executed
      *
-     * @param event
+     * @param event click on highscore button
      */
     @FXML
     void onHighscoreBTNClick(ActionEvent event) {
@@ -67,7 +67,7 @@ public class SelectionController {
     /**
      * if restart button clicked method will be executed
      *
-     * @param event
+     * @param event click on restart button
      */
     @FXML
     void onRestartGameBTNClick(ActionEvent event) {

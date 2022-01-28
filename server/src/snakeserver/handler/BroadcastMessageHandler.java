@@ -20,7 +20,7 @@ public class BroadcastMessageHandler extends MessageHandler {
     /**
      * evaluates incoming messages and delivers the requested information as json string
      *
-     * @param message
+     * @param message transfered message
      */
     @Override
     public void onMessage(String message) {

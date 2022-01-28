@@ -61,8 +61,7 @@ public class LoginController {
 	private Button backButton;
 	@FXML
 	private ColorPicker snakeColorPicker; // color picker to customize a snake
-
-	/* Image Slider */
+	// Image Slider
 	@FXML
 	private ImageView avatarIMG;
 	@FXML
@@ -105,7 +104,7 @@ public class LoginController {
 	/**
 	 * if play button clicked method will be executed
 	 *
-	 * @param event
+	 * @param event click on play button
 	 */
 	@FXML
 	protected void onPlayButtonClick(ActionEvent event) {
@@ -142,7 +141,6 @@ public class LoginController {
 				pw_incorrect.setVisible(true);
 			}
 		} catch (Exception e) {
-			// handle error exception
 			System.err.println(e.getMessage());
 		}
 	}
@@ -150,7 +148,7 @@ public class LoginController {
 	/**
 	 * customize the color of the snake
 	 *
-	 * @param event
+	 * @param event from color picker
 	 */
 	@FXML
 	void customizeSnakeColor(ActionEvent event) {
@@ -161,7 +159,7 @@ public class LoginController {
 	/**
 	 * toDo
 	 *
-	 * @param e
+	 * @param e pressed key
 	 * @throws SQLException
 	 */
 	@FXML
@@ -173,7 +171,7 @@ public class LoginController {
 	/**
 	 * if exit button clicked method will be executed
 	 *
-	 * @param event
+	 * @param event click on exit button
 	 */
 	@FXML
 	protected void onExitButtonClick(ActionEvent event) {
@@ -190,7 +188,7 @@ public class LoginController {
 	/**
 	 * if back button clicked method will be executed
 	 *
-	 * @param event
+	 * @param event click on back button
 	 */
 	@FXML
 	protected void onBackButton_Click(ActionEvent event) {
@@ -213,7 +211,7 @@ public class LoginController {
 	/**
 	 * if signup button clicked method will be executed
 	 *
-	 * @param event
+	 * @param event click on signup button
 	 */
 	@FXML
 	protected void onSignupButtonClick(ActionEvent event) {
@@ -239,7 +237,7 @@ public class LoginController {
 	/**
 	 * if register button clicked method will be executed
 	 *
-	 * @param actionEvent
+	 * @param actionEvent click on register button
 	 * @throws InterruptedException
 	 */
 	public void onRegisterButtonClick(ActionEvent actionEvent) throws InterruptedException {
@@ -261,7 +259,7 @@ public class LoginController {
 	/**
 	 * if clear button clicked method will be executed
 	 *
-	 * @param actionEvent
+	 * @param actionEvent click on clear
 	 */
 	public void onClearClick(ActionEvent actionEvent) {
 		r_name.clear();
@@ -272,7 +270,7 @@ public class LoginController {
 	/**
 	 * if image slider selection clicked method will be executed
 	 *
-	 * @param event
+	 * @param event click on next on slider
 	 */
 	@FXML
 	void onNextClick(ActionEvent event) {
@@ -283,12 +281,9 @@ public class LoginController {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
-		// Prevent index out of bounds error
-		// and disable next button
+		// Prevent index out of bounds error and disable next button
 		if (indexIMGCounter == 4)
 			nextBTN.setDisable(true);
-
 		// Enable back button
 		if (indexIMGCounter == 1)
 			backBTN.setDisable(false);
@@ -297,7 +292,7 @@ public class LoginController {
 	/**
 	 * if back button clicked method will be executed
 	 *
-	 * @param event
+	 * @param event click on back on slider
 	 */
 	@FXML
 	void onBackClick(ActionEvent event) {

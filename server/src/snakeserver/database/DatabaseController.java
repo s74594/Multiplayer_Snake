@@ -50,9 +50,9 @@ public class DatabaseController {
     /**
      * creates player in database
      *
-     * @param name
-     * @param pw
-     * @param pw_check
+     * @param name player name
+     * @param pw player password
+     * @param pw_check player password check
      * @return success of operation
      */
     public static String Insert_Player(String name, String pw, String pw_check) {
@@ -104,9 +104,9 @@ public class DatabaseController {
     /**
      * creates highscore in database
      *
-     * @param player_id
-     * @param datenow
-     * @param points
+     * @param player_id playerID
+     * @param datenow date and time
+     * @param points points
      */
     public static void Insert_Highscore(String player_id, LocalDateTime datenow, int points) {
         Connection conn = DatabaseController.connect();
@@ -129,8 +129,8 @@ public class DatabaseController {
     /**
      * retrieves playerID from database
      *
-     * @param player_name
-     * @return playerID
+     * @param player_name player name
+     * @return playerID playerID
      */
     public static String getPlayerId(String player_name) {
         Connection conn = DatabaseController.connect();
@@ -155,13 +155,13 @@ public class DatabaseController {
     /**
      * creates list of played games in database
      *
-     * @param player1id
-     * @param player2id
-     * @param player1_points
-     * @param player2_points
-     * @param startTime
-     * @param datenow
-     * @param duration
+     * @param player1id player 1 ID
+     * @param player2id player 2 ID
+     * @param player1_points player 1 points
+     * @param player2_points player 2 points
+     * @param startTime start time of game
+     * @param datenow date and time of game ending
+     * @param duration duration of game
      */
     public static void setGamedata(String player1id,
                                    String player2id,
@@ -191,7 +191,7 @@ public class DatabaseController {
     /**
      * Insert a new row into the 'snakecolor' table
      *
-     * @param value
+     * @param value color that will be inserted in database
      */
     @SuppressWarnings("exports")
     public void Insert_Custom_Snake_Color(Color value) {

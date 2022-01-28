@@ -37,9 +37,9 @@ public class Player {
 	/**
 	 * player1 snake moving
 	 *
-	 * @param x
-	 * @param y
-	 * @param direction
+	 * @param x coordinate of snake
+	 * @param y coordinate of snake
+	 * @param direction player moving direction
 	 */
 	public void movePlayer(double x, double y, KeyCode direction) {
 		this.snakeX = x;
@@ -86,9 +86,9 @@ public class Player {
 	/**
 	 * player2 snake moving
 	 *
-	 * @param xp2
-	 * @param yp2
-	 * @param direction
+	 * @param xp2 coordinate of snake
+	 * @param yp2 coordinate of snake
+	 * @param direction player moving direction
 	 */
 	public void movePlayerTwo(double xp2, double yp2, KeyCode direction) {
 		this.snakeXP2 = xp2;

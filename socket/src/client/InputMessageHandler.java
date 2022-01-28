@@ -5,6 +5,9 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * InputMessageHandler planed to use with future multiplayer feature, not used yet
+ */
 public class InputMessageHandler implements Runnable {
 
     BufferedReader reader;
