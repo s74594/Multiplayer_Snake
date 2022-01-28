@@ -11,7 +11,6 @@ import java.util.Set;
 
 /**
  * server for multiplayer snake
- *
  */
 public class Socket {
 
