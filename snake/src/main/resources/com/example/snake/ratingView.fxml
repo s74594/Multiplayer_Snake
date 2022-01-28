@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="627.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RatingController">
+   <children>
+      <Pane prefHeight="627.0" prefWidth="1144.0" style="-fx-background-color: grey;">
+         <children>
+            <Label layoutX="330.0" layoutY="90.0" prefHeight="64.0" prefWidth="475.0" text="* * * Player rating * * *" textFill="#fff600">
+               <font>
+                  <Font size="43.0" />
+
+               </font>
+            </Label>
+            <Label layoutX="118.0" layoutY="406.0" prefHeight="45.0" prefWidth="224.0" text="Playing time" textFill="#9cffb3">
+               <font>
+                  <Font name="Rockwell Nova Light" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="118.0" layoutY="351.0" prefHeight="45.0" prefWidth="224.0" text="Average score" textFill="#9cffb3">
+               <font>
+                  <Font name="Rockwell Nova Light" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="118.0" layoutY="292.0" prefHeight="45.0" prefWidth="224.0" text="Played games" textFill="#9cffb3">
+               <font>
+                  <Font name="Rockwell Nova Light" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="163.0" layoutY="238.0" prefHeight="40.0" prefWidth="117.0" text="Player" textFill="#9cffb3">
+               <font>
+                  <Font name="Rockwell Nova Light" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="Player1_Played_Games" layoutX="463.0" layoutY="294.0" prefHeight="40.0" prefWidth="117.0" text="PGames" textFill="WHITE">
+               <font>
+                  <Font name="Droid Serif Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="Player1_Average_Score" layoutX="463.0" layoutY="353.0" prefHeight="40.0" prefWidth="117.0" text="AvgScore" textFill="WHITE">
+               <font>
+                  <Font name="Droid Serif Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="Player_Playing_Time" layoutX="463.0" layoutY="408.0" prefHeight="40.0" prefWidth="117.0" text="PTime" textFill="WHITE">
+               <font>
+                  <Font name="Droid Serif Bold" size="28.0" />
+               </font>
+            </Label>
+            <Line endX="605.0" layoutX="355.0" layoutY="286.0" startX="-311.0" stroke="#85ff50" />
+            <Line endX="-100.0" endY="324.0" layoutX="480.0" layoutY="239.0" startX="-100.0" stroke="#46ff80" />
+            <Line endX="-100.0" endY="324.0" layoutX="726.0" layoutY="239.0" startX="-100.0" stroke="#46ff80" />
+            <Label fx:id="Player_Name1" layoutX="461.0" layoutY="241.0" prefHeight="40.0" prefWidth="117.0" text="Player" textFill="WHITE">
+               <font>
+                  <Font name="Droid Serif Bold" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

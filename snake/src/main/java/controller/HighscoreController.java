@@ -61,13 +61,7 @@ public class HighscoreController {
 	void initialize() throws InterruptedException {
 		List<String[]> highscore_list = NetworkFacade.getHighscoreTable();  // network
 
-		for (int i = 0; i < highscore_list.size(); ++i) {
-			for (int j = 0; j < highscore_list.get(i).length; ++j) {
-				Player_Pos1.setText(highscore_list.get(i)[j]);
-			}
-		}
-
-		// ToDo : Auslagern in eine schöne Schleife
+		// filling fields
 		Player_Pos1.setText(highscore_list.get(0)[0]);
 		Player_Pos2.setText(highscore_list.get(1)[0]);
 		Player_Pos3.setText(highscore_list.get(2)[0]);

@@ -48,6 +48,12 @@ public class BroadcastMessageHandler extends MessageHandler {
             String highscoreTableJSONString = new Gson().toJson(highscoreTable);
             answerJSON.put("sql_highscore_table_answer", highscoreTableJSONString);
         }
+        // Get rating table
+        if (messageJSON.has("sql_get_rating_table") == true) {
+            List<String[]> ratingTable = DatabaseController.GetRating(messageJSON.getString("sql_get_rating_table"));
+            String ratingTableJSONString = new Gson().toJson(ratingTable);
+            answerJSON.put("sql_rating_table_answer", ratingTableJSONString);
+        }
         // Set game data
         if (messageJSON.has("sql_set_gamedata") == true) {
             String player1_id = messageJSON.getString("sql_set_gamedata_player1id");

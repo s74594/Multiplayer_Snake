@@ -63,6 +63,8 @@ public class ArenaController {
     @FXML
     private MenuItem HighscoreBTN;
     @FXML
+    private MenuItem RatingBTN;
+    @FXML
     private MenuItem gameInfoBTNMenu;
     @FXML
     public ImageView foodImage; // raspberry
@@ -298,6 +300,29 @@ public class ArenaController {
             Scene scene = new Scene(rootParent);
             Stage stage = new Stage();
             stage.setTitle("Highscore");
+            stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+            centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    /**
+     * if rating button clicked method will be executed
+     *
+     * @param event click on rating button
+     */
+    @FXML
+    void onRatingBTNClick(ActionEvent event) {
+        try {
+            URL url = new File("snake/src/main/resources/com/example/snake/ratingView.fxml").toURI().toURL();
+            Parent rootParent = FXMLLoader.load(url);
+            Scene scene = new Scene(rootParent);
+            Stage stage = new Stage();
+            stage.setTitle("Rating");
             stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
             stage.setResizable(false);
             stage.setScene(scene);
