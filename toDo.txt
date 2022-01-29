@@ -1,7 +1,0 @@
-//todo
-- ausloggen muss noch implementiert werden -> erledigt (bug aber ok)
-- einfache Auswertung fehlt noch -> erledigt (Funktioniert, Benutzername müsste noch übergeben werden zur Zeit in Controllerklasse (RatingController) fest eingestellt)
-- Highscore Liste Schleife (optional) -> meiner Meinung ist gut so (keep it simple prinzip)
-- Frucht so implementieren das beide Schlangen Frucht essen können -> Erledigt
-- Schlangenfarbe in Datenbank speichern -> Susanne
-- Entwurfsmuster suchen und implementieren -> erledigt
