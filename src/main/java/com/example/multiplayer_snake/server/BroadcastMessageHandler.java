@@ -1,6 +1,6 @@
 package com.example.multiplayer_snake.server;
 
-import org.json.JSONObject;;
+import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,11 +1,10 @@
 package com.example.multiplayer_snake.model;
 
+import java.util.LinkedList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
-
-import java.util.LinkedList;
 
 /**
  * holds player information and controls them
@@ -46,7 +45,8 @@ public class Player {
 		this.snakeY = y;
 		eatFruit = false;
 
-		// System.out.println("Key: " + direction + " SnakeX: " + snakeX + " SnakeY: " + snakeY); // Debug
+		// System.out.println("Key: " + direction + " SnakeX: " + snakeX + " SnakeY: " +
+		// snakeY); // Debug
 
 		if (direction != null) {
 			switch (direction) {
@@ -192,31 +192,39 @@ public class Player {
 		if (collisionDetectionStatus == 0) {
 			// Collision detection for player one
 			if (snakeX <= 15) {
-			// System.out.println("Left border touched: Game Over!"); // Collision with left border
+				// System.out.println("Left border touched: Game Over!"); // Collision with left
+				// border
 				gameOver();
 			} else if (snakeX >= 1520) {
-			// System.out.println("Right border touched: Game Over!"); // Collision with right border
+				// System.out.println("Right border touched: Game Over!"); // Collision with
+				// right border
 				gameOver();
 			} else if (snakeY <= 40) {
-			// System.out.println("Top border touched: Game Over!"); // Collision with top border
+				// System.out.println("Top border touched: Game Over!"); // Collision with top
+				// border
 				gameOver();
 			} else if (snakeY > 770) {
-			// System.out.println("Bottom border touched: Game Over!"); // Collision with bottom border
+				// System.out.println("Bottom border touched: Game Over!"); // Collision with
+				// bottom border
 				gameOver();
 			}
 
 			// Collistion detection for player two
 			if (snakeXP2 <= 15) {
-			// System.out.println("Left border touched: Game Over!"); // Collision with left border
+				// System.out.println("Left border touched: Game Over!"); // Collision with left
+				// border
 				gameOverPlayerTwo();
 			} else if (snakeXP2 >= 1520) {
-			// System.out.println("Right border touched: Game Over!"); // Collision with right border
+				// System.out.println("Right border touched: Game Over!"); // Collision with
+				// right border
 				gameOverPlayerTwo();
 			} else if (snakeYP2 <= 40) {
-			// System.out.println("Top border touched: Game Over!"); // Collision with top border
+				// System.out.println("Top border touched: Game Over!"); // Collision with top
+				// border
 				gameOverPlayerTwo();
 			} else if (snakeYP2 > 770) {
-			// System.out.println("Bottom border touched: Game Over!"); // Collision with bottom border
+				// System.out.println("Bottom border touched: Game Over!"); // Collision with
+				// bottom border
 				gameOverPlayerTwo();
 			}
 		} else if (collisionDetectionStatus == 1) {
@@ -239,14 +247,13 @@ public class Player {
 		gameOverPlayerTwo = true;
 	}
 
-
 	/**
-	 *  generates food at a random positions
+	 * generates food at a random positions
 	 */
 	public void generateFood() {
 		/* place food within defined borders */
 		int minWidth = 200;
-		int maxWidth = 1500;
+		int maxWidth = 1000;
 		int minHeight = 25;
 		int maxHeight = 760;
 
@@ -258,6 +265,7 @@ public class Player {
 		fruitX = posX;
 		fruitY = posY;
 
-		// System.out.println("Fruit location(x): " + fruitX + " Fruit location(y): " + fruitY); // Debug
+		// System.out.println("Fruit location(x): " + fruitX + " Fruit location(y): " +
+		// fruitY); // Debug
 	}
 }

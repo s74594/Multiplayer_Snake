@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.net.URL;
 
@@ -16,14 +15,14 @@ import java.net.URL;
  * controls gameover screen
  */
 public class GameSelectionController {
-	
+
 	@FXML
 	private Button exitBTN;
 	@FXML
 	private Button highscoreBTN;
 	@FXML
 	private Button restartBTN;
-	
+
 	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
 
 	/**
