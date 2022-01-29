@@ -55,11 +55,11 @@ public class DatabaseController {
      * @param pw_check player password check
      * @return success of operation
      */
-    public static String Insert_Player(String name, String pw, String pw_check) {
+    public static String Insert_Player(String name, String pw, String pw_check, String snakeColor, int avatarID) {
         Connection conn = DatabaseController.connect();
         try {
             if (Objects.equals(pw, pw_check)) {
-                String sql = "INSERT INTO players (" + "name, password) " + "VALUES ( '" + name + "', '" + pw + "' );";
+                String sql = "INSERT INTO players (" + "name, password, snakecolor, avatar_id) " + "VALUES ( '" + name + "', '" + pw + "', '" + snakeColor + "', '" + avatarID +"' );";
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
                 System.out.println(rs);

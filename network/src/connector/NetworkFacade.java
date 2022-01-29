@@ -64,13 +64,17 @@ public class NetworkFacade {
      *
      * @param name future player name
      * @param password future player password
+     * @param value
+     * @param indexIMGCounter
      * @return successfully insert into database
      */
-    public static boolean register(String name, String password) {
+    public static boolean register(String name, String password, String value, int indexIMGCounter) {
         // send message
         JSONObject messageOutJSON = new JSONObject();
         messageOutJSON.put("sql_register_user", name);
         messageOutJSON.put("sql_register_pass", password);
+        messageOutJSON.put("sql_register_color", value);
+        messageOutJSON.put("sql_register_avatar_id", indexIMGCounter);
         SocketClient.writer.println(messageOutJSON);
         SocketClient.writer.flush();
         // answer message

@@ -20,7 +20,7 @@ Client -> Server: Login Request: {"sql_login_user": name}
 Client <-- Server: Login Response: {"sql_login_user": name, sql_login_user_pass": pass}
 == User Registration ==
 autonumber 20 "<font color=red><b>message "
-Client -> Server: User Registration Request: {"sql_register_user": name, "sql_register_pass": pass}
+Client -> Server: User Registration Request: {"sql_register_user": name, "sql_register_pass": pass, "sql_register_color": snakecolor, "sql_register_avatar_id": avatarID}
 Client <-- Server: User Registration Response: {"sql_register_user_answer": "true"}
 == Set Highscore ==
 autonumber 30 "<font color=red><b>message "

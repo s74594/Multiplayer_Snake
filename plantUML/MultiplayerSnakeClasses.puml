@@ -56,6 +56,8 @@ package "snake <module>" {
         class loginView_fxml {}
 
         class registryView_fxml {}
+
+        class ratingView_fxml {}
     }
 
     package controller {
@@ -105,7 +107,7 @@ package "snake <module>" {
             +point_counter_player2 : int
             +snakeBody : Circle[]
             +bodyPlayerTwoCircles : Circle[]
-            ~centerWindowScreen : CenterWindowScreen
+            ~centerWindowScreen : WindowController
             ~animationDirection : KeyEvent
             ~animationDirectionPlayerTwo : KeyEvent
             ~timer : AnimationTimer
@@ -151,7 +153,7 @@ package "snake <module>" {
             -{static}COLUMNS : int
             -{static}SQUARE_SIZE : int
             -graphicsContext : GraphicsContext
-            ~centerWindowScreen : CenterWindowScreen
+            ~centerWindowScreen : WindowController
             -event : ActionEvent
             ~initialize() : void
             #onPlayButtonClick(ActionEvent) : void
@@ -169,14 +171,23 @@ package "snake <module>" {
                     -exitBTN : Button
                     -highscoreBTN : Button
                     -restartBTN : Button
-                    ~centerWindowScreen : CenterWindowScreen
+                    ~centerWindowScreen : WindowController
                     ~onExitButtonClick(ActionEvent) : void
                     ~onHighscoreBTNClick(ActionEvent) : void
                     ~onRestartGameBTNClick(ActionEvent) : void
         }
 
-        class CenterWindowScreen {
+        class WindowController {
             +CenterScreen(Stage) : void
+        }
+
+        class LoopTaskController {
+            -loopTaskName : String
+            -timerDelay : int
+            +model : Player
+            -foodImage : ImageView
+            +LoopTaskController(String, ImageView)
+            +run()
         }
     }
     'connections
@@ -185,15 +196,16 @@ package "snake <module>" {
     ArenaController --> Player
     ArenaController -u-> arenaView_fxml
 
-    ArenaController -- CenterWindowScreen
+    ArenaController -- LoopTaskController
+    ArenaController -- WindowController
     ArenaController -- infoView_fxml
     LoginController -u-> loginView_fxml
     LoginController -u-> registryView_fxml
 
-    LoginController -- CenterWindowScreen
+    LoginController -- WindowController
     SelectionController -u- HighscoreController
     SelectionController -u-> selectionView_fxml
-    SelectionController -r- CenterWindowScreen
+    SelectionController -r- WindowController
     HighscoreController -u-> highscoreView_fxml
 
     'layout
@@ -204,7 +216,7 @@ package "snake <module>" {
             class NetworkFacade {
                 +{static}connect() : void
                 +{static}login(String, String) : boolean
-                +{static}register(String, String) : boolean
+                +{static}register(String, String, String, int) : boolean
                 +{static}setHighscore(String, int) : boolean
             }
             'connections
@@ -250,7 +262,7 @@ package "server <module>" {
             class DatabaseController {
                 +{static}connect() : Connection
                 +{static}Select_Player_PW(String) : String
-                +{static}Insert_Player(String, String, String) : String
+                +{static}Insert_Player(String, String, String, String, int) : String
                 +{static}Get_Highscore() : List<String[]>
                 +{static}Insert_Highscore(String, LocalDateTime, int) : void
                 +Insert_Custom_Snake_Color(Color) : void

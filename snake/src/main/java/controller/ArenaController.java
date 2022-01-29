@@ -93,7 +93,7 @@ public class ArenaController {
     public Circle[] snakeBody = new Circle[1000]; // snake body player one
     @FXML
     public Circle[] bodyPlayerTwoCircles = new Circle[1000]; // snake body player two
-    CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
+    WindowController centerWindowScreen = new WindowController();
 
     // Animation timer for player one
     KeyEvent animationDirection = null;
@@ -220,7 +220,7 @@ public class ArenaController {
         foodImage.setLayoutY(model.fruitY);
         foodImage.setVisible(true);
         for (int i = 1; i <= 3; i++) {
-            LoopTask loopTask = new LoopTask("LoopTask " + i, foodImage);
+            LoopTaskController loopTask = new LoopTaskController("LoopTask " + i, foodImage);
             executorService.submit(loopTask);
         }
         executorService.shutdown();

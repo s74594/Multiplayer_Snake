@@ -1,6 +1,7 @@
 package com.example.snake;
 
-import controller.CenterWindowScreen;
+import connector.NetworkFacade;
+import controller.WindowController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +13,7 @@ import java.net.URL;
 
 public class Snake extends Application {
 
-    CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
+    WindowController centerWindowScreen = new WindowController();
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -27,6 +28,7 @@ public class Snake extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            NetworkFacade.connect();
             URL url = new File("snake/src/main/resources/com/example/snake/loginView.fxml").toURI().toURL();
             Parent rootParent = FXMLLoader.load(url);
             Scene scene = new Scene(rootParent);

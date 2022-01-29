@@ -34,7 +34,7 @@ public class BroadcastMessageHandler extends MessageHandler {
         }
         // Register new user
         if (messageJSON.has("sql_register_user") == true) {
-            DatabaseController.Insert_Player(messageJSON.getString("sql_register_user"), messageJSON.getString("sql_register_pass"), messageJSON.getString("sql_register_pass"));
+            DatabaseController.Insert_Player(messageJSON.getString("sql_register_user"), messageJSON.getString("sql_register_pass"), messageJSON.getString("sql_register_pass"), messageJSON.getString("sql_register_color"), messageJSON.getInt("sql_register_avatar_id"));
             answerJSON.put("sql_register_user_answer", "true");
         }
         // Set highscore

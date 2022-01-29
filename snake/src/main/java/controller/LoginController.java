@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * controls the login window
@@ -81,7 +82,7 @@ public class LoginController {
 	private static final int SQUARE_SIZE = WIDTH / ROWS;
 	private GraphicsContext graphicsContext;
 
-	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
+	WindowController centerWindowScreen = new WindowController();
 	private ActionEvent event;
 
 	/**
@@ -92,8 +93,6 @@ public class LoginController {
 	 */
 	@FXML
 	void initialize() {
-		NetworkFacade.connect();
-
 		/* add images to arraylist */
 		pictures.add("snake/src/main/resources/com/example/snake/image/avatar/img_1.png");
 		pictures.add("snake/src/main/resources/com/example/snake/image/avatar/img_2.png");
@@ -239,9 +238,19 @@ public class LoginController {
 	 * @param actionEvent click on register button
 	 * @throws InterruptedException
 	 */
-	public void onRegisterButtonClick(ActionEvent actionEvent) throws InterruptedException {
+	public void onRegisterButtonClick(ActionEvent actionEvent) throws InterruptedException, FileNotFoundException {
 		if (r_pw.getText().equals(r_pw_check.getText())) {
-			if(NetworkFacade.register(r_name.getText(), r_pw.getText()) == true) {
+
+			File myObj = new File("color.txt");
+			Scanner reader = new Scanner(myObj);
+			String data = null;
+			while (reader.hasNextLine()) {
+				data = reader.nextLine();
+			}
+			myObj.delete();
+
+			System.out.println("WebFormat" + data);
+			if (NetworkFacade.register(r_name.getText(), r_pw.getText(), data, indexIMGCounter) == true) {
 				error_msg.setText("User registered sucessfully");
 				error_msg.setVisible(true);
 			} else {

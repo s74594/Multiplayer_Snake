@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 /**
  * starts thread for generating fruits
  */
-public class LoopTask implements Runnable {
+public class LoopTaskController implements Runnable {
 
     private String loopTaskName;
     private int timerDelay = 10000;
@@ -16,7 +16,7 @@ public class LoopTask implements Runnable {
     @FXML
     private ImageView foodImage;
 
-    public LoopTask(String loopTaskName, ImageView foodImage) {
+    public LoopTaskController(String loopTaskName, ImageView foodImage) {
         super();
         this.loopTaskName = loopTaskName;
         this.foodImage = foodImage;
@@ -42,7 +42,7 @@ public class LoopTask implements Runnable {
                 foodImage.setLayoutY(model.fruitY);
                 foodImage.setVisible(true);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }

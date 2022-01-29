@@ -10,7 +10,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -25,7 +24,7 @@ public class SelectionController {
     @FXML
     private Button restartBTN;
 
-    CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
+    WindowController centerWindowScreen = new WindowController();
 
     /**
      * if exit button clicked method will be executed

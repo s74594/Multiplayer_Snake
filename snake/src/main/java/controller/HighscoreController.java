@@ -50,7 +50,7 @@ public class HighscoreController {
 		arr = new Label[]{Player_Pos1, Player_Pos2, Player_Pos3, Player_Pos4, Player_Pos5};
 	}
 
-	CenterWindowScreen centerWindowScreen = new CenterWindowScreen();
+	WindowController centerWindowScreen = new WindowController();
 
 	/**
 	 * first method that will be executed, requests highscore data from server, fills local array

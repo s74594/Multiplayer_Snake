@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 /**
  * centers application on screen
  */
-public class CenterWindowScreen {
+public class WindowController {
 
 	/**
 	 * centers application window on screen
