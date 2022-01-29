@@ -112,12 +112,11 @@ public class LoginController {
 		try {
 			if (NetworkFacade.login(player_name.getText(), player_password.getText())) {
 				URL url = new File("snake/src/main/resources/com/example/snake/arenaView.fxml").toURI().toURL();
-				//Parent rootParent = FXMLLoader.load(url);
 
-				FXMLLoader loader = new FXMLLoader(url); // change
-				Parent rootParent = loader.load(); // change
+				FXMLLoader loader = new FXMLLoader(url);
+				Parent rootParent = loader.load();
 
-				ArenaController arenaController = loader.getController(); // change
+				ArenaController arenaController = loader.getController();
 				Image image = new Image(new FileInputStream(pictures.get(indexIMGCounter-1)));
 				arenaController.passValues(player_name.getText(), image);
 

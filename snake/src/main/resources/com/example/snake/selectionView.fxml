@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectionController">
    <children>
       <Button fx:id="exitBTN" layoutX="222.0" layoutY="91.0" mnemonicParsing="false" onAction="#onExitBTNClick" style="-fx-background-color: #e89f02;" text="Exit Game" />
-      <Button fx:id="restartBTN" layoutX="10.0" layoutY="91.0" mnemonicParsing="false" onAction="#onRestartGameBTNClick" style="-fx-background-color: #e89f02;" text="Restart Game" />
+      <Button fx:id="restartBTN" layoutX="10.0" layoutY="91.0" mnemonicParsing="false" onAction="#onRestartGameBTNClick" style="-fx-background-color: #e89f02;" text="Logout Game" />
       <Button fx:id="highscoreBTN" layoutX="109.0" layoutY="91.0" mnemonicParsing="false" onAction="#onHighscoreBTNClick" style="-fx-background-color: #e89f02;" text="Show Highscore" />
       <Label layoutX="75.0" layoutY="14.0" text="Game Over!" textFill="#940b0b">
          <font>

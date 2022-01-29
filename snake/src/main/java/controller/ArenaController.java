@@ -29,6 +29,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * controls the main game window
@@ -60,6 +62,8 @@ public class ArenaController {
     private ImageView avatarPlayerTwo; // avatar img player two
     @FXML
     private MenuItem exitBTNMenu;
+    @FXML
+    private MenuItem logoutBTNMenu;
     @FXML
     private MenuItem HighscoreBTN;
     @FXML
@@ -136,29 +140,7 @@ public class ArenaController {
         startDate = new Date();
         player2_id = "3";
 
-		/* Threading - Nebenläufigkeit */
-        /**
-         * Generierte Frucht wird nach einer bestimmten Zeit an einem neuen Punkt erneut
-         * generiert.
-         */
-        Thread thread = new Thread() {
-            public void run() {
-                System.out.println("Thread Running");
-                try {
-                    generateFood();
-                    generateFoodPlayerTwo();
-                    Thread.sleep(10L * 1000L);
-                    foodImage.setVisible(false);
-                    foodImage1.setVisible(false);
-                    generateFoodPlayerTwo();
-                    generateFood();
-                    run();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
+        generateFood(); // initialize food
 
         // Initialize Snakebody
         for (int i = 0; i < snakeBody.length; i++) {
@@ -227,25 +209,48 @@ public class ArenaController {
         }
     }
 
+    /* Foodgenerierung Ausgelagert in ControlSubThread.java */
     /**
-     * generates food for player1
+     * generates food for players
      */
-
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
     public void generateFood() {
         model.generateFood();
         foodImage.setLayoutX(model.fruitX);
         foodImage.setLayoutY(model.fruitY);
         foodImage.setVisible(true);
+        for (int i = 1; i <= 3; i++) {
+            LoopTask loopTask = new LoopTask("LoopTask " + i, foodImage);
+            executorService.submit(loopTask);
+        }
+        executorService.shutdown();
     }
 
+
     /**
-     * generates food for player2
+     * if logout button clicked method will be executed
+     *
+     * @param event click on logout button in menu
      */
-    public void generateFoodPlayerTwo() {
-        modelPlayerTwo.generateFood();
-        foodImage1.setLayoutX(modelPlayerTwo.fruitX);
-        foodImage1.setLayoutY(modelPlayerTwo.fruitY);
-        foodImage1.setVisible(true);
+    @FXML
+    void onLogoutMenuClick(ActionEvent event) {
+        try {
+            Stage currentStage = (Stage) playGround.getScene().getWindow();
+            currentStage.close();
+
+            URL url = new File("snake/src/main/resources/com/example/snake/loginView.fxml").toURI().toURL();
+            Parent rootParent = FXMLLoader.load(url);
+            Scene scene = new Scene(rootParent);
+            Stage stage = new Stage();
+            stage.setTitle("Snake");
+            stage.initModality(Modality.APPLICATION_MODAL); // disable minimize, maximize button
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+            centerWindowScreen.CenterScreen(stage); // call method: center frame on screen
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
@@ -256,10 +261,8 @@ public class ArenaController {
     @FXML
     void onExitMenuClick(ActionEvent event) {
         try {
-            // <Menubar: Game -> Exit Game>: Close game window
             System.exit(0);
         } catch (Exception e) {
-            // handle error exception
             System.err.println(e.getMessage());
         }
     }
@@ -364,6 +367,8 @@ public class ArenaController {
         // move
         // key handling player one or two
         if ((key == KeyCode.UP) || (key == KeyCode.RIGHT) || (key == KeyCode.DOWN) || (key == KeyCode.LEFT)) {
+            executorService.shutdownNow(); // kill currently running thread process
+
             double snakeHeadX = model.snakeBodyLocationsX.getFirst();
             double snakeHeadY = model.snakeBodyLocationsY.getFirst();
 
@@ -416,6 +421,8 @@ public class ArenaController {
                 gameSelection();
             }
         } else if ((key == KeyCode.W) || (key == KeyCode.D) || (key == KeyCode.S) || (key == KeyCode.A)) {
+            executorService.shutdownNow(); // kill currently running thread process
+
             double snakeHeadXP2 = modelPlayerTwo.snakeBodyLocationsXP2.getFirst(); // Player Two
             double snakeHeadYP2 = modelPlayerTwo.snakeBodyLocationsYP2.getFirst(); // Player Two
 
@@ -424,7 +431,7 @@ public class ArenaController {
 
             // bounds
             modelPlayerTwo.snakeBoundsPlayerTwo = snakeHeadPlayerTwo.getBoundsInParent(); // Player Two
-            modelPlayerTwo.fruitBounds = foodImage1.getBoundsInParent(); // Player Two
+            modelPlayerTwo.fruitBounds = foodImage.getBoundsInParent(); // Player Two
 
             // move
             modelPlayerTwo.movePlayerTwo(snakeHeadXP2, snakeHeadYP2, directionPlayerTwo); // Player Two
@@ -444,11 +451,11 @@ public class ArenaController {
             // multiplayerSnakeStatus();
 
             if (modelPlayerTwo.eatFruit == true) {
-                foodImage1.setVisible(false); // set food invisible if the snake hits its boundaries
+                foodImage.setVisible(false); // set food invisible if the snake hits its boundaries
                 modelPlayerTwo.generateFood();
-                foodImage1.setLayoutX(modelPlayerTwo.fruitX);
-                foodImage1.setLayoutY(modelPlayerTwo.fruitY);
-                foodImage1.setVisible(true);
+                foodImage.setLayoutX(modelPlayerTwo.fruitX);
+                foodImage.setLayoutY(modelPlayerTwo.fruitY);
+                foodImage.setVisible(true);
                 modelPlayerTwo.eatFruit = false;
                 point_counter_player2++;
                 scorePlayer2.setText(String.valueOf(point_counter_player2));

@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<Pane fx:id="playGround2" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="786.0" prefWidth="1532.0" style="-fx-background-color: #AAD751;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
+<Pane fx:id="playGround2" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="786.0" prefWidth="1532.0" style="-fx-background-color: #AAD751;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
    <children>
       <Pane id="game" fx:id="playGround" focusTraversable="true" onKeyPressed="#snakeSteering" opacity="0.0" />
       <MenuBar prefWidth="1532.0">
         <menus>
           <Menu mnemonicParsing="false" text="Game">
                <items>
+               <MenuItem fx:id="logoutBTNMenu" mnemonicParsing="false" onAction="#onLogoutMenuClick" text="Logout Game" />
                   <MenuItem fx:id="exitBTNMenu" mnemonicParsing="false" onAction="#onExitMenuClick" text="Exit Game" />
                </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Player">
+            <Menu mnemonicParsing="false" text="Stats">
                <items>
                   <MenuItem fx:id="HighscoreBTN" mnemonicParsing="false" onAction="#onHighscoreBTNClick" text="Highscore" />
                    <MenuItem fx:id="RatingBTN" mnemonicParsing="false" onAction="#onRatingBTNClick" text="Played Games" />
